@@ -119,5 +119,27 @@
         console.error('Load error:', error);  
       }  
     });  
+    <script>
+document.addEventListener("keydown", function(e) {
+    // F12
+    if (e.keyCode == 123) {
+        e.preventDefault();
+    }
+
+    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+U
+    if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) {
+        e.preventDefault();
+    }
+
+    if (e.ctrlKey && e.keyCode == 85) { // Ctrl+U
+        e.preventDefault();
+    }
+
+    if (e.ctrlKey && e.keyCode == 83) { // Ctrl+S
+        e.preventDefault();
+    }
+});
+</script>
+    
   </script>  
 </body>
