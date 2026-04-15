@@ -1,212 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sayan TNT1</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Star Sports Hindi </title>
+<meta name="referrer" content="no-referrer">
+<script src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css"/>
+
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7VPXZYQPN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L7VPXZYQPN');
+</script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      background: #000;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      font-family: system-ui, -apple-system, sans-serif;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    .shaka-video-container {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      object-fit: contain;
-    }
-    .shaka-spinner-container,
-    .shaka-spinner,
-    .shaka-spinner-svg {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-    }
-    #blocked-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 99999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    #blocked-screen h1 {
-      color: red;
-      font-size: 2rem;
-    }
-    #blocked-screen p {
-      color: #aaa;
-      margin-top: 10px;
-      font-size: 1rem;
-    }
-  </style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+
+.shaka-video-container{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+video{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
+}
+
+.custom-watermark{
+position:absolute;
+z-index:40;
+pointer-events:none;
+top:65%;
+left:6%;
+transform:translateY(-50%);
+font-size:11px;
+font-weight:600;
+color:rgba(255,255,255,0.12);
+}
+
+/* --- Updated Modern Blocker Styles --- */
+.block-overlay{
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+background:radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+text-align:center;
+}
+
+.block-box{
+padding:40px;
+max-width:500px;
+width:90%;
+background:rgba(20, 20, 20, 0.95);
+border-radius:16px;
+border:1px solid rgba(255, 255, 255, 0.1);
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.block-title{
+font-size:42px;
+font-weight:800;
+color:#ffffff;
+text-transform:uppercase;
+letter-spacing:2px;
+margin-bottom:20px;
+text-shadow:0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.block-sub{
+font-size:14px;
+font-weight:500;
+color:rgba(255, 255, 255, 0.6);
+line-height:1.6;
+}
+
+/* Icon hidden as requested, but keeping structure if needed later */
+.block-icon{ display: none; }
+.block-note{ display: none; }
+
+@media(max-width:700px){
+.custom-watermark{font-size:9px;top:60%;left:16%}
+.block-title{font-size:28px}
+.block-box{padding:25px}
+.block-sub{font-size:12px}
+}
+</style>
+    
 </head>
+    
 <body>
 
-  <!-- Blocked Screen Overlay -->
-  <div id="blocked-screen">
-    <h1>⚠️ Access Denied</h1>
-    <p>Developer tools are not allowed on this page.</p>
-  </div>
+<div class="shaka-video-container" id="player-container">
+<video id="video" autoplay muted playsinline preload="metadata"></video>
+<div class="custom-watermark"> </div>
+</div>
 
-  <div class="shaka-video-container" data-shaka-player id="player-wrapper">
-    <video autoplay playsinline preload="metadata" poster="https://assets.tntsports.io/web/img/og/tntsports.jpg"></video>
-  </div>
-
-  <script>
-    // ============================================
-    // 🔒 PROTECTION BLOCK — RUNS IMMEDIATELY
-    // ============================================
-
-    const BLOCK = () => {
-      document.getElementById('blocked-screen').style.display = 'flex';
-      document.getElementById('player-wrapper').style.display = 'none';
-    };
-
-    // 1. Disable Right Click
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
-    // 2. Block Keyboard Shortcuts
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12') { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c','K','k'].includes(e.key)) { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && ['U','u','S','s','A','a'].includes(e.key)) { e.preventDefault(); }
-    });
-
-    // 3. Disable Copy / Cut / Drag / Select
-    document.addEventListener('copy', e => e.preventDefault());
-    document.addEventListener('cut', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-
-    // 4. DevTools Size Detection
-    setInterval(() => {
-      const threshold = 160;
-      if (
-        window.outerWidth - window.innerWidth > threshold ||
-        window.outerHeight - window.innerHeight > threshold
-      ) { BLOCK(); }
-    }, 500);
-
-    // 5. console.log Image Trick
-    const trap = new Image();
-    Object.defineProperty(trap, 'id', {
-      get: function() { BLOCK(); }
-    });
-    setInterval(() => {
-      console.log('%c', trap);
-      console.clear();
-    }, 1000);
-
-    // 6. Debugger Trap (slows down DevTools)
-    setInterval(function() {
-      (function() { return false; })
-      ['constructor']('debugger')['call']();
-    }, 100);
-
-    // 7. Timing-based DevTools detection on load
-    window.addEventListener('load', () => {
-      const start = performance.now();
-      debugger;
-      if (performance.now() - start > 100) { BLOCK(); }
-    });
-
-    // ============================================
-    // 🎬 SHAKA PLAYER
-    // ============================================
-    document.addEventListener('DOMContentLoaded', async () => {
-      shaka.polyfill.installAll();
-
-      if (!shaka.Player.isBrowserSupported()) {
-        console.error('Browser not supported');
-        return;
+<script>
+(function(){
+  
+  function isSandboxedEnv(){
+    try {
+      if (window.self === window.top) return false;
+      if (window.frameElement && window.frameElement.hasAttribute("sandbox")) {
+        return true;
       }
-
-      const video = document.querySelector('video');
-      const player = new shaka.Player();
-      await player.attach(video);
-
-      const container = document.querySelector('.shaka-video-container');
-      const ui = new shaka.ui.Overlay(player, container, video);
-
-      ui.configure({
-        controlPanelElements: [
-          'play_pause', 'time_and_duration', 'mute', 'volume',
-          'spacer', 'language', 'captions', 'picture_in_picture',
-          'quality', 'fullscreen'
-        ],
-        volumeBarColors: {
-          base: 'rgba(255, 192, 203, 0.3)',
-          level: 'rgb(255, 105, 180)'
-        },
-        seekBarColors: {
-          base: 'rgba(255, 255, 0, 0.3)',
-          buffered: 'rgba(255, 255, 0, 0.6)',
-          played: 'rgb(255, 255, 0)'
-        }
-      });
-
-      let drmConfig = {
-        clearKeys: {
-          "294b5761cefc22d0c6312939e13d8278": "52148f1042d238849f0a7813f1da8a7b"
-        }
-      };
-
-      let streamUrl = "https://allinonereborn.online/sony/sliv/stream.php?id=1000009283&chunks=215218dc50b20e9ce79d8642721f2e2b6cf8e2f25b4033ab389a34ca296c3f268c718dc42a2dda0028b3eb5dc3cbf521bf547d2e90aa73ee551e77419efb5793a48a8be5fcc5d5b6e1ee1afe70548eb108413ae585192c48d2a79027a036beacb007d4984a9c9eaa8d341c1018e68329d099e4dbd04d6abdd2dbd64961cb4b814040b23fc17919d958860d4024a2e65a755c341b6fbe65261693c9b0b9d29aa5770a47c3767320d5fed54770addf7b1cd33f71128e534d2d1f08947e9416fca5e81e66457fe3197ca9a9dd5f205c134354974dc2d233e12d374476db7eed521d7e1c0aa2476e039aa534b8811f3db6fa55acaec752e514385c0b9f9d1dcdba310361ea0618b69e9b962405252985126655598b965f521eed36a3bf0d87b3933499bee461885fea0af26957e0bcf0ad4f332d2a2917954b77c73342a9a436bcb89e6777a8255f347cfc42ab934023925d4a51a35c7d83415b9d980a33e629f93dc0cff185a0d1e61f26c177821c804b45&segment=";
-
-      player.configure({
-        drm: drmConfig,
-        streaming: {
-          lowLatencyMode: true,
-          bufferingGoal: 15,
-          rebufferingGoal: 2,
-          bufferBehind: 15,
-          retryParameters: {
-            timeout: 10000,
-            maxAttempts: 5,
-            baseDelay: 300,
-            backoffFactor: 1.2
-          },
-          segmentRequestTimeout: 8000,
-          segmentPrefetchLimit: 2,
-          useNativeHlsOnSafari: true
-        },
-        manifest: {
-          retryParameters: {
-            timeout: 8000,
-            maxAttempts: 3
-          }
-        }
-      });
-
-      player.addEventListener('error', (event) => {
-        console.error('Shaka Player Error:', event.detail);
-      });
-
       try {
-        await player.load(streamUrl);
-      } catch (error) {
-        console.error('Load error:', error);
+        document.domain = document.domain;
+        if (window.frameElement && !window.frameElement.getAttribute("sandbox")) {
+             return false;
+        }
+      } catch (e) {
+         return true;
+      }
+      return false;
+    } catch(e) {
+      return true;
+    }
+  }
+  function triggerBlockScreen(title, message){
+    const container = document.getElementById("player-container");
+    const video = document.getElementById("video");
+    
+    try {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    } catch(e){}
+
+    const overlay = document.createElement("div");
+    overlay.className = "block-overlay";
+    overlay.id = "sandbox-block-display";
+    overlay.innerHTML = `
+      <div class="block-box">
+        <div class="block-title">${title}</div>
+        <div class="block-sub">${message}</div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    container.style.display = 'none';
+  }
+  if(isSandboxedEnv()){
+
+    triggerBlockScreen('Disable Sandbox', 'Opening Chrome Browser Only & Disable Ad blocker');
+    return;
+  }
+  const CONFIG={
+    streamUrl:"https://allinonereborn.online/sony/sliv/stream.php?id=1000009283&chunks=215218dc50b20e9ce79d8642721f2e2b6cf8e2f25b4033ab389a34ca296c3f268c718dc42a2dda0028b3eb5dc3cbf521bf547d2e90aa73ee551e77419efb5793a48a8be5fcc5d5b6e1ee1afe70548eb108413ae585192c48d2a79027a036beacb007d4984a9c9eaa8d341c1018e68329d099e4dbd04d6abdd2dbd64961cb4b814040b23fc17919d958860d4024a2e65a755c341b6fbe65261693c9b0b9d29aa5770a47c3767320d5fed54770addf7b1cd33f71128e534d2d1f08947e9416fca5e81e66457fe3197ca9a9dd5f205c134354974dc2d233e12d374476db7eed521d7e1c0aa2476e039aa534b8811f3db6fa55acaec752e514385c0b9f9d1dcdba310361ea0618b69e9b962405252985126655598b965f521eed36a3bf0d87b3933499bee461885fea0af26957e0bcf0ad4f332d2a2917954b77c73342a9a436bcb89e6777a8255f347cfc42ab934023925d4a51a35c7d83415b9d980a33e629f93dc0cff185a0d1e61f26c177821c804b45&segment= ",
+    
+    
+  };
+
+  document.addEventListener("DOMContentLoaded",async()=>{
+
+    shaka.polyfill.installAll();
+    if(!shaka.Player.isBrowserSupported()) return;
+
+    const video=document.getElementById("video");
+    const container=document.getElementById("player-container");
+
+    video.muted=true;
+
+    const player=new shaka.Player();
+    await player.attach(video);
+
+    const ui=new shaka.ui.Overlay(player,container,video);
+
+    ui.configure({
+  addBigPlayButton: true,
+  controlPanelElements: [
+    "mute",           // First - volume/mute button
+    "play_pause",     // Second - play/pause button  
+    "time_and_duration", // Third - timeline timings (00:00 / 00:00)
+    "spacer",
+    "quality",
+    "picture_in_picture",
+    "fullscreen"
+  ],
+  seekBarColors: {
+    base: "white",
+    buffered: "red", 
+    played: "green"
+  }
+});
+
+    player.configure({
+      
+
+      manifest:{defaultPresentationDelay:5},
+      streaming:{
+        lowLatencyMode:true,
+        bufferingGoal:10,
+        rebufferingGoal:2,
+        safeSeekOffset:5
       }
     });
-  </script>
+
+    let cookieValue="";
+
+    try{
+      const response=await fetch(CONFIG.cookieUrl,{cache:"no-store"});
+      const data=await response.json();
+      cookieValue=data.cookie||"";
+    }catch(e){}
+
+    if(cookieValue){
+      player.getNetworkingEngine().registerRequestFilter((type,request)=>{
+        request.headers["Referer"]="https://www.jiotv.com/";
+        request.headers["User-Agent"]="plaYtv/7.1.5 (Linux;Android 13) ExoPlayerLib/2.11.6";
+        request.headers["Cookie"]=cookieValue;
+
+        let urlCookie=cookieValue.startsWith("__hdnea__=")?cookieValue.substring(10):cookieValue;
+
+        if((type===shaka.net.NetworkingEngine.RequestType.MANIFEST||
+        type===shaka.net.NetworkingEngine.RequestType.SEGMENT)&&
+        !request.uris[0].includes("__hdnea__")){
+          const sep=request.uris[0].includes("?")?"&":"?";
+          request.uris[0]+=sep+"__hdnea__="+urlCookie;
+        }
+      });
+    }
+
+    try{
+      await player.load(CONFIG.streamUrl);
+      video.play().catch(()=>{});
+    }catch(e){}
+
+    video.addEventListener("play",()=>{
+      video.muted=false;
+    });
+
+  });
+})();
+</script>
+  <script>(function(s){s.dataset.zone='10603308',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  
 </body>
 </html>
