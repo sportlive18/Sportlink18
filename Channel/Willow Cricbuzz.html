@@ -63,12 +63,15 @@
         }  
       });  
   
-      // ✅ Updated New Stream URL
-      const streamUrl = "https://otte.cache.aiv-cdn.net/.../cenc.mpd";
-
-clearKeys: {
-  "290e09c837da78d5cd961978d390515c": "b748836c71e6a4ca68ef5b5652db6247"
-    }
+      // ✅ Updated Stream URL (clean MPD without query params)
+      const streamUrl = "https://a96aivottlinear-a.akamaihd.net/OTTB/iad-nitro/enc/e0s1ohyu2t/out/v1/7a645e0b4e0449f2a8953ca6e474e435/cenc.mpd";  
+      
+      player.configure({  
+        drm: {  
+          clearKeys: {  
+            // ✅ KID: KEY from drmLicense param
+            "d43c0cbfaf9fa9334c3ce2d477ab22ee": "6a161f989374f4ccecd6736c4a6a4f41"
+          }  
         },  
         manifest: {
           retryParameters: {
