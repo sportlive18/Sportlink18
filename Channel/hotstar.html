@@ -331,10 +331,19 @@
         <div class="loader-text">Starting Stream…</div>
     </div>
 
+    <!--
+        sandbox attribute blocks all popups (Telegram, ads, etc.)
+        by NOT including "allow-popups" or "allow-popups-to-escape-sandbox".
+        allow-scripts        → JS runs (video player works)
+        allow-same-origin    → cookies/storage work (stream auth)
+        allow-forms          → form submissions allowed
+        allow-presentation   → fullscreen / picture-in-picture
+    -->
     <iframe
         id="video-frame"
-        src="https://allrounder-live2.pages.dev/channel/hotstar"
-        allow="autoplay; encrypted-media; picture-in-picture"
+        src="https://matcheslinkz.pages.dev/ios?id=hindi"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
         loading="eager">
     </iframe>
 </main>
