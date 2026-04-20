@@ -1,632 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sportlink</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Sportlink - Willow</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="referrer" content="no-referrer"/>
+  
+  <!-- Plyr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
+
+  <!-- HLS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <!-- Plyr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --gold:    #F5C518;
-      --white:   #FFFFFF;
-      --red:     #DC052D;
-      --blue:    #0066B2;
-      --dark:    #080808;
-      --mid:     #141414;
-      --border:  rgba(255,255,255,0.07);
-    }
-
     body {
-      background: var(--dark);
-      color: #fff;
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── TOP BAR ── */
-    .topbar {
-      width: 100%;
-      background: linear-gradient(90deg, var(--red) 0%, #a00020 50%, var(--blue) 100%);
-      text-align: center;
-      padding: 7px 0;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ── HEADER ── */
-    header {
-      width: 100%;
-      max-width: 1000px;
-      padding: 50px 20px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* star background decoration */
-    header::before {
-      content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
-      position: absolute;
-      top: 20px;
-      font-size: 9px;
-      letter-spacing: 8px;
-      color: rgba(245,197,24,0.12);
-      white-space: nowrap;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
       overflow: hidden;
+    }
+    html, body {
+      height: 100%;
       width: 100%;
-      text-align: center;
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(245,197,24,0.1);
-      border: 1px solid rgba(245,197,24,0.3);
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 2px;
-    }
-
-    .badge-star { font-size: 12px; }
-
-    .matchup {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(38px, 8.5vw, 88px);
-      letter-spacing: 3px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .team-rm {
-      color: #fff;
-      text-shadow: 0 0 40px rgba(245,197,24,0.3);
-    }
-
-    .team-bay {
-      color: #fff;
-      text-shadow: 0 0 40px rgba(0,102,178,0.3);
-    }
-
-    .vs {
-      font-size: clamp(20px, 3.5vw, 38px);
-      color: var(--gold);
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 6px;
+    .video-container {
       position: relative;
-    }
-
-    .vs::before, .vs::after {
-      content: '';
-      display: block;
-      width: 30px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.4;
-      margin: 4px auto;
-    }
-
-    .clubs {
-      display: flex;
-      gap: 60px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .club-tag {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-    }
-
-    .club-tag span {
-      display: block;
-      font-size: 10px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 2px;
-      margin-top: 2px;
-    }
-
-    .meta {
-      font-size: 12px;
-      letter-spacing: 2.5px;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-    }
-
-    /* ── LIVE PILL ── */
-    .live-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(220,5,45,0.12);
-      border: 1px solid rgba(220,5,45,0.5);
-      border-radius: 30px;
-      padding: 6px 18px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #ff3355;
-    }
-
-    .live-dot {
-      width: 8px; height: 8px;
-      background: #ff3355;
-      border-radius: 50%;
-      animation: pulse 1.3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,51,85,0.5); }
-      50%       { opacity: 0.5; transform: scale(0.75); box-shadow: 0 0 0 4px rgba(255,51,85,0); }
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 100%;
-      max-width: 1000px;
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .divider-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(245,197,24,0.25), transparent);
-    }
-
-    /* ── PLAYER ── */
-    .player-shell {
-      width: 100%;
-      max-width: 1000px;
-      padding: 28px 20px 50px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .player-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow:
-        0 0 0 1px rgba(245,197,24,0.06),
-        0 0 80px rgba(245,197,24,0.08),
-        0 20px 60px rgba(0,0,0,0.9);
-    }
-
-    .player-frame iframe {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
-      border: none;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    /* gold corner accents */
-    .corner {
-      position: absolute;
-      width: 20px; height: 20px;
-      z-index: 10;
-      pointer-events: none;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.6;
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
     }
-    .corner-tl { top: 0; left: 0;  border-width: 2px 0 0 2px; }
-    .corner-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
-    .corner-bl { bottom: 0; left: 0;  border-width: 0 0 2px 2px; }
-    .corner-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
-
-    /* ── FOOTER ── */
-    footer {
-      margin-top: auto;
-      padding: 18px 20px;
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.15);
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      text-align: center;
+    .plyr {
+      height: 100%;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-
-  <div class="topbar">UEFA Champions League &nbsp;·&nbsp; Quarter-Final &nbsp;·&nbsp; Live</div>
-
-  <header>
-    <span class="badge"><span class="badge-star">★</span> Champions League <span class="badge-star">★</span></span>
-
-    <div class="matchup">
-      <span class="team-rm">Real Madrid</span>
-      <div class="vs">VS</div>
-      <span class="team-bay">PSG</span>
-    </div>
-
-    <div class="clubs">
-      <div class="club-tag">Real Madrid CF <span>Santiago Bernabéu</span></div>
-      <div class="club-tag">FC Bayern München <span>Allianz Arena</span></div>
-    </div>
-
-    <div class="meta">UEFA Champions League &nbsp;·&nbsp; Quarter-Final · 2nd Leg</div>
-    <div class="live-pill"><span class="live-dot"></span> Live Now</div>
-  </header>
-
-  <div class="divider"><div class="divider-line"></div></div>
-
-  <div class="player-shell">
-    <div class="player-frame">
-      <div class="corner corner-tl"></div>
-      <div class="corner corner-tr"></div>
-      <div class="corner corner-bl"></div>
-      <div class="corner corner-br"></div>
-      <iframe
-        src="https://allinonereborn.online/events/player.html?url=https%3A%2F%2Fmini.allinonereborn.fun%2Fevents%2Fstream_proxy.php%3Furl%3Dhttps%3A%2F%2Fsonydaimenew.akamaized.net%2Fhls%2Flive%2F2022316%2FUYL_Real1704%2FENG%2Fstd_lrh-800300010.m3u8%3Fhdnea%3Dexp%3D1776487872~acl%3D%2F*~id%3D76109614097567277876162592531752~hmac%3Df909f5ec2c19bad6d08daf60f7adaa0b130c79f6f1da25878b4485a8e5d3df11"
-        allowfullscreen
-        allow="autoplay; encrypted-media; fullscreen"
-        scrolling="no"
-      ></iframe>
-    </div>
+  <div class="video-container">
+    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
   </div>
 
-  <footer>Real Madrid vs Bayern Munich &nbsp;·&nbsp; UEFA Champions League &nbsp;·&nbsp; HD Stream</footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("player");
+      const source = "https://tv.cloudfront.fun/redint/stream.m3u8?id=29";
 
-</body>
-</html>
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Real Madrid vs Bayern Munich</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      const defaultOptions = {
+        autoplay: true,
+        controls: [
+          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
+          'mute', 'volume', 'settings', 'fullscreen'
+        ],
+        settings: ['quality']
+      };
 
-    :root {
-      --gold:    #F5C518;
-      --white:   #FFFFFF;
-      --red:     #DC052D;
-      --blue:    #0066B2;
-      --dark:    #080808;
-      --mid:     #141414;
-      --border:  rgba(255,255,255,0.07);
-    }
+      let player;
 
-    body {
-      background: var(--dark);
-      color: #fff;
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-    }
+      function setupPlayer(hls, qualities = []) {
+        player = new Plyr(video, {
+          ...defaultOptions,
+          quality: qualities.length ? {
+            default: qualities[0],
+            options: qualities,
+            forced: true,
+            onChange: q => {
+              hls.levels.forEach((level, index) => {
+                if (level.height === q) {
+                  hls.currentLevel = index;
+                }
+              });
+            }
+          } : {}
+        });
 
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
+        // 🔁 AUTO RESUME
+        setInterval(() => {
+          if (video.paused && video.readyState > 2) {
+            video.play().catch(()=>{});
+          }
+        }, 3000);
 
-    /* ── TOP BAR ── */
-    .topbar {
-      width: 100%;
-      background: linear-gradient(90deg, var(--red) 0%, #a00020 50%, var(--blue) 100%);
-      text-align: center;
-      padding: 7px 0;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
-      position: relative;
-      z-index: 10;
-    }
+        // 🔊 AUTO UNMUTE (on first interaction)
+        const unmute = () => {
+          video.muted = false;
+          video.volume = 1;
+          document.removeEventListener("click", unmute);
+          document.removeEventListener("touchstart", unmute);
+        };
 
-    /* ── HEADER ── */
-    header {
-      width: 100%;
-      max-width: 1000px;
-      padding: 50px 20px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
+        document.addEventListener("click", unmute);
+        document.addEventListener("touchstart", unmute);
+      }
 
-    /* star background decoration */
-    header::before {
-      content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
-      position: absolute;
-      top: 20px;
-      font-size: 9px;
-      letter-spacing: 8px;
-      color: rgba(245,197,24,0.12);
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100%;
-      text-align: center;
-    }
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          autoStartLoad: true
+        });
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(245,197,24,0.1);
-      border: 1px solid rgba(245,197,24,0.3);
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 2px;
-    }
+        hls.loadSource(source);
+        hls.attachMedia(video);
 
-    .badge-star { font-size: 12px; }
+        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
+          video.play().catch(()=>{});
+          setupPlayer(hls, availableQualities);
+        });
 
-    .matchup {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(38px, 8.5vw, 88px);
-      letter-spacing: 3px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        // 🔥 AUTO RECOVER ON ERROR
+        hls.on(Hls.Events.ERROR, function (_, data) {
+          if (data.fatal) {
+            hls.startLoad();
+          }
+        });
 
-    .team-rm {
-      color: #fff;
-      text-shadow: 0 0 40px rgba(245,197,24,0.3);
-    }
-
-    .team-bay {
-      color: #fff;
-      text-shadow: 0 0 40px rgba(0,102,178,0.3);
-    }
-
-    .vs {
-      font-size: clamp(20px, 3.5vw, 38px);
-      color: var(--gold);
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 6px;
-      position: relative;
-    }
-
-    .vs::before, .vs::after {
-      content: '';
-      display: block;
-      width: 30px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.4;
-      margin: 4px auto;
-    }
-
-    .clubs {
-      display: flex;
-      gap: 60px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .club-tag {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-    }
-
-    .club-tag span {
-      display: block;
-      font-size: 10px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 2px;
-      margin-top: 2px;
-    }
-
-    .meta {
-      font-size: 12px;
-      letter-spacing: 2.5px;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-    }
-
-    /* ── LIVE PILL ── */
-    .live-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(220,5,45,0.12);
-      border: 1px solid rgba(220,5,45,0.5);
-      border-radius: 30px;
-      padding: 6px 18px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #ff3355;
-    }
-
-    .live-dot {
-      width: 8px; height: 8px;
-      background: #ff3355;
-      border-radius: 50%;
-      animation: pulse 1.3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,51,85,0.5); }
-      50%       { opacity: 0.5; transform: scale(0.75); box-shadow: 0 0 0 4px rgba(255,51,85,0); }
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 100%;
-      max-width: 1000px;
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .divider-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(245,197,24,0.25), transparent);
-    }
-
-    /* ── PLAYER ── */
-    .player-shell {
-      width: 100%;
-      max-width: 1000px;
-      padding: 28px 20px 50px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .player-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow:
-        0 0 0 1px rgba(245,197,24,0.06),
-        0 0 80px rgba(245,197,24,0.08),
-        0 20px 60px rgba(0,0,0,0.9);
-    }
-
-    .player-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* gold corner accents */
-    .corner {
-      position: absolute;
-      width: 20px; height: 20px;
-      z-index: 10;
-      pointer-events: none;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.6;
-    }
-    .corner-tl { top: 0; left: 0;  border-width: 2px 0 0 2px; }
-    .corner-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
-    .corner-bl { bottom: 0; left: 0;  border-width: 0 0 2px 2px; }
-    .corner-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
-
-    /* ── FOOTER ── */
-    footer {
-      margin-top: auto;
-      padding: 18px 20px;
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.15);
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="topbar">UEFA Champions League &nbsp;·&nbsp; Quarter-Final &nbsp;·&nbsp; Live</div>
-
-  <header>
-    <span class="badge"><span class="badge-star">★</span> Champions League <span class="badge-star">★</span></span>
-
-    <div class="matchup">
-      <span class="team-rm">Real Madrid</span>
-      <div class="vs">VS</div>
-      <span class="team-bay">Bayern Munich</span>
-    </div>
-
-    <div class="clubs">
-      <div class="club-tag">Real Madrid CF <span>Santiago Bernabéu</span></div>
-      <div class="club-tag">FC Bayern München <span>Allianz Arena</span></div>
-    </div>
-
-    <div class="meta">UEFA Champions League &nbsp;·&nbsp; Quarter-Final · 2nd Leg</div>
-    <div class="live-pill"><span class="live-dot"></span> Live Now</div>
-  </header>
-
-  <div class="divider"><div class="divider-line"></div></div>
-
-  <div class="player-shell">
-    <div class="player-frame">
-      <div class="corner corner-tl"></div>
-      <div class="corner corner-tr"></div>
-      <div class="corner corner-bl"></div>
-      <div class="corner corner-br"></div>
-      <iframe
-        src="https://allinonereborn.online/events/player.html?url=https%3A%2F%2Fmini.allinonereborn.fun%2Fevents%2Fstream_proxy.php%3Furl%3Dhttps%3A%2F%2Fsonydaimenew.akamaized.net%2Fhls%2Flive%2F2005445%2FUCL_Baye1504%2FENG%2Fstd_lrh-800300010.m3u8%3Fhdnea%3Dexp%3D1776322332~acl%3D%2F*~id%3D17831562390218935492962805584382~hmac%3D1f99f730acd0876a64413aae4ca9417035599580c96f5204d94cdfa0cd99b3ff"
-        allowfullscreen
-        allow="autoplay; encrypted-media; fullscreen"
-        scrolling="no"
-      ></iframe>
-    </div>
-  </div>
-
-  <footer>Real Madrid vs Bayern Munich &nbsp;·&nbsp; UEFA Champions League &nbsp;·&nbsp; HD Stream</footer>
-
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = source;
+        video.addEventListener("loadedmetadata", () => {
+          video.play().catch(()=>{});
+          setupPlayer(null);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
