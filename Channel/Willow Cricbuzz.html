@@ -1,221 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportLink - Willow Sports</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-        .header {
-            background: rgba(10,10,10,0.98);
-            padding: 0 40px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 3px solid #e8000d;
-            box-shadow: 0 4px 30px rgba(232,0,13,0.3);
-            height: 70px;
-        }
-        .logo-container { display: flex; align-items: center; gap: 6px; }
-        .logo-sport { font-size: 30px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-link  { font-size: 30px; font-weight: 900; color: #e8000d; text-transform: uppercase; letter-spacing: 1px; }
-        .header-right { display: flex; align-items: center; gap: 20px; }
-        .live-badge {
-            background: #e8000d; padding: 7px 18px; border-radius: 4px;
-            font-size: 13px; font-weight: 700; letter-spacing: 2px;
-            animation: glow 2s infinite;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .live-dot-header { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes glow {
-            0%,100%{ box-shadow: 0 0 10px rgba(232,0,13,.5); }
-            50%    { box-shadow: 0 0 25px rgba(232,0,13,.9); }
-        }
-        @keyframes pulse {
-            0%,100%{ opacity:1; transform:scale(1);   }
-            50%    { opacity:.4; transform:scale(1.4); }
-        }
-        .sub-header {
-            background: linear-gradient(90deg,#e8000d,#b30000);
-            padding: 10px 40px; display: flex; align-items: center; gap: 14px;
-        }
-        .cricket-icon { font-size: 20px; }
-        .sub-title { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
-        .sub-divider { width: 1px; height: 16px; background: rgba(255,255,255,.4); }
-        .sub-desc { font-size: 13px; color: rgba(255,255,255,.85); letter-spacing: 1px; }
-        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
-        .video-section {
-            background: rgba(255,255,255,.04); border-radius: 14px; overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0,0,0,.8);
-            border: 1px solid rgba(232,0,13,.25);
-        }
-        .video-header {
-            background: rgba(0,0,0,.6); padding: 16px 28px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid rgba(232,0,13,.2);
-        }
-        .video-title-group { display: flex; flex-direction: column; gap: 4px; }
-        .video-title { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .video-subtitle { font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: 1px; }
-        .live-indicator {
-            display: flex; align-items: center; gap: 9px;
-            background: rgba(232,0,13,.15); padding: 8px 18px; border-radius: 6px;
-            border: 1px solid rgba(232,0,13,.5);
-        }
-        .live-dot { width: 10px; height: 10px; background: #e8000d; border-radius: 50%; animation: pulse 1.5s infinite; box-shadow: 0 0 8px #e8000d; }
-        .live-text { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #e8000d; }
-
-        .player-shell {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            background: #000;
-        }
-        .player-shell iframe {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            border: none; display: block;
-        }
-
-        .sportlink-watermark {
-            position: absolute;
-            bottom: 80px;
-            right: 20px;
-            z-index: 15;
-            pointer-events: none;
-            opacity: 0.35;
-            transition: opacity 0.3s;
-        }
-        .watermark-text {
-            font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-            display: flex; align-items: center; gap: 3px;
-        }
-        .watermark-sport { color: #fff; }
-        .watermark-link  { color: #e8000d; }
-
-        .player-shell:fullscreen .sportlink-watermark,
-        .player-shell:-webkit-full-screen .sportlink-watermark,
-        .player-shell:-moz-full-screen .sportlink-watermark,
-        .player-shell:-ms-fullscreen .sportlink-watermark {
-            opacity: 0.5; bottom: 20px;
-        }
-
-        @media screen and (orientation: landscape) and (max-width: 1024px) {
-            .sportlink-watermark { bottom: 15px; right: 15px; opacity: 0.45; }
-            .watermark-text { font-size: 13px; }
-        }
-
-        .controls {
-            padding: 18px 28px; background: rgba(0,0,0,.5);
-            display: flex; gap: 12px; align-items: center;
-            border-top: 1px solid rgba(255,255,255,.06);
-        }
-        .btn { padding:10px 22px; border:none; border-radius:6px; font-size:13px; font-weight:700; cursor:pointer; transition:all .25s; color:#fff; text-transform:uppercase; letter-spacing:1px; }
-        .btn-primary  { background:#e8000d; box-shadow:0 4px 15px rgba(232,0,13,.35); }
-        .btn-primary:hover  { background:#ff1a24; box-shadow:0 6px 20px rgba(232,0,13,.55); transform:translateY(-2px); }
-        .btn-secondary{ background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); }
-        .btn-secondary:hover{ background:rgba(255,255,255,.18); transform:translateY(-2px); }
-        .spacer { flex:1; }
-        .stream-info { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; }
-        .footer { text-align:center; padding:30px 20px; color:rgba(255,255,255,.25); font-size:12px; letter-spacing:1px; }
-        .footer span { color:#e8000d; }
-
-        @media(max-width:768px){
-            .header,.sub-header{ padding-left:16px; padding-right:16px; }
-            .logo-sport,.logo-link{ font-size:22px; }
-            .sub-desc,.sub-divider{ display:none; }
-            .container{ margin:16px auto; padding:0 12px; }
-            .controls{ flex-wrap:wrap; padding:14px 16px; gap:10px; }
-            .btn{ padding:9px 16px; font-size:12px; }
-            .stream-info{ display:none; }
-            .sportlink-watermark{ bottom: 70px; right: 10px; }
-            .watermark-text{ font-size: 12px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayan Willow</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: #000;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .shaka-video-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      object-fit: contain;
+    }
+    .shaka-spinner-container,
+    .shaka-spinner,
+    .shaka-spinner-svg {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+    #blocked-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #blocked-screen h1 {
+      color: red;
+      font-size: 2rem;
+    }
+    #blocked-screen p {
+      color: #aaa;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="logo-container">
-        <span class="logo-sport">Sport</span><span class="logo-link">Link</span>
-    </div>
-    <div class="header-right">
-        <div class="live-badge"><div class="live-dot-header"></div>LIVE</div>
-    </div>
-</div>
+  <!-- Blocked Screen Overlay -->
+  <div id="blocked-screen">
+    <h1>⚠️ Access Denied</h1>
+    <p>Developer tools are not allowed on this page.</p>
+  </div>
 
-<div class="sub-header">
-    <span class="cricket-icon">📺</span>
-    <span class="sub-title">Willow Sports</span>
-    <div class="sub-divider"></div>
-    <span class="sub-desc">Live Sports Streaming</span>
-</div>
+  <div class="shaka-video-container" data-shaka-player id="player-wrapper">
+    <video autoplay playsinline preload="metadata" poster="https://assets.tntsports.io/web/img/og/tntsports.jpg"></video>
+  </div>
 
-<div class="container">
-    <div class="video-section">
+  <script>
+    // ============================================
+    // 🔒 PROTECTION BLOCK — RUNS IMMEDIATELY
+    // ============================================
 
-        <div class="video-header">
-            <div class="video-title-group">
-                <div class="video-title">Willow Sports</div>
-                <div class="video-subtitle">Live Sports · HD Stream</div>
-            </div>
-            <div class="live-indicator">
-                <div class="live-dot"></div>
-                <span class="live-text">LIVE</span>
-            </div>
-        </div>
+    const BLOCK = () => {
+      document.getElementById('blocked-screen').style.display = 'flex';
+      document.getElementById('player-wrapper').style.display = 'none';
+    };
 
-        <div class="player-shell" id="playerShell">
-            <iframe
-                id="streamFrame"
-                src="https://streamcrichd.com/update/willowcricket.php"
-                allowfullscreen
-                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                scrolling="no"
-                frameborder="0">
-            </iframe>
+    // 1. Disable Right Click
+    document.addEventListener('contextmenu', e => e.preventDefault());
 
-            <div class="sportlink-watermark">
-                <div class="watermark-text">
-                    <span class="watermark-sport">Sport</span><span class="watermark-link">Link</span>
-                </div>
-            </div>
-        </div>
+    // 2. Block Keyboard Shortcuts
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12') { e.preventDefault(); BLOCK(); }
+      if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c','K','k'].includes(e.key)) { e.preventDefault(); BLOCK(); }
+      if (e.ctrlKey && ['U','u','S','s','A','a'].includes(e.key)) { e.preventDefault(); }
+    });
 
-        <div class="controls">
-            <button class="btn btn-primary" onclick="enterFullscreen()">⛶ &nbsp;Fullscreen</button>
-            <button class="btn btn-secondary" onclick="reloadStream()">↺ &nbsp;Reload</button>
-            <div class="spacer"></div>
-            <div class="stream-info">sportlink.live · hub sports</div>
-        </div>
+    // 3. Disable Copy / Cut / Drag / Select
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
 
-    </div>
-</div>
+    // 4. DevTools Size Detection
+    setInterval(() => {
+      const threshold = 160;
+      if (
+        window.outerWidth - window.innerWidth > threshold ||
+        window.outerHeight - window.innerHeight > threshold
+      ) { BLOCK(); }
+    }, 500);
 
-<div class="footer">&copy; 2026 <span>SportLink by Sayan</span> &nbsp;·&nbsp; Hub Sports &nbsp;·&nbsp; All rights reserved</div>
+    // 5. console.log Image Trick
+    const trap = new Image();
+    Object.defineProperty(trap, 'id', {
+      get: function() { BLOCK(); }
+    });
+    setInterval(() => {
+      console.log('%c', trap);
+      console.clear();
+    }, 1000);
 
-<script>
-    function reloadStream(){
-        const f = document.getElementById('streamFrame');
-        f.src = f.src;
-    }
+    // 6. Debugger Trap (slows down DevTools)
+    setInterval(function() {
+      (function() { return false; })
+      ['constructor']('debugger')['call']();
+    }, 100);
 
-    function enterFullscreen(){
-        const w = document.getElementById('playerShell');
-        const f = document.getElementById('streamFrame');
-        const go = el => (el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen||function(){}).call(el);
-        go(w) || go(f);
-    }
+    // 7. Timing-based DevTools detection on load
+    window.addEventListener('load', () => {
+      const start = performance.now();
+      debugger;
+      if (performance.now() - start > 100) { BLOCK(); }
+    });
 
-    document.getElementById('playerShell').addEventListener('click', () => {
-        setTimeout(enterFullscreen, 300);
-    }, { once: true });
-</script>
+    // ============================================
+    // 🎬 SHAKA PLAYER
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      shaka.polyfill.installAll();
 
+      if (!shaka.Player.isBrowserSupported()) {
+        console.error('Browser not supported');
+        return;
+      }
+
+      const video = document.querySelector('video');
+      const player = new shaka.Player();
+      await player.attach(video);
+
+      const container = document.querySelector('.shaka-video-container');
+      const ui = new shaka.ui.Overlay(player, container, video);
+
+      ui.configure({
+        controlPanelElements: [
+          'play_pause', 'time_and_duration', 'mute', 'volume',
+          'spacer', 'language', 'captions', 'picture_in_picture',
+          'quality', 'fullscreen'
+        ],
+        volumeBarColors: {
+          base: 'rgba(255, 192, 203, 0.3)',
+          level: 'rgb(255, 105, 180)'
+        },
+        seekBarColors: {
+          base: 'rgba(255, 255, 0, 0.3)',
+          buffered: 'rgba(255, 255, 0, 0.6)',
+          played: 'rgb(255, 255, 0)'
+        }
+      });
+
+      let drmConfig = {
+        clearKeys: {
+          "f4214190ce30ed81af4628c998438fb1": "bf37f9f11320229a054cf795b880b54d"
+        }
+      };
+
+      let streamUrl = "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/kdbiww0yq8/out/v1/fef7df2f68424809883abfa4c7cf7e63/cenc.mpd";
+
+      player.configure({
+        drm: drmConfig,
+        streaming: {
+          lowLatencyMode: true,
+          bufferingGoal: 15,
+          rebufferingGoal: 2,
+          bufferBehind: 15,
+          retryParameters: {
+            timeout: 10000,
+            maxAttempts: 5,
+            baseDelay: 300,
+            backoffFactor: 1.2
+          },
+          segmentRequestTimeout: 8000,
+          segmentPrefetchLimit: 2,
+          useNativeHlsOnSafari: true
+        },
+        manifest: {
+          retryParameters: {
+            timeout: 8000,
+            maxAttempts: 3
+          }
+        }
+      });
+
+      player.addEventListener('error', (event) => {
+        console.error('Shaka Player Error:', event.detail);
+      });
+
+      try {
+        await player.load(streamUrl);
+      } catch (error) {
+        console.error('Load error:', error);
+      }
+    });
+  </script>
 </body>
 </html>
