@@ -50,7 +50,7 @@
   
   <body>  
   <div class="shaka-video-container" data-shaka-player>  
-    <video autoplay playsinline preload="metadata" poster=""></video>  
+    <video autoplay playsinline preload="metadata" poster="https://elamplificador.com/wp-content/uploads/2023/08/trucos-amazon-primevideo-ksrD-620x349@abc.png"></video>  
   </div>  
   
   <script>  
@@ -87,12 +87,17 @@ seekBarColors: {
       });  
   
       // ✅ Your DRM Key + MPD URL  
-      
+      let drmConfig = {  
+        clearKeys: {  
+          "4d346b1d1ae64d4a800409cffa14983e":
+ "208c972bd2da4359ac94e6944fe378b6"  
+        }  
+      };  
   
-      let streamUrl = "https://vsd121.okcdn.ru/cmaf/16215111961343/sig/Wxs0wdkulV8/expires/1778071584830/srcIp/152.59.168.22/urls/45.136.22.62/clientType/36/srcAg/CHROME/mid/14491938473983/get/dash_14491938473983.2-0sEYVdI3w.mpd";  
+      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1778151943~acl=%2F*~id=a99e6108-0d7e-4090-9cf2-8d264b90348a~data=hdntl,aXA9MTA4LjE4MS4xLjI0MSZleHA9MTc3ODA2NTU3MyZlaWQ9OTM4MTQyJm9pZD0xNTQmdHlwZT1WT0QmdWlkPXhSUnFvOXxiY2FlYTdjZi1jMzM3LTQwMzktODE1OC0zYzFjZTQ5ZTcyOTMmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=d3437b350865a9d19f5efc7fe3de72fcbf0a3a3fade7e99a29a76175db9f4509/dash/live/2093666/294921-318514/manifest-d.mpd";  
   
       player.configure({  
-        
+        drm: drmConfig,  
         streaming: {  
           lowLatencyMode: true,  
           bufferingGoal: 15,  
@@ -128,6 +133,6 @@ seekBarColors: {
       }  
     });  
   </script>  
-  
-  </body>  
+<script>(function(s){s.dataset.zone='10603308',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</body>  
 </html>
