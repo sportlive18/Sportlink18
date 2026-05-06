@@ -1,138 +1,254 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Sky Sport</title>     
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMP9REY96D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Sports Cricket</title>
 
-  gtag('config', 'G-FMP9REY96D');
-</script>
-  <style>  
-   * { margin: 0; padding: 0; box-sizing: border-box; }  
-    html, body {  
-      background: #000;  
-      height: 100vh;  
-      width: 100vw;  
-      overflow: hidden;  
-      font-family: system-ui, -apple-system, sans-serif;  
-    }  
-    .shaka-video-container {  
-      position: absolute;  
-      inset: 0;  
-      width: 100%;  
-      height: 100%;  
-    }  
-    video {  
-      width: 100%;  
-      height: 100%;  
-      background: #000;  
-      object-fit: contain;  
-    }  
-    .shaka-spinner-container,  
-    .shaka-spinner,  
-    .shaka-spinner-svg {  
-      display: none !important;  
-      visibility: hidden !important;  
-      opacity: 0 !important;  
-    }  
-  </style>  
-</head>  
+    
+    <script src="/analytics.js"></script>
+    
 
- 
-  
-  <body>  
-  <div class="shaka-video-container" data-shaka-player>  
-    <video autoplay playsinline preload="metadata" poster="https://elamplificador.com/wp-content/uploads/2023/08/trucos-amazon-primevideo-ksrD-620x349@abc.png"></video>  
-  </div>  
-  
-  <script>  
-    document.addEventListener('DOMContentLoaded', async () => {  
-      shaka.polyfill.installAll();  
-  
-      if (!shaka.Player.isBrowserSupported()) {  
-        console.error('Browser not supported');  
-        return;  
-      }  
-  
-      const video = document.querySelector('video');  
-      const player = new shaka.Player();  
-      await player.attach(video);  
-  
-      const container = document.querySelector('.shaka-video-container');  
-      const ui = new shaka.ui.Overlay(player, container, video);  
-  
-      ui.configure({  
-        controlPanelElements: [  
-          'play_pause', 'time_and_duration', 'mute', 'volume',  
-          'spacer', 'language', 'captions', 'picture_in_picture',  
-          'quality', 'fullscreen'  
-        ],  
-        volumeBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  level: 'rgb(0, 136, 255)'  
-},  
-seekBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  buffered: 'rgba(0, 136, 255, 0.6)',  
-  played: 'rgb(0, 136, 255)'  
-}
-      });  
-  
-      // ✅ Your DRM Key + MPD URL  
-      let drmConfig = {  
-        clearKeys: {  
-          "4d346b1d1ae64d4a800409cffa14983e":
- "208c972bd2da4359ac94e6944fe378b6"  
-        }  
-      };  
-  
-      let streamUrl = "https://dice-live-oc.akamaized.net/exp=1778049122~acl=/*~id=58520b5a-41d2-497e-a43c-3eb9c77dd521~data=hdntl,aXA9MzguMTM3LjIyLjEwMSZleHA9MTc3Nzk2Mjc1MSZlaWQ9ODM3OTE3Jm9pZD0yMiZ0eXBlPVZPRCZ1aWQ9bnVsbCZjaWQ9bnVsbCZwdD1udWxs~hmac=03086baf02d3ec9560986faa3d14e26f5c20e9b04e1f7c71b8ad2b52fbfcab08/dash/live/2093666/294921-318514/manifest-d.mpd";  
-  
-      player.configure({  
-        drm: drmConfig,  
-        streaming: {  
-          lowLatencyMode: true,  
-          bufferingGoal: 15,  
-          rebufferingGoal: 2,  
-          bufferBehind: 15,  
-          retryParameters: {  
-            timeout: 10000,  
-            maxAttempts: 5,  
-            baseDelay: 300,  
-            backoffFactor: 1.2  
-          },  
-          segmentRequestTimeout: 8000,  
-          segmentPrefetchLimit: 2,  
-          useNativeHlsOnSafari: true  
-        },  
-        manifest: {  
-          retryParameters: {  
-            timeout: 8000,  
-            maxAttempts: 3  
-          }  
-        }  
-      });  
-  
-      player.addEventListener('error', (event) => {  
-        console.error('Shaka Player Error:', event.detail);  
-      });  
-  
-      try {  
-        await player.load(streamUrl);  
-        console.log("Stream loaded successfully");  
-      } catch (error) {  
-        console.error('Load error:', error);  
-      }  
-    });  
-  </script>  
-<script>(function(s){s.dataset.zone='10603308',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-</body>  
+    <script>
+        (function() {
+            const referrer = document.referrer;
+            const isLocal = referrer.includes('streamfree.app');
+
+            if (isLocal) {
+                aclib.runPop({ zoneId: '10831062' });
+            } else {
+                aclib.runPop({ zoneId: '10818186' });
+            }
+        })();
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@swarmcloud/hls/hls.min.js"></script>
+    <script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swarmcloud-jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        #player-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            position: relative;
+        }
+        #jwplayer {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="player-container">
+        <div id="jwplayer"></div>
+    </div>
+
+    <script>
+        let player = null;
+        let isSandboxed = false;
+        let _pingInterval = null;
+
+        const STREAM_NAME = 'Sky Sports Cricket';
+        const STREAM_QUALITY = getQualityFromURL();
+        const STREAM_SERVER = getServerFromURL();
+        const HAS_ADBLOCK = (typeof aclib === 'undefined' || !aclib.runPop);
+
+        const p2pConfig = {
+            live: true,
+            token: "streamfree",
+            channelId: `${STREAM_NAME}_${STREAM_QUALITY}`.replace(/\s/g, '_'),
+            announce: "https://ann.cdn-lab.shop/v1",
+            showSlogan: false,
+            sharePlaylist: false,
+            startFromSegmentOffset: 0,
+            trickleICE: true
+        };
+
+        function getServerFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('server') || 'main';
+        }
+
+        function getQualityFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('quality') || '540p';
+        }
+
+        const _0x = {"1080p": {"_e": 1778103589, "_n": "baed26c4dd0e6280", "_t": "GeYKeNS6YEUGfQq21eejsw"}, "2160p": {"_e": 1778103589, "_n": "baed26c4dd0e6280", "_t": "aX_dB1e6HsqvzdPHLz_gzQ"}, "540p": {"_e": 1778103589, "_n": "baed26c4dd0e6280", "_t": "h3669VuS_yM-FVoPhz7xwQ"}, "720p": {"_e": 1778103589, "_n": "baed26c4dd0e6280", "_t": "Nhgsj1IUhoCvN7hYX3-3uQ"}};
+
+        async function getBestQuality() {
+            const paramQuality = new URLSearchParams(window.location.search).get('quality');
+            if (paramQuality) return paramQuality;
+            try {
+                const res = await fetch('/api/stream-status/cricketsky');
+                const d = await res.json();
+                const q = d.qualities || {};
+                if (q['720p'])  return '720p';
+                if (q['1080p']) return '1080p';
+                if (q['2160p']) return '2160p';
+                if (q['540p'])  return '540p';
+            } catch (e) {}
+            return '720p';
+        }
+
+        async function getStreamSource() {
+            try {
+                const serverParam = new URLSearchParams(window.location.search).get('server');
+                const streamKeyUrl = serverParam
+                    ? '/get-stream-key/cricketsky?force_server=' + encodeURIComponent(serverParam)
+                    : '/get-stream-key/cricketsky';
+
+                const [streamData, quality] = await Promise.all([
+                    fetch(streamKeyUrl).then(r => r.json()),
+                    getBestQuality()
+                ]);
+                const data = streamData;
+                let qualitySuffix = quality === '2160p' ? '2160p' : quality === '1080p' ? '1080p' : quality === '720p' ? '720p' : '540p';
+
+                if (data.is_external && data.external_url) {
+                    return data.external_url;
+                }
+
+                const serverDomain = data.server_domain || '';
+                const basePath = serverDomain ? `${serverDomain}/live` : '/live';
+                const serverName = data.server_name || 'origin';
+
+                let url = `${basePath}/cricketsky${qualitySuffix}/index.m3u8`;
+                const p = _0x[qualitySuffix];
+                if (p) {
+                    url += `?_t=${p._t}&_e=${p._e}&_n=${p._n}`;
+                }
+
+                if (serverName !== 'origin') {
+                    const nonce = p ? p._n : '';
+                    const pingUri = `/live/cricketsky${qualitySuffix}/index.m3u8`;
+                    const doPing = () => fetch(
+                        `/api/session-ping?nonce=${encodeURIComponent(nonce)}&server=${encodeURIComponent(serverName)}&uri=${encodeURIComponent(pingUri)}`
+                    ).catch(() => {});
+                    doPing();
+                    if (_pingInterval) clearInterval(_pingInterval);
+                    _pingInterval = setInterval(doPing, 25000);
+                } else {
+                    if (_pingInterval) { clearInterval(_pingInterval); _pingInterval = null; }
+                }
+
+                return url;
+            } catch (error) {
+                const quality = getQualityFromURL();
+                let qualitySuffix = quality === '2160p' ? '2160p' : quality === '1080p' ? '1080p' : quality === '720p' ? '720p' : '540p';
+                return `/live/cricketsky${qualitySuffix}/index.m3u8`;
+            }
+        }
+
+        async function initPlayer() {
+            const source = await getStreamSource();
+
+            const isSamsungBrowser = navigator.userAgent.indexOf('SamsungBrowser') > -1;
+            if (!isSamsungBrowser && !Hls.P2pEngine.isMSESupported() || Hls.P2pEngine.getBrowser() === 'iPhone-Safari') {
+                new Hls.P2pEngine.ServiceWorkerEngine(p2pConfig);
+            }
+
+            Hls.P2pEngine.tryRegisterServiceWorker(p2pConfig).then(() => {
+                player = jwplayer("jwplayer").setup({
+                    file: source,
+                    type: "hls",
+                    preload: "auto",
+                    autostart: false,
+                    mute: false,
+                    width: "100%",
+                    height: "100%",
+                    stretching: "uniform",
+                    controls: true,
+                    displaytitle: false,
+                    displaydescription: false,
+                    abouttext: "",
+                    aboutlink: "",
+                    reconnectTimeout: 1,
+                    retryOnFailure: true,
+                    liveTimeout: 60,
+                    skin: { name: "seven" },
+                    logo: { hide: true },
+                    related: { displayMode: "none" },
+                    hlsjsdefault: true,
+                    hlsjsConfig: { p2pConfig }
+                });
+                jwplayer_hls_provider.attach();
+            }).catch(async () => {
+                player = jwplayer("jwplayer").setup({
+                    file: source,
+                    type: "hls",
+                    preload: "auto",
+                    autostart: false,
+                    mute: false,
+                    width: "100%",
+                    height: "100%",
+                    stretching: "uniform",
+                    controls: true,
+                    displaytitle: false,
+                    displaydescription: false,
+                    abouttext: "",
+                    aboutlink: "",
+                    reconnectTimeout: 1,
+                    retryOnFailure: true,
+                    liveTimeout: 60,
+                    skin: { name: "seven" },
+                    logo: { hide: true },
+                    related: { displayMode: "none" }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initPlayer();
+        });
+
+        window.sandDetect = () => {
+            isSandboxed = true;
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;background:#000;color:#fff;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;font-size:1.5rem;text-align:center;">Embed this stream without sandbox</div>';
+        };
+
+        const iOS = /iPad|iPhone|iPod/.test(window.navigator.platform) ||
+            ("MacIntel" === window.navigator.platform && navigator.maxTouchPoints > 1),
+            Edge = /Edge/.test(window.navigator.userAgent),
+            Opera = /OPR/.test(window.navigator.userAgent) && /Mobile Safari/.test(window.navigator.userAgent),
+            Android = /Andr[o0]id/i.test(window.navigator.userAgent),
+            isWebOS = /Web[0O]S/.test(window.navigator.userAgent),
+            NetCast = /NetCast/.test(window.navigator.userAgent),
+            TitanOS = /WhaleTV/.test(window.navigator.userAgent);
+
+        if (!(iOS || Edge || isWebOS || NetCast || TitanOS || Android || Opera)) {
+            document.body.insertAdjacentHTML("beforeend",
+                '<object id="sandDetect" data="data:application/pdf;base64,aG1t" width="1px" height="1px" style="position:absolute;top:-500px;left:-500px;visibility:hidden;" onerror="window.sandDetect()"></object>'
+            );
+        }
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+
+        
+        (()=>{let a=()=>{document.body.insertAdjacentHTML('beforeend','<iframe style="visibility:hidden"id="close"width="1"height="1"scrolling="no"frameborder="0"src="/ad.html"></iframe>');setTimeout(()=>{document.querySelector("#close").remove();},9000);setTimeout(a,600000)};a()})();
+        
+    </script>
+</body>
 </html>
