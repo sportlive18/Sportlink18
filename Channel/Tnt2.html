@@ -14,10 +14,6 @@
       width: 100vw;
       overflow: hidden;
       font-family: system-ui, -apple-system, sans-serif;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
     .shaka-video-container {
       position: absolute;
@@ -38,100 +34,15 @@
       visibility: hidden !important;
       opacity: 0 !important;
     }
-    #blocked-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 99999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    #blocked-screen h1 {
-      color: red;
-      font-size: 2rem;
-    }
-    #blocked-screen p {
-      color: #aaa;
-      margin-top: 10px;
-      font-size: 1rem;
-    }
   </style>
 </head>
 <body>
-
-  <!-- Blocked Screen Overlay -->
-  <div id="blocked-screen">
-    <h1>⚠️ Access Denied</h1>
-    <p>Developer tools are not allowed on this page.</p>
-  </div>
 
   <div class="shaka-video-container" data-shaka-player id="player-wrapper">
     <video autoplay playsinline preload="metadata" poster="https://assets.tntsports.io/web/img/og/tntsports.jpg"></video>
   </div>
 
   <script>
-    // ============================================
-    // 🔒 PROTECTION BLOCK — RUNS IMMEDIATELY
-    // ============================================
-
-    const BLOCK = () => {
-      document.getElementById('blocked-screen').style.display = 'flex';
-      document.getElementById('player-wrapper').style.display = 'none';
-    };
-
-    // 1. Disable Right Click
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
-    // 2. Block Keyboard Shortcuts
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12') { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c','K','k'].includes(e.key)) { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && ['U','u','S','s','A','a'].includes(e.key)) { e.preventDefault(); }
-    });
-
-    // 3. Disable Copy / Cut / Drag / Select
-    document.addEventListener('copy', e => e.preventDefault());
-    document.addEventListener('cut', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
-    document.addEventListener('selectstart', e => e.preventDefault());
-
-    // 4. DevTools Size Detection
-    setInterval(() => {
-      const threshold = 160;
-      if (
-        window.outerWidth - window.innerWidth > threshold ||
-        window.outerHeight - window.innerHeight > threshold
-      ) { BLOCK(); }
-    }, 500);
-
-    // 5. console.log Image Trick
-    const trap = new Image();
-    Object.defineProperty(trap, 'id', {
-      get: function() { BLOCK(); }
-    });
-    setInterval(() => {
-      console.log('%c', trap);
-      console.clear();
-    }, 1000);
-
-    // 6. Debugger Trap (slows down DevTools)
-    setInterval(function() {
-      (function() { return false; })
-      ['constructor']('debugger')['call']();
-    }, 100);
-
-    // 7. Timing-based DevTools detection on load
-    window.addEventListener('load', () => {
-      const start = performance.now();
-      debugger;
-      if (performance.now() - start > 100) { BLOCK(); }
-    });
-
-    // ============================================
-    // 🎬 SHAKA PLAYER
-    // ============================================
     document.addEventListener('DOMContentLoaded', async () => {
       shaka.polyfill.installAll();
 
@@ -210,4 +121,3 @@
   </script>
 </body>
 </html>
-```
