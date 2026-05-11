@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🏏 PTV </title>
+  <title>🏏 PTV Live</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
   <style>
@@ -15,29 +15,93 @@
       overflow: hidden;
       font-family: system-ui, -apple-system, sans-serif;
       -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
     }
+
     .shaka-video-container {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
     }
+
     video {
       width: 100%;
       height: 100%;
       background: #000;
       object-fit: contain;
     }
+
+    /* Hide default Shaka spinner */
     .shaka-spinner-container,
     .shaka-spinner,
     .shaka-spinner-svg {
       display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
     }
+
+    /* Custom loading overlay */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      transition: opacity 0.5s ease;
+    }
+    #loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-ball {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff 0%, #cc0000 40%, #8b0000 100%);
+      box-shadow: 0 0 20px rgba(200,0,0,0.5);
+      animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #loading-overlay p {
+      color: #aaa;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    /* Error screen */
+    #error-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0a0a0a;
+      z-index: 9998;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #error-screen h1 { color: #ff4444; font-size: 1.6rem; }
+    #error-screen p  { color: #777; font-size: 0.9rem; }
+    #retry-btn {
+      margin-top: 10px;
+      padding: 10px 28px;
+      background: #cc0000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #retry-btn:hover { background: #ff2222; }
+
+    /* Blocked screen */
     #blocked-screen {
       display: none;
       position: fixed;
@@ -47,98 +111,100 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      gap: 10px;
     }
-    #blocked-screen h1 {
-      color: red;
-      font-size: 2rem;
-    }
-    #blocked-screen p {
-      color: #aaa;
-      margin-top: 10px;
-      font-size: 1rem;
-    }
+    #blocked-screen h1 { color: red; font-size: 2rem; }
+    #blocked-screen p  { color: #aaa; font-size: 1rem; }
   </style>
 </head>
 <body>
 
+  <!-- Loading -->
+  <div id="loading-overlay">
+    <div class="loader-ball"></div>
+    <p>Loading stream…</p>
+  </div>
+
+  <!-- Error -->
+  <div id="error-screen">
+    <h1>⚠️ Stream Error</h1>
+    <p id="error-msg">Unable to load the stream.</p>
+    <button id="retry-btn" onclick="loadStream()">Retry</button>
+  </div>
+
+  <!-- Blocked -->
   <div id="blocked-screen">
     <h1>⚠️ Access Denied</h1>
     <p>Developer tools are not allowed on this page.</p>
   </div>
 
+  <!-- Player -->
   <div class="shaka-video-container" data-shaka-player id="player-wrapper">
     <video autoplay playsinline preload="metadata"></video>
   </div>
 
   <script>
-    // ============================================
-    // 🔒 PROTECTION BLOCK
-    // ============================================
-
+    // ============================================================
+    // 🔒 PROTECTION
+    // ============================================================
     const BLOCK = () => {
       document.getElementById('blocked-screen').style.display = 'flex';
       document.getElementById('player-wrapper').style.display = 'none';
+      document.getElementById('loading-overlay').style.display = 'none';
     };
 
     document.addEventListener('contextmenu', e => e.preventDefault());
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12') { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c','K','k'].includes(e.key)) { e.preventDefault(); BLOCK(); }
-      if (e.ctrlKey && ['U','u','S','s','A','a'].includes(e.key)) { e.preventDefault(); }
-    });
-
-    document.addEventListener('copy', e => e.preventDefault());
-    document.addEventListener('cut', e => e.preventDefault());
-    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('copy',        e => e.preventDefault());
+    document.addEventListener('cut',         e => e.preventDefault());
+    document.addEventListener('dragstart',   e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
 
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12') { e.preventDefault(); BLOCK(); return; }
+      if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c','K','k'].includes(e.key)) { e.preventDefault(); BLOCK(); return; }
+      if (e.ctrlKey && ['U','u','S','s','A','a'].includes(e.key)) e.preventDefault();
+    });
+
     setInterval(() => {
-      const threshold = 160;
-      if (
-        window.outerWidth - window.innerWidth > threshold ||
-        window.outerHeight - window.innerHeight > threshold
-      ) { BLOCK(); }
+      if (window.outerWidth  - window.innerWidth  > 160 ||
+          window.outerHeight - window.innerHeight > 160) BLOCK();
     }, 500);
 
-    const trap = new Image();
-    Object.defineProperty(trap, 'id', {
-      get: function() { BLOCK(); }
-    });
-    setInterval(() => {
-      console.log('%c', trap);
-      console.clear();
-    }, 1000);
-
-    setInterval(function() {
-      (function() { return false; })
-      ['constructor']('debugger')['call']();
-    }, 100);
+    const _trap = new Image();
+    Object.defineProperty(_trap, 'id', { get() { BLOCK(); } });
+    setInterval(() => { console.log('%c', _trap); console.clear(); }, 1000);
+    setInterval(() => { (function(){return false;})['constructor']('debugger')['call'](); }, 100);
 
     window.addEventListener('load', () => {
-      const start = performance.now();
+      const t = performance.now();
       debugger;
-      if (performance.now() - start > 100) { BLOCK(); }
+      if (performance.now() - t > 100) BLOCK();
     });
 
-    // ============================================
-    // 🎬 SHAKA PLAYER
-    // ============================================
-    document.addEventListener('DOMContentLoaded', async () => {
-      shaka.polyfill.installAll();
+    // ============================================================
+    // 🎬 PLAYER
+    // ============================================================
+    const STREAM_URL  = "https://ottlive.dishhome.com.np/protected/jQTOzZkB0RDJ74Ryniuo/dash/manifest.mpd";
+    const CLEAR_KEYS  = {
+      "a7712196dbee413ab510c825e5c4d3f0": "1ade126fa6a9162ba34bd5de5b1427ca"
+    };
 
+    let player;
+
+    async function initPlayer() {
+      shaka.polyfill.installAll();
       if (!shaka.Player.isBrowserSupported()) {
-        console.error('Browser not supported');
+        showError("Your browser does not support this player.");
         return;
       }
 
-      const video = document.querySelector('video');
-      const player = new shaka.Player();
+      const video     = document.querySelector('video');
+      const container = document.querySelector('.shaka-video-container');
+
+      player = new shaka.Player();
       await player.attach(video);
 
-      const container = document.querySelector('.shaka-video-container');
       const ui = new shaka.ui.Overlay(player, container, video);
-
       ui.configure({
         controlPanelElements: [
           'play_pause', 'time_and_duration', 'mute', 'volume',
@@ -146,28 +212,18 @@
           'quality', 'fullscreen'
         ],
         volumeBarColors: {
-          base: 'rgba(255, 192, 203, 0.3)',
-          level: 'rgb(255, 105, 180)'
+          base:  'rgba(255,192,203,0.3)',
+          level: 'rgb(255,105,180)'
         },
         seekBarColors: {
-          base: 'rgba(0, 180, 255, 0.3)',
-          buffered: 'rgba(0, 180, 255, 0.6)',
-          played: 'rgb(0, 200, 255)'
+          base:     'rgba(0,180,255,0.3)',
+          buffered: 'rgba(0,180,255,0.6)',
+          played:   'rgb(0,200,255)'
         }
       });
 
-      // ── ✅ STREAM & DRM ──────────────────────────────
-      let drmConfig = {
-        clearKeys: {
-          "a7712196dbee413ab510c825e5c4d3f0": "1ade126fa6a9162ba34bd5de5b1427ca"
-        }
-      };
-
-      let streamUrl = "https://ottlive.dishhome.com.np/protected/jQTOzZkB0RDJ74Ryniuo/dash/manifest.mpd";
-      // ─────────────────────────────────────────────────
-
       player.configure({
-        drm: drmConfig,
+        drm: { clearKeys: CLEAR_KEYS },
         streaming: {
           lowLatencyMode: true,
           bufferingGoal: 15,
@@ -184,23 +240,54 @@
           useNativeHlsOnSafari: true
         },
         manifest: {
-          retryParameters: {
-            timeout: 8000,
-            maxAttempts: 3
-          }
+          retryParameters: { timeout: 8000, maxAttempts: 3 }
         }
       });
 
-      player.addEventListener('error', (event) => {
-        console.error('Shaka Player Error:', event.detail);
+      player.addEventListener('error', e => {
+        console.error('Shaka error:', e.detail);
+        showError(`Error ${e.detail.code}: ${e.detail.message || 'Stream failed.'}`);
       });
 
+      // Hide loading once playing
+      const video2 = document.querySelector('video');
+      video2.addEventListener('playing', hideLoading, { once: true });
+      video2.addEventListener('canplay', hideLoading,  { once: true });
+
+      await loadStream();
+    }
+
+    async function loadStream() {
+      hideError();
+      showLoading();
       try {
-        await player.load(streamUrl);
-      } catch (error) {
-        console.error('Load error:', error);
+        await player.load(STREAM_URL);
+      } catch (err) {
+        console.error('Load error:', err);
+        showError(err.message || 'Failed to load stream.');
       }
-    });
+    }
+
+    function showLoading() {
+      const el = document.getElementById('loading-overlay');
+      el.classList.remove('hidden');
+      el.style.display = 'flex';
+    }
+    function hideLoading() {
+      const el = document.getElementById('loading-overlay');
+      el.classList.add('hidden');
+      setTimeout(() => { el.style.display = 'none'; }, 500);
+    }
+    function showError(msg) {
+      hideLoading();
+      document.getElementById('error-msg').textContent = msg || 'Stream unavailable.';
+      document.getElementById('error-screen').style.display = 'flex';
+    }
+    function hideError() {
+      document.getElementById('error-screen').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', initPlayer);
   </script>
 </body>
 </html>
