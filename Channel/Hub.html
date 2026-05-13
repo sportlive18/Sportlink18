@@ -4,121 +4,95 @@
   <title>Fox Cricket</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <meta name="referrer" content="no-referrer"/>
-  
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
-  <!-- HLS.js -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <!-- Plyr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+  <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet"/>
+  <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
   <style>
-    body {
-      background-color: #000;
-      margin: 0;
-      padding: 0;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #000;
       overflow: hidden;
     }
-    html, body {
-      height: 100%;
-      width: 100%;
+    .video-js {
+      width: 100vw !important;
+      height: 100vh !important;
     }
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
-    .plyr {
-      height: 100%;
-      width: 100%;
+    .vjs-big-play-button {
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
     }
   </style>
 </head>
 <body>
-  <div class="video-container">
-    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
-  </div>
+  <video
+    id="player"
+    class="video-js vjs-default-skin vjs-big-play-centered"
+    controls
+    autoplay
+    playsinline
+    preload="auto">
+  </video>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const video = document.getElementById("player");
-      const source = "https://dai.google.com/linear/hls/event/mbsfWpAoS2Olw5e-nkM-gw/master.m3u8";
-      const defaultOptions = {
-        autoplay: true,
-        controls: [
-          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
-          'mute', 'volume', 'settings', 'fullscreen'
-        ],
-        settings: ['quality']
-      };
-      let player;
-      function setupPlayer(hls, qualities = []) {
-        player = new Plyr(video, {
-          ...defaultOptions,
-          quality: qualities.length ? {
-            default: qualities[0],
-            options: qualities,
-            forced: true,
-            onChange: q => {
-              hls.levels.forEach((level, index) => {
-                if (level.height === q) {
-                  hls.currentLevel = index;
-                }
-              });
+    const src = "https://dai.google.com/linear/hls/event/mbsfWpAoS2Olw5e-nkM-gw/master.m3u8";
+
+    const player = videojs('player', {
+      autoplay: true,
+      muted: true,
+      liveui: true,
+      html5: {
+        vhs: {
+          overrideNative: true,
+          withCredentials: false,
+          handleManifestRedirects: true,
+          limitRenditionByPlayerDimensions: false,
+          xhr: {
+            beforeRequest: function(options) {
+              options.headers = options.headers || {};
+              options.headers['User-Agent'] = 'Cricbuzz/7.00.01(Linux;Android13)AndroidXMedia3/1.5.1';
+              options.headers['X-Forwarded-For'] = '1.178.20.23';
+              return options;
             }
-          } : {}
-        });
-        // 🔁 AUTO RESUME
-        setInterval(() => {
-          if (video.paused && video.readyState > 2) {
-            video.play().catch(()=>{});
           }
-        }, 3000);
-        // 🔊 AUTO UNMUTE (on first interaction)
-        const unmute = () => {
-          video.muted = false;
-          video.volume = 1;
-          document.removeEventListener("click", unmute);
-          document.removeEventListener("touchstart", unmute);
-        };
-        document.addEventListener("click", unmute);
-        document.addEventListener("touchstart", unmute);
+        },
+        nativeAudioTracks: false,
+        nativeVideoTracks: false
       }
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          autoStartLoad: true,
-          xhrSetup: function(xhr, url) {
-            xhr.setRequestHeader('User-Agent', 'Cricbuzz/7.00.01(Linux;Android13)AndroidXMedia3/1.5.1');
-          }
-        });
-        hls.loadSource(source);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
-          video.play().catch(()=>{});
-          setupPlayer(hls, availableQualities);
-        });
-        // 🔥 AUTO RECOVER ON ERROR
-        hls.on(Hls.Events.ERROR, function (_, data) {
-          if (data.fatal) {
-            hls.startLoad();
-          }
-        });
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = source;
-        video.addEventListener("loadedmetadata", () => {
-          video.play().catch(()=>{});
-          setupPlayer(null);
-        });
+    });
+
+    player.src({
+      src: src,
+      type: 'application/x-mpegURL'
+    });
+
+    player.ready(function () {
+      player.play().catch(() => {});
+    });
+
+    // Auto unmute on first tap/click
+    const unmute = () => {
+      player.muted(false);
+      player.volume(1);
+      document.removeEventListener('click', unmute);
+      document.removeEventListener('touchstart', unmute);
+    };
+    document.addEventListener('click', unmute);
+    document.addEventListener('touchstart', unmute);
+
+    // Auto resume if paused
+    setInterval(() => {
+      if (player.paused() && player.readyState() > 2) {
+        player.play().catch(() => {});
       }
+    }, 3000);
+
+    // Error recovery
+    player.on('error', function() {
+      setTimeout(() => {
+        player.src({ src: src, type: 'application/x-mpegURL' });
+        player.play().catch(() => {});
+      }, 3000);
     });
   </script>
 </body>
