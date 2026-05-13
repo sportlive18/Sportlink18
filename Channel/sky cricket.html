@@ -1,138 +1,313 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Sportlink</title>     
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
-  <!-- Google tag (gtag.js) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>219027-321028</title>
+<meta name="referrer" content="no-referrer">
+<script src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css"/>
+
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMP9REY96D"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-FMP9REY96D');
 </script>
-  <style>  
-   * { margin: 0; padding: 0; box-sizing: border-box; }  
-    html, body {  
-      background: #000;  
-      height: 100vh;  
-      width: 100vw;  
-      overflow: hidden;  
-      font-family: system-ui, -apple-system, sans-serif;  
-    }  
-    .shaka-video-container {  
-      position: absolute;  
-      inset: 0;  
-      width: 100%;  
-      height: 100%;  
-    }  
-    video {  
-      width: 100%;  
-      height: 100%;  
-      background: #000;  
-      object-fit: contain;  
-    }  
-    .shaka-spinner-container,  
-    .shaka-spinner,  
-    .shaka-spinner-svg {  
-      display: none !important;  
-      visibility: hidden !important;  
-      opacity: 0 !important;  
-    }  
-  </style>  
-</head>  
 
- 
-  
-  <body>  
-  <div class="shaka-video-container" data-shaka-player>  
-    <video autoplay playsinline preload="metadata" poster=""></video>  
-  </div>  
-  
-  <script>  
-    document.addEventListener('DOMContentLoaded', async () => {  
-      shaka.polyfill.installAll();  
-  
-      if (!shaka.Player.isBrowserSupported()) {  
-        console.error('Browser not supported');  
-        return;  
-      }  
-  
-      const video = document.querySelector('video');  
-      const player = new shaka.Player();  
-      await player.attach(video);  
-  
-      const container = document.querySelector('.shaka-video-container');  
-      const ui = new shaka.ui.Overlay(player, container, video);  
-  
-      ui.configure({  
-        controlPanelElements: [  
-          'play_pause', 'time_and_duration', 'mute', 'volume',  
-          'spacer', 'language', 'captions', 'picture_in_picture',  
-          'quality', 'fullscreen'  
-        ],  
-        volumeBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  level: 'rgb(0, 136, 255)'  
-},  
-seekBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  buffered: 'rgba(0, 136, 255, 0.6)',  
-  played: 'rgb(0, 136, 255)'  
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+
+.shaka-video-container{
+  position:fixed;inset:0;background:#000;
+  display:flex;align-items:center;justify-content:center;
 }
-      });  
-  
-      // ✅ Your DRM Key + MPD URL  
-      let drmConfig = {  
-        clearKeys: {  
-          "278b8746b7c7410e901af0aa3774f037":
- "15e1142d647b474ebbd49e41efa2a9d7"  
-        }  
-      };  
-  
-      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1778479837~acl=%2F*~id=f982c1bc-036d-4277-baf9-6df46863b3ee~data=hdntl,aXA9MTA4LjE4MS4wLjEwOSZleHA9MTc3ODM5MzQ2NyZlaWQ9OTM5NjY2Jm9pZD0xNTQmdHlwZT1WT0QmdWlkPXhSUnFvOXxiY2FlYTdjZi1jMzM3LTQwMzktODE1OC0zYzFjZTQ5ZTcyOTMmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=a0a3328a3b0e5421968984ebacecaf3ebf8fac58bf8a7ff905f235b2076347d9/dash/live/2093720/219029-321032/manifest-d.mpd";  
-  
-      player.configure({  
-        drm: drmConfig,  
-        streaming: {  
-          lowLatencyMode: true,  
-          bufferingGoal: 15,  
-          rebufferingGoal: 2,  
-          bufferBehind: 15,  
-          retryParameters: {  
-            timeout: 10000,  
-            maxAttempts: 5,  
-            baseDelay: 300,  
-            backoffFactor: 1.2  
-          },  
-          segmentRequestTimeout: 8000,  
-          segmentPrefetchLimit: 2,  
-          useNativeHlsOnSafari: true  
-        },  
-        manifest: {  
-          retryParameters: {  
-            timeout: 8000,  
-            maxAttempts: 3  
-          }  
-        }  
-      });  
-  
-      player.addEventListener('error', (event) => {  
-        console.error('Shaka Player Error:', event.detail);  
-      });  
-  
-      try {  
-        await player.load(streamUrl);  
-        console.log("Stream loaded successfully");  
-      } catch (error) {  
-        console.error('Load error:', error);  
-      }  
-    });  
-  </script>  
-<script>(function(s){s.dataset.zone='10975013',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  </body>  
+
+video{width:100%;height:100%;object-fit:contain;background:#000;}
+
+.custom-watermark{
+  position:absolute;z-index:40;pointer-events:none;
+  top:65%;left:6%;transform:translateY(-50%);
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.12);
+}
+
+.block-overlay{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);text-align:center;
+}
+.block-box{
+  padding:40px;max-width:500px;width:90%;
+  background:rgba(20,20,20,0.95);border-radius:16px;
+  border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  animation:fadeInUp 0.6s ease-out;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.block-title{
+  font-size:42px;font-weight:800;color:#fff;text-transform:uppercase;
+  letter-spacing:2px;margin-bottom:20px;text-shadow:0 0 10px rgba(255,0,0,0.3);
+}
+.block-sub{font-size:14px;font-weight:500;color:rgba(255,255,255,0.6);line-height:1.6;}
+.block-icon,.block-note{display:none;}
+
+/* Refresh indicator */
+#refresh-toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.2);border-radius:50px;
+  padding:10px 22px;color:#fff;font-size:13px;font-weight:600;
+  z-index:9999;opacity:0;transition:opacity 0.4s;pointer-events:none;
+  white-space:nowrap;
+}
+#refresh-toast.show{opacity:1;}
+
+@media(max-width:700px){
+  .custom-watermark{font-size:9px;top:60%;left:16%}
+  .block-title{font-size:28px}
+  .block-box{padding:25px}
+  .block-sub{font-size:12px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="shaka-video-container" id="player-container">
+  <video id="video" autoplay muted playsinline preload="metadata"></video>
+  <div class="custom-watermark"> </div>
+</div>
+
+<div id="refresh-toast">🔄 Refreshing stream...</div>
+
+<script>
+(function(){
+
+  /* ── Sandbox check ── */
+  function isSandboxedEnv(){
+    try{
+      if(window.self===window.top) return false;
+      if(window.frameElement&&window.frameElement.hasAttribute("sandbox")) return true;
+      try{
+        document.domain=document.domain;
+        if(window.frameElement&&!window.frameElement.getAttribute("sandbox")) return false;
+      }catch(e){ return true; }
+      return false;
+    }catch(e){ return true; }
+  }
+
+  function triggerBlockScreen(title,message){
+    const container=document.getElementById("player-container");
+    const video=document.getElementById("video");
+    try{ video.pause(); video.removeAttribute('src'); video.load(); }catch(e){}
+    const overlay=document.createElement("div");
+    overlay.className="block-overlay";
+    overlay.id="sandbox-block-display";
+    overlay.innerHTML=`<div class="block-box"><div class="block-title">${title}</div><div class="block-sub">${message}</div></div>`;
+    document.body.appendChild(overlay);
+    container.style.display='none';
+  }
+
+  if(isSandboxedEnv()){
+    triggerBlockScreen('Disable Sandbox','Opening Chrome Browser Only & Disable Ad blocker');
+    return;
+  }
+
+  /* ── CONFIG ── */
+  const CONFIG = {
+    // Fallback stream URL (used if API doesn't return one)
+    streamUrl: "https://dice-live-oc.akamaized.net/hdntl=exp=1778758219~acl=%2f*~id=c7cd7823-86a9-4fb3-b1b9-77b287bc40bb~data=hdntl,aXA9MjA4Ljg3LjI0Mi4xMTEmZXhwPTE3Nzg2NzE4NDgmZWlkPTkzNjQ2NCZvaWQ9MTU0JnR5cGU9Vk9EJnVpZD14UlJxbzl8YmNhZWE3Y2YtYzMzNy00MDM5LTgxNTgtM2MxY2U0OWU3MjkzJmNpZD1kY2UuZmlzZmVkJnB0PW51bGw~hmac=5316976585f84acae4c2761846403d5d2407714372ca863af330ad9451a4671f/dash/live/2093715/219027-321028/manifest-d.mpd",
+    keyId: "708a98b352bd4418a73a028edd84da8f",
+    key:   "b1fa5c2bca4c4b57b924b748564532cb",
+    cookie: "",
+    cookieUrl: "https://sayan10-sportlink-cookies.pages.dev/api/cookie.json"
+  };
+
+  /* ── State ── */
+  let player, video;
+  let isRefreshing = false;
+  let refreshTimer  = null;
+  let errorRetries  = 0;
+  const MAX_RETRIES = 3;
+
+  /* ── Toast helper ── */
+  function showToast(msg, duration = 3000){
+    const t = document.getElementById('refresh-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+  }
+
+  /* ── Fetch fresh config from API ── */
+  async function fetchFreshConfig(){
+    try{
+      const res  = await fetch(CONFIG.cookieUrl, { cache:"no-store" });
+      const data = await res.json();
+      if(data.cookie)     CONFIG.cookie    = data.cookie;
+      if(data.streamUrl)  CONFIG.streamUrl = data.streamUrl;  // optional: if API returns new URL
+      if(data.keyId)      CONFIG.keyId     = data.keyId;
+      if(data.key)        CONFIG.key       = data.key;
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  /* ── Register request filter with current cookie ── */
+  function registerFilter(){
+    player.getNetworkingEngine().clearAllRequestFilters();
+    if(!CONFIG.cookie) return;
+
+    const cookieValue = CONFIG.cookie;
+    let urlCookie = cookieValue.startsWith("__hdnea__=")
+      ? cookieValue.substring(10)
+      : cookieValue;
+
+    player.getNetworkingEngine().registerRequestFilter((type, request) => {
+      request.headers["Referer"]    = "https://www.jiotv.com/";
+      request.headers["User-Agent"] = "plaYtv/7.1.5 (Linux;Android 13) ExoPlayerLib/2.11.6";
+      request.headers["Cookie"]     = cookieValue;
+
+      if(
+        (type === shaka.net.NetworkingEngine.RequestType.MANIFEST ||
+         type === shaka.net.NetworkingEngine.RequestType.SEGMENT) &&
+        !request.uris[0].includes("__hdnea__")
+      ){
+        const sep = request.uris[0].includes("?") ? "&" : "?";
+        request.uris[0] += sep + "__hdnea__=" + urlCookie;
+      }
+    });
+  }
+
+  /* ── Schedule proactive refresh before URL expires ── */
+  function scheduleProactiveRefresh(){
+    if(refreshTimer) clearTimeout(refreshTimer);
+
+    // Parse exp= from current streamUrl
+    const match = CONFIG.streamUrl.match(/exp=(\d+)/);
+    if(!match) return;
+
+    const expTimestamp = parseInt(match[1]) * 1000; // convert to ms
+    const now = Date.now();
+    const refreshAt = expTimestamp - now - (2 * 60 * 1000); // 2 min before expiry
+
+    if(refreshAt <= 0){
+      // Already expired or about to — refresh immediately
+      doRefresh('⚠️ URL expired, refreshing...');
+      return;
+    }
+
+    console.log(`[AutoRefresh] Scheduled in ${Math.round(refreshAt/1000)}s`);
+    refreshTimer = setTimeout(() => {
+      doRefresh('🔄 Proactive refresh...');
+    }, refreshAt);
+  }
+
+  /* ── Core refresh + reload logic ── */
+  async function doRefresh(toastMsg = '🔄 Refreshing stream...'){
+    if(isRefreshing) return;
+    isRefreshing = true;
+    showToast(toastMsg, 8000);
+
+    const ok = await fetchFreshConfig();
+
+    if(ok){
+      try{
+        const drmConfig = (CONFIG.keyId && CONFIG.key)
+          ? { clearKeys: { [CONFIG.keyId]: CONFIG.key } }
+          : {};
+        player.configure({ drm: drmConfig });
+        registerFilter();
+        await player.load(CONFIG.streamUrl);
+        video.play().catch(()=>{});
+        errorRetries = 0;
+        showToast('✅ Stream refreshed!');
+        scheduleProactiveRefresh(); // reschedule with new exp=
+      }catch(e){
+        showToast('❌ Reload failed');
+      }
+    } else {
+      showToast('❌ Could not fetch new config');
+    }
+
+    isRefreshing = false;
+  }
+
+  /* ── Main init ── */
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    shaka.polyfill.installAll();
+    if(!shaka.Player.isBrowserSupported()) return;
+
+    video = document.getElementById("video");
+    const container = document.getElementById("player-container");
+    video.muted = true;
+
+    player = new shaka.Player();
+    await player.attach(video);
+
+    const ui = new shaka.ui.Overlay(player, container, video);
+    ui.configure({
+      addBigPlayButton: true,
+      controlPanelElements: [
+        "mute", "play_pause", "time_and_duration",
+        "spacer", "quality", "picture_in_picture", "fullscreen"
+      ],
+      seekBarColors: { base:"white", buffered:"red", played:"green" }
+    });
+
+    const drmConfig = (CONFIG.keyId && CONFIG.key)
+      ? { clearKeys: { [CONFIG.keyId]: CONFIG.key } }
+      : {};
+
+    player.configure({
+      drm: drmConfig,
+      manifest: { defaultPresentationDelay: 5 },
+      streaming: {
+        lowLatencyMode: true,
+        bufferingGoal: 10,
+        rebufferingGoal: 2,
+        safeSeekOffset: 5
+      }
+    });
+
+    /* ── Error handler: auto-refresh on 401/403/network fail ── */
+    player.addEventListener('error', async (event) => {
+      const code = event.detail.code;
+      console.warn('[Shaka Error]', code, event.detail.message);
+
+      // 1001=network, 1002=bad HTTP (401/403), 3016=manifest parse fail
+      const recoverableCodes = [1001, 1002, 3016, 3085];
+
+      if(recoverableCodes.includes(code) && errorRetries < MAX_RETRIES){
+        errorRetries++;
+        console.log(`[AutoRefresh] Error triggered refresh (attempt ${errorRetries})`);
+        await doRefresh(`🔄 Error detected, refreshing... (${errorRetries}/${MAX_RETRIES})`);
+      }
+    });
+
+    /* ── Initial cookie/config fetch ── */
+    await fetchFreshConfig();
+    registerFilter();
+
+    /* ── Initial load ── */
+    try{
+      await player.load(CONFIG.streamUrl);
+      video.play().catch(()=>{});
+      scheduleProactiveRefresh(); // set timer based on exp= in URL
+    }catch(e){
+      await doRefresh('🔄 Initial load failed, retrying...');
+    }
+
+    video.addEventListener("play", () => { video.muted = false; });
+  });
+
+})();
+</script>
+
+<script>(function(s){s.dataset.zone='10603308',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+</body>
 </html>
