@@ -13,6 +13,12 @@
       "iframeSrc": "https://allrounder-live9.pages.dev/channel/ptv"
     },
     {
+      "id": "laliga",
+      "name": "Laliga Tv",
+      "type": "iframe",
+      "iframeSrc": "https://allrounder-live9.pages.dev/channel/ptv"
+    },
+    {
       "id": "star1-english",
       "name": "Star Sports (English)",
       "type": "iframe",
