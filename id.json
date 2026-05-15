@@ -235,7 +235,13 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn.html"
     },
     {
-      "id": "premier-sport",
+      "id": "premier-sport 2",
+      "name": "Premier Sport",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/premiersport"
+    },
+     {
+      "id": "premier-sport 1",
       "name": "Premier Sport",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/premiersport.html"
