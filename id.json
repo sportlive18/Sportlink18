@@ -28,7 +28,7 @@
       "id": "star3",
       "name": "Star Sports 3 (English)",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Star3.html"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-3"
     },
     {
       "id": "kayosport",
@@ -64,7 +64,7 @@
       "id": "Sky Sport",
       "name": "Sky Sport",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv-10.pages.dev/Channel/219027-321028"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/sky%20cricket"
     },
     {
       "id": "ptv",
@@ -76,13 +76,13 @@
       "id": "fox501",
       "name": "Fox 501",
       "type": "iframe",
-      "iframeSrc": "https://pooembed.eu/embed/ipl/2026-05-14/pbks-mi"
+      "iframeSrc": "https://pooembed.eu/embed/ipl/2026-05-15/lsg-csk"
     },
     {
       "id": "star1-tv-eng",
       "name": "Star Sports 1 TV (English)",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv-10.pages.dev/Channel/Star_Sports_HD1_BTS"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-1-hd"
     },
     {
       "id": "Cbs Sports",
@@ -94,19 +94,19 @@
       "id": "star1-hindi-hd",
       "name": "Star Sports 1 Hindi HD",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv-10.pages.dev/Channel/Star_Sports_HD1_Hindi_BTS"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-1-hindi-hd"
     },
     {
       "id": "star2-hindi-hd",
       "name": "Star Sports 2 Hindi HD",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv-10.pages.dev/Channel/StarSportsHD2Hin_BTS"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-hindi-hd"
     },
     {
       "id": "star2-eng-hd",
       "name": "Star Sports 2 Eng HD",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv-10.pages.dev/Channel/StarSportsHD2Hin_BTS"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-hd"
     },
     {
       "id": "bein1",
@@ -199,16 +199,16 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/fubosport.html"
     },
     {
-      "id": "star-select-1",
+      "id": "star-select-1 HD",
       "name": "Star Sport Select 1",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv.pages.dev/Channel/Star_Sports_Select_1_HD"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-select-1-hd"
     },
     {
       "id": "star-select-2",
       "name": "Star Sport Select 2",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv.pages.dev/Channel/Star_Sports_Select_2_HD"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-select-2-hd"
     },
     {
       "id": "fancode",
@@ -256,19 +256,19 @@
       "id": "star2-tamil",
       "name": "Star Sports 2 Tamil",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv.pages.dev/Channel/Star_Sports_2_Tamil_HD"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-tamil-hd"
     },
     {
       "id": "star2-telugu",
       "name": "Star Sports 2 Telugu",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv.pages.dev/Channel/Star_Sports_2_Telugu_HD"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-telugu-hd"
     },
     {
       "id": "star2-kannada",
       "name": "Star Sports 2 Kannada",
       "type": "iframe",
-      "iframeSrc": "https://sayan-jiotv.pages.dev/Channel/Star_Sports_2_Kannada"
+      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-kannada"
     }
   ]
 }
