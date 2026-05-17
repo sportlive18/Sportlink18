@@ -86,9 +86,9 @@
     },
     {
       "id": "star1-tv-eng",
-      "name": "Star Sports 1 TV (English)",
+      "name": "Star Sports 1 HD (English)",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-1-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-hd"
     },
     {
       "id": "Cbs Sports",
@@ -100,19 +100,19 @@
       "id": "star1-hindi-hd",
       "name": "Star Sports 1 Hindi HD",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-1-hindi-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-hindi-hd"
     },
     {
       "id": "star2-hindi-hd",
       "name": "Star Sports 2 Hindi HD",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-hindi-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-hindi-hd"
     },
     {
       "id": "star2-eng-hd",
       "name": "Star Sports 2 Eng HD",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-hd"
     },
     {
       "id": "bein1",
