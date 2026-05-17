@@ -166,19 +166,19 @@
       "id": "sony1",
       "name": "Sony Sport 1",
       "type": "iframe",
-      "iframeSrc": "https://jio-tv-all.pages.dev/Channel/Sony_Ten_1_HD"
+      "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-1"
     },
     {
       "id": "sony2",
       "name": "Sony Sport 2",
       "type": "iframe",
-      "iframeSrc": "https://jio-tv-all.pages.dev/Channel/Sony_Ten_2_HD"
+      "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-2"
     },
     {
       "id": "sony3",
       "name": "Sony Sport 3",
       "type": "iframe",
-      "iframeSrc": "https://jio-tv-all.pages.dev/Channel/Sony_Ten_3_HD_Hindi"
+      "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-3"
     },
     {
       "id": "sony4",
@@ -190,7 +190,7 @@
       "id": "sony5",
       "name": "Sony Sport 5",
       "type": "iframe",
-      "iframeSrc": "https://jio-tv-all.pages.dev/Channel/Sony_Ten_5_HD"
+      "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-5"
     },
     {
       "id": "ten-cricket",
@@ -208,13 +208,13 @@
       "id": "star-select-1 HD",
       "name": "Star Sport Select 1",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-select-1-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-1-hd"
     },
     {
       "id": "star-select-2",
       "name": "Star Sport Select 2",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-select-2-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-2-hd"
     },
     {
       "id": "fancode",
@@ -250,37 +250,37 @@
       "id": "star1-kannada",
       "name": "Star Sports 1 Kannada",
       "type": "iframe",
-      "iframeSrc": "https://jiotvplus.dr-strange.workers.dev/?id=302118"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-kannada"
     },
     {
       "id": "star1-tamil",
       "name": "Star Sports 1 Tamil",
       "type": "iframe",
-      "iframeSrc": "https://jiotvplus.dr-strange.workers.dev/?id=302122"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-tamil-hd"
     },
     {
       "id": "star1-telugu",
       "name": "Star Sports 1 Telugu",
       "type": "iframe",
-      "iframeSrc": "https://jiotvplus.dr-strange.workers.dev/?id=302123"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-telugu-hd"
     },
     {
       "id": "star2-tamil",
       "name": "Star Sports 2 Tamil",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-tamil-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-tamil-hd"
     },
     {
       "id": "star2-telugu",
       "name": "Star Sports 2 Telugu",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-telugu-hd"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-telugu-hd"
     },
     {
       "id": "star2-kannada",
       "name": "Star Sports 2 Kannada",
       "type": "iframe",
-      "iframeSrc": "https://spotlink-jio-tv.pages.dev/channel/star-sports-2-kannada"
+      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-kannada"
     }
   ]
 }
