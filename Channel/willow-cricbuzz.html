@@ -13,7 +13,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-L7VPXZYQPN');
 </script>
   <style>  
@@ -46,9 +45,6 @@
     }  
   </style>  
 </head>  
-
- 
-  
   <body>  
   <div class="shaka-video-container" data-shaka-player>  
     <video autoplay playsinline preload="metadata" poster=""></video>  
@@ -77,25 +73,24 @@
           'quality', 'fullscreen'  
         ],  
         volumeBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  level: 'rgb(0, 136, 255)'  
-},  
-seekBarColors: {  
-  base: 'rgba(0, 136, 255, 0.3)',  
-  buffered: 'rgba(0, 136, 255, 0.6)',  
-  played: 'rgb(0, 136, 255)'  
-}
+          base: 'rgba(0, 136, 255, 0.3)',  
+          level: 'rgb(0, 136, 255)'  
+        },  
+        seekBarColors: {  
+          base: 'rgba(0, 136, 255, 0.3)',  
+          buffered: 'rgba(0, 136, 255, 0.6)',  
+          played: 'rgb(0, 136, 255)'  
+        }
       });  
   
-      // ✅ Your DRM Key + MPD URL  
+      // ✅ Updated DRM Key + MPD URL  
       let drmConfig = {  
         clearKeys: {  
-          "33f0135bc99bd90a1356c18086a7f9c0":
- "923c0db66811b455400da2682c903b37"  
+          "8989ef2e334dacc8b77de15f31152701": "180dc5513532d500bac8813715a95b48"
         }  
       };  
   
-      let streamUrl = "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/pjo2efuu08/out/v1/37c363392c5c4820b1af1056273ab74c/cenc.mpd";  
+      let streamUrl = "https://abfjk4haaaaaaaampv6ofhkihi4r6.bia-cf.live.pv-cdn.net/iad-nitro/live/clients/dash/enc/axzzkdukfy/out/v1/3ae01320c1cb4853bd48e575e3699b3e/cenc.mpd";
   
       player.configure({  
         drm: drmConfig,  
