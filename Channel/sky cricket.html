@@ -3,9 +3,18 @@
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Sky Sport</title>     
+  <title>Prame By Allrounder</title>     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMP9REY96D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FMP9REY96D');
+</script>
   <style>  
    * { margin: 0; padding: 0; box-sizing: border-box; }  
     html, body {  
@@ -36,7 +45,10 @@
     }  
   </style>  
 </head>  
-<body>  
+
+ 
+  
+  <body>  
   <div class="shaka-video-container" data-shaka-player>  
     <video autoplay playsinline preload="metadata" poster=""></video>  
   </div>  
@@ -64,25 +76,26 @@
           'quality', 'fullscreen'  
         ],  
         volumeBarColors: {  
-          base: 'rgba(255, 192, 203, 0.3)',  
-          level: 'rgb(255, 105, 180)'  
-        },  
-        seekBarColors: {  
-          base: 'rgba(255, 255, 0, 0.3)',  
-          buffered: 'rgba(255, 255, 0, 0.6)',  
-          played: 'rgb(255, 255, 0)'  
-        }  
+  base: 'rgba(0, 136, 255, 0.3)',  
+  level: 'rgb(0, 136, 255)'  
+},  
+seekBarColors: {  
+  base: 'rgba(0, 136, 255, 0.3)',  
+  buffered: 'rgba(0, 136, 255, 0.6)',  
+  played: 'rgb(0, 136, 255)'  
+}
       });  
   
-      // ✅ Updated DRM Key + MPD URL  
+      // ✅ Your DRM Key + MPD URL  
       let drmConfig = {  
         clearKeys: {  
-          "708a98b352bd4418a73a028edd84da8f": "b1fa5c2bca4c4b57b924b748564532cb"
+          "4d346b1d1ae64d4a800409cffa14983e":
+ "208c972bd2da4359ac94e6944fe378b6"  
         }  
       };  
   
-      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1778826287~acl=%2f*~id=3ba8b898-d114-45f4-9e2e-8e7551fcd493~data=hdntl,aXA9MTA4LjE4MS40LjY5JmV4cD0xNzc4NzM5OTE2JmVpZD05MzY0MTgmb2lkPTE1NCZ0eXBlPVZPRCZ1aWQ9eFJScW85fGJjYWVhN2NmLWMzMzctNDAzOS04MTU4LTNjMWNlNDllNzI5MyZjaWQ9ZGNlLmZpc2ZlZCZwdD1udWxs~hmac=53c888802c83140db1d017869281fd216e0a7ec26a6fc4cab9338df1fd7da0f9/dash/live/2093715/219027-321028/manifest-d.mpd";
-
+      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1779158077~acl=%2F*~id=49805124-7de7-433c-b410-bcc0164e59f4~data=hdntl,aXA9NTIuMTU0LjE5LjIyNSZleHA9MTc3OTA3MTcwNyZlaWQ9OTM2NTc2Jm9pZD0xNTQmdHlwZT1WT0QmdWlkPXZ1Q1Jtenw0ZWJlNjg1ZC1mZGY0LTQ1YWItODlhOS1kZDVjNzQ3YTQzZjAmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=335907a80e190b660c61c6c4b158c55ade2bd1e8894bcaa419ae45efa9b22329/dash/live/2093666/294921-318514/manifest-d.mpd";  
+  
       player.configure({  
         drm: drmConfig,  
         streaming: {  
@@ -120,5 +133,6 @@
       }  
     });  
   </script>  
-</body>
+<script>(function(s){s.dataset.zone='10975013',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  </body>  
 </html>
