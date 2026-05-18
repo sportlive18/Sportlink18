@@ -40,7 +40,7 @@
       "id": "kayosport",
       "name": "Kayo Sport HD",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live9.pages.dev/channel/ptv"
+      "iframeSrc": "https://allrounder-live10.pages.dev/channel/ptv"
     },
     {
       "id": "criclife",
@@ -52,7 +52,7 @@
       "id": "willow-cricbuzz",
       "name": "Willow Cricbuzz",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live9.pages.dev/channel/willow"
+      "iframeSrc": "https://allrounder-live10.pages.dev/channel/willow"
     },
     {
       "id": "willow-cricbuzz-2",
@@ -64,7 +64,7 @@
       "id": "sky-cricket",
       "name": "Sky Cricket",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live9.pages.dev/channel/hub5"
+      "iframeSrc": "https://allrounder-live10.pages.dev/channel/hub5"
     },
     {
       "id": "Sky Sport",
