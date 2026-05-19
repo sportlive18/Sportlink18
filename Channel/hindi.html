@@ -65,18 +65,18 @@ video {
       playsinline
       autoplay
       muted
-      poster="http://ttpl.tmsimg.com/assets/p28368535_b_h10_aa.jpg?lock=1280x720"
-      src="blob:https://dev.denver69.fun/712bc89a-1306-4165-a54f-e1ac7ad6be02">
+      poster="http://ttpl.tmsimg.com/assets/p28368535_b_h10_aa.jpg?lock=1280x720">
     </video>
   </div>
 </div>
 
 <script>
 const streamConfig = {
-  mpd:     "https://bpaita2.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd",
-  token:   "hdntl=exp=1779183804~acl=%2fbpk-tv%2firdeto_com_Channel_250%2foutput%2f*~id=7989256738~data=hdntl~hmac=b2816776af49ab28ca547c5332026cd839120503de857a4fb76e472d0f93a92c",
+  name:    "Star Sports 1 Hindi HD",
+  mpd:     "https://bpaita3.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd",
+  token:   "hdntl=exp=1779184179~acl=%2fbpk-tv%2firdeto_com_Channel_252%2foutput%2f*~id=7989256738~data=hdntl~hmac=761715bcb9271b0ddddea0287db62587d5202c7a4c43e549a13ae698b2a2cba3",
   referer: "https://www.tataplaybinge.com/",
-  drm:     { "06341bf3dd635e6ca5c71188d0210373": "2c6d9ccbf866eee8c42dcf9c343f179b" }
+  drm:     { "6a9e4204f3f8577ebf6e79b3b18573f8": "78ca20d6f8be904eec61c0e9aca3c511" }
 };
 
 let shakaPlayer = null;
@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   shakaPlayer.configure({
     drm: { clearKeys: streamConfig.drm },
     streaming: {
-      bufferingGoal:    30,
-      rebufferingGoal:  15,
-      retryParameters:  { maxAttempts: 5 }
+      bufferingGoal:   30,
+      rebufferingGoal: 15,
+      retryParameters: { maxAttempts: 5 }
     }
   });
 
