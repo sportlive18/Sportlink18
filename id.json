@@ -1,11 +1,11 @@
 {
   "iframes": [
     {
-      "id": "English",
-      "name": "English",
+      "id": "jio-hotstar",
+      "name": "Jio-Hotstar-1080p",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/star1-english"
-    },
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/hotstar"
+  
     {
       "id": "Hindi",
       "name": "Hindi",
