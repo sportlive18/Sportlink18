@@ -1,0 +1,204 @@
+Channel DRM & KEY & MPD
+
+Sky Sport 1 (MPD URL Expire Need to Update )
+
+
+      let drmConfig = {  
+        clearKeys: {  
+          "4d346b1d1ae64d4a800409cffa14983e":
+ "208c972bd2da4359ac94e6944fe378b6"  
+        }  
+      };  
+
+      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1779158077~acl=%2F*~id=49805124-7de7-433c-b410-bcc0164e59f4~data=hdntl,aXA9NTIuMTU0LjE5LjIyNSZleHA9MTc3OTA3MTcwNyZlaWQ9OTM2NTc2Jm9pZD0xNTQmdHlwZT1WT0QmdWlkPXZ1Q1Jtenw0ZWJlNjg1ZC1mZGY0LTQ1YWItODlhOS1kZDVjNzQ3YTQzZjAmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=335907a80e190b660c61c6c4b158c55ade2bd1e8894bcaa419ae45efa9b22329/dash/live/2093666/294921-318514/manifest-d.mpd"; 
+
+
+Sky Sport  (MPD URL Expire Need to Update ) 
+
+
+ const CONFIG={
+    streamUrl:"https://dice-live-oc.akamaized.net/hdntl=exp=1778826287~acl=%2f*~id=3ba8b898-d114-45f4-9e2e-8e7551fcd493~data=hdntl,aXA9MTA4LjE4MS40LjY5JmV4cD0xNzc4NzM5OTE2JmVpZD05MzY0MTgmb2lkPTE1NCZ0eXBlPVZPRCZ1aWQ9eFJScW85fGJjYWVhN2NmLWMzMzctNDAzOS04MTU4LTNjMWNlNDllNzI5MyZjaWQ9ZGNlLmZpc2ZlZCZwdD1udWxs~hmac=53c888802c83140db1d017869281fd216e0a7ec26a6fc4cab9338df1fd7da0f9/dash/live/2093715/219027-321028/manifest-d.mpd",
+
+    keyId:"708a98b352bd4418a73a028edd84da8f",
+    key:"b1fa5c2bca4c4b57b924b748564532cb"
+  };
+
+Sky Sport 8 (MPD URL Expire Need to Update ) 
+
+
+ const CONFIG={
+    streamUrl:"https://dice-live-oc.akamaized.net/hdntl=exp=1779158076~acl=/*~id=341cec7b-33c8-4f73-b865-d9643441454b~data=hdntl,aXA9NTIuMTU0LjE5LjIyNSZleHA9MTc3OTA3MTcwNSZlaWQ9OTM5OTYzJm9pZD0xNTQmdHlwZT1WT0QmdWlkPXZ1Q1Jtenw0ZWJlNjg1ZC1mZGY0LTQ1YWItODlhOS1kZDVjNzQ3YTQzZjAmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=625598d228a5556533ef83cc177d554ecc8bd6f48507c930be4c58d510fe5687/dash/live/2093712/219035-321027/manifest-d.mpd",
+
+    keyId:"",
+    key:""
+  };
+
+
+
+
+
+
+
+La Liga Tv 
+
+ let drmConfig = {  
+        clearKeys: {  
+          "620e51b82596475517a27aa425c52280": "2b9ba811e9c5aeafc8ae1b71cdca4d6a"
+        }  
+      };  
+  
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/k0duzgfejg/out/v1/70a50b1bda944628b8e7e66ab4069419/cenc.mpd";
+
+
+
+
+
+TNT 1
+
+clearKeys: {
+          "294b5761cefc22d0c6312939e13d8278": "52148f1042d238849f0a7813f1da8a7b"
+           }
+let streamUrl = "https://otte.cache.aiv-cdn.net/syd-nitro/live/dash/enc/cllekigzzn/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd";
+
+
+TNT 2
+
+clearKeys: {
+          "f288380ca4cef9ad3f27a92a08e9bb8b": "9f18d26291d9230833501f7f822f6875"
+        }
+  let streamUrl = "https://otte.cache.aiv-cdn.net/syd-nitro/live/dash/enc/fb6jy4pxts/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd";
+
+TNT 3
+
+     let drmConfig = {  
+        clearKeys: {  
+          "1d96ab366bbe6451edf7407b58e2fa16": "0116201f4a63ac5bf5787d2c610c41a7"  
+        }  
+      };  
+  
+      let streamUrl = "https://otte.cache.aiv-cdn.net/syd-nitro/live/dash/enc/5sxuux529k/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd";  
+  
+
+TNT 4
+
+let drmConfig = {  
+        clearKeys: {  
+          "192b1115da041585c77200128549efa1": "634e10efe4abbb14be400a3ccbac0258"  
+        }  
+      };  
+  
+      let streamUrl = "https://otte.cache.aiv-cdn.net/syd-nitro/live/dash/enc/pnu10tp36z/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd";  
+
+
+
+
+Bein Sport 2 
+
+let drmConfig = {  
+        clearKeys: {  
+          "0b42be2664d7e811d04f3e504e0924c5": "ae24090123b8c72ac5404dc152847cb8"
+        }  
+      };  
+  
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/8m8cd46i1t/out/v1/83985c68e4174e90a58a1f2c024be4c9/cenc.mpd";
+
+  
+Bein Sport 3
+
+      let drmConfig = {  
+        clearKeys: {  
+          "7995c724a13748ed970840a8ab5bb9b3": "67bdaf1e2175b9ff682fcdf0e2354b1e"
+        }  
+      };  
+  
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd";
+
+
+
+
+
+Premier Sport 1
+
+let drmConfig = {  
+        clearKeys: {  
+          "1444f4235529f183f0a5a486befe9cdb": "e5e3fec67a1bb3472a2089c8a0a2557f"
+        }  
+      };  
+  
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/m6sqanvm2m/out/v1/f6beb46c6e9a4132ad739f3ca27df6aa/cenc.mpd";
+
+
+
+Premier Sport 2
+
+ let drmConfig = {  
+        clearKeys: {  
+          "1a5df53609ebc9857898c490f4724918": "77f62980d582ec541280796acf8b2d19"
+        }  
+      };  
+
+  
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/bcj3iscpd6/out/v1/fcd137b391214f7cb99dd4d7be90ca87/cenc.mpd";
+
+
+
+
+
+Fubo Sport
+
+
+let drmConfig = {
+        clearKeys: {
+          "dc69b6159a0f9f0a4e03b3ff91cbacd5": "d0dcbcd7723bc40df0bf34c9c092d51f"
+        }
+      };
+
+      let streamUrl = "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/3b7qwiqzk3/out/v1/9f14895badca43e6a716db021dcd0c31/cenc.mpd";
+
+
+
+
+CBS Sport
+
+ let drmConfig = {
+        clearKeys: {
+          "d9623774ac5c8c351aafe97c5fe70267": "5164e6d05164a2d65fa8fcc962aa4861"
+        }
+      };
+
+      let streamUrl = "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd";
+
+
+
+Tsn
+
+ let drmConfig = {  
+        clearKeys: {  
+          "c4088f5f265f9de50cffd80bf89308b7": "2c4d2239d96d532b4ec2050653611003"
+        }  
+      };  
+  
+      let streamUrl = "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/h9urpo3cwb/out/v1/fde190f369484bc6b6117cc16cd82a9f/cenc.mpd";
+
+
+
+
+Fancode 1
+      let drmConfig = {  
+        clearKeys: {  
+          "065051b99bf5cf8d9a3bde5cbde6aaf9": "214bd176832872339ce184338320f9a2"  
+        }  
+      };  
+  
+      let streamUrl = "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/inpyms8ezu/out/v1/1084d5c9a97a4c5b9f9554c88f486646/cenc.mpd"; 
+
+
+Fancode 2
+
+    let drmConfig = {  
+        clearKeys: {  
+          "7e9239c1982d984a002df3ed049d0756": "1b8a17598129a3618535c8fb05f103fe"  
+        }  
+      };  
+  
+      let streamUrl = "https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/fdb3pubmek/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd";  
