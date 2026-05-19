@@ -1,6 +1,18 @@
 {
   "iframes": [
     {
+      "id": "English",
+      "name": "English",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/star1-english"
+    },
+    {
+      "id": "Hindi",
+      "name": "Hindi",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/hindi"
+    },
+    {
       "id": "willow",
       "name": "Willow TV",
       "type": "iframe",
