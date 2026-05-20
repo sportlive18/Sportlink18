@@ -1,165 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#000">
-<title>Hindi</title>
+  <title>HOTSTAR</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="referrer" content="no-referrer"/>
+  
+  <!-- Plyr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css">
+  <!-- HLS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <!-- Plyr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
 
-html, body {
-  width: 100%; height: 100%;
-  background: #000;
-  overflow: hidden;
-}
-
-.player-area {
-  position: fixed;
-  inset: 0;
-  background: #000;
-}
-
-.shaka-video-container {
-  width: 100% !important;
-  height: 100% !important;
-  background: #000 !important;
-}
-
-video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  background: #000 !important;
-}
-
-.shaka-controls-container {
-  z-index: 9999 !important;
-  padding-bottom: env(safe-area-inset-bottom) !important;
-}
-
-.shaka-bottom-controls {
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.shaka-overflow-menu {
-  max-height: 70vh !important;
-}
-</style>
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    .plyr {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
-
-<script src="https://troopinvariably.com/37/d7/1a/37d71a290dde379f3d1016fe3009fb4b.js"></script>
-
 <body>
-
-<div class="player-area">
-  <div class="shaka-video-container" data-shaka-player-container shaka-controls="true">
-    <video
-      id="video"
-      data-shaka-player
-      playsinline
-      autoplay
-      muted
-      poster="http://ttpl.tmsimg.com/assets/p28368535_b_h10_aa.jpg?lock=1280x720">
-    </video>
+  <div class="video-container">
+    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
   </div>
-</div>
 
-<script>
-const streamConfig = {
-  name:    "Star Sports 1 Hindi HD",
-  mpd:     "https://bpaita3.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd",
-  token:   "hdntl=exp=1779197409~acl=%2fbpk-tv%2firdeto_com_Channel_252%2foutput%2f*~id=7989256738~data=hdntl~hmac=1cd4eca86323defc9f71c177615e62ec474804d7781993c6de8cfc4aec97bdea",
-  referer: "https://www.tataplaybinge.com/",
-  drm:     { "6a9e4204f3f8577ebf6e79b3b18573f8": "78ca20d6f8be904eec61c0e9aca3c511" }
-};
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("player");
+      const source = "https://matcheslinkz.pages.dev/jio-hotstar";
+      const defaultOptions = {
+        autoplay: true,
+        controls: [
+          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
+          'mute', 'volume', 'settings', 'fullscreen'
+        ],
+        settings: ['quality']
+      };
 
-let shakaPlayer = null;
+      let player;
 
-document.addEventListener("DOMContentLoaded", async () => {
-  shaka.polyfill.installAll();
-  if (!shaka.Player.isBrowserSupported()) return;
+      function setupPlayer(hls, qualities = []) {
+        player = new Plyr(video, {
+          ...defaultOptions,
+          quality: qualities.length ? {
+            default: qualities[0],
+            options: qualities,
+            forced: true,
+            onChange: q => {
+              hls.levels.forEach((level, index) => {
+                if (level.height === q) {
+                  hls.currentLevel = index;
+                }
+              });
+            }
+          } : {}
+        });
 
-  const video     = document.getElementById("video");
-  const container = document.querySelector("[data-shaka-player-container]");
+        // 🔁 AUTO RESUME
+        setInterval(() => {
+          if (video.paused && video.readyState > 2) {
+            video.play().catch(()=>{});
+          }
+        }, 3000);
 
-  shakaPlayer = new shaka.Player(video);
-  const ui    = new shaka.ui.Overlay(shakaPlayer, container, video);
+        // 🔊 AUTO UNMUTE (on first interaction)
+        const unmute = () => {
+          video.muted = false;
+          video.volume = 1;
+          document.removeEventListener("click", unmute);
+          document.removeEventListener("touchstart", unmute);
+        };
 
-  ui.configure({
-    controlPanelElements: ["play_pause", "time_and_duration", "spacer", "mute", "fullscreen", "overflow_menu"],
-    overflowMenuButtons:  ["captions", "playback_rate", "quality"],
-    seekBarColors: {
-      base:     "rgba(255,255,255,0.2)",
-      buffered: "rgba(255,255,255,0.4)",
-      played:   "#e8534a"
-    }
-  });
+        document.addEventListener("click", unmute);
+        document.addEventListener("touchstart", unmute);
+      }
 
-  shakaPlayer.configure({
-    drm: { clearKeys: streamConfig.drm },
-    streaming: {
-      bufferingGoal:   30,
-      rebufferingGoal: 15,
-      retryParameters: { maxAttempts: 5 }
-    }
-  });
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          autoStartLoad: true
+        });
 
-  shakaPlayer.getNetworkingEngine().registerRequestFilter((type, request) => {
-    request.headers["Referer"] = streamConfig.referer;
-    if ((type === shaka.net.NetworkingEngine.RequestType.MANIFEST ||
-         type === shaka.net.NetworkingEngine.RequestType.SEGMENT) &&
-        !request.uris[0].includes("__hdnea")) {
-      const sep = request.uris[0].includes("?") ? "&" : "?";
-      request.uris[0] += sep + streamConfig.token;
-    }
-  });
+        hls.loadSource(source);
+        hls.attachMedia(video);
 
-  shakaPlayer.load(streamConfig.mpd)
-    .then(() => { video.play().catch(() => {}); })
-    .catch(e  => console.error("Load error:", e));
+        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
+          video.play().catch(()=>{});
+          setupPlayer(hls, availableQualities);
+        });
 
-  // Auto-hide controls
-  const controls = document.querySelector(".shaka-controls-container");
-  if (controls) {
-    let hideTimer;
-    controls.style.transition = "opacity .35s ease";
+        // 🔥 AUTO RECOVER ON ERROR
+        hls.on(Hls.Events.ERROR, function (_, data) {
+          if (data.fatal) {
+            hls.startLoad();
+          }
+        });
 
-    const show = () => {
-      controls.style.opacity = "1";
-      controls.style.pointerEvents = "auto";
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(hide, 3000);
-    };
-
-    const hide = () => {
-      if (video.paused) return;
-      controls.style.opacity = "0";
-      controls.style.pointerEvents = "none";
-    };
-
-    container.addEventListener("mousemove",  show);
-    container.addEventListener("touchstart", show);
-    container.addEventListener("click",      show);
-    video.addEventListener("pause", show);
-    video.addEventListener("play",  () => setTimeout(hide, 3000));
-
-    setTimeout(hide, 3000);
-  }
-
-  // Force play retry
-  const forcePlay = () => {
-    const p = video.play();
-    if (p) p.catch(() => setTimeout(forcePlay, 1000));
-  };
-  setTimeout(forcePlay, 1500);
-});
-</script>
-
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = source;
+        video.addEventListener("loadedmetadata", () => {
+          video.play().catch(()=>{});
+          setupPlayer(null);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
