@@ -6,6 +6,12 @@
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/hotstar"
     }, 
+     {
+      "id": "kayo",
+      "name": "Kayo Sport ",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/hotstar"
+    },
     {
       "id": "FOX501HD",
       "name": "FOX 501 HD",
