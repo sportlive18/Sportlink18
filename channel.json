@@ -289,6 +289,12 @@
       "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-kannada"
     },
      {
+      "id": "MotoSport",
+      "name": "Moto Sport",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/MotoSport"
+    },
+     {
       "id": "tennis-channel",
       "name": "Tenis Channel",
       "type": "iframe",
