@@ -13,6 +13,12 @@
       "iframeSrc": "https://embedsports.top/embed/echo/soudal-open-dp-world-tour-atp1000/1"
     },
      {
+      "id": "MotoSport",
+      "name": "Moto Sport",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/MotoSport"
+    },
+     {
       "id": "kayo",
       "name": "Kayo Sport ",
       "type": "iframe",
