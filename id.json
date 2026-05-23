@@ -1,11 +1,17 @@
 {
   "iframes": [
-    {
-      "id": "jio-hotstar",
-      "name": "Jio-Hotstar-1080p",
+     {
+      "id": "tennis-channel",
+      "name": "Tenis Channel",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/hotstar"
-    }, 
+      "iframeSrc": "https://embedsports.top/embed/admin/admin-tennis-channel/1"
+    },
+    {
+      "id": "SkySportGolf",
+      "name": "Sky Sport Golf",
+      "type": "iframe",
+      "iframeSrc": "https://embedsports.top/embed/echo/soudal-open-dp-world-tour-atp1000/1"
+    },
      {
       "id": "kayo",
       "name": "Kayo Sport ",
@@ -82,7 +88,7 @@
       "id": "willow-cricbuzz-2",
       "name": "Willow Cricbuzz 2",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/willow-cricbuzz"
+      "iframeSrc": "https://embedsports.top/embed/admin/admin-willow-cricket/1"
     },
     {
       "id": "sky-cricket",
