@@ -70,7 +70,7 @@
       "id": "willow-cricbuzz-2",
       "name": "Willow Cricbuzz 2",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/willow-cricbuzz"
+      "iframeSrc": "https://embedsports.top/embed/admin/admin-willow-cricket/1"
     },
     {
       "id": "sky-cricket",
@@ -287,6 +287,12 @@
       "name": "Star Sports 2 Kannada",
       "type": "iframe",
       "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-kannada"
+    },
+     {
+      "id": "tennis-channel",
+      "name": "Tenis Channel",
+      "type": "iframe",
+      "iframeSrc": "https://embedsports.top/embed/admin/admin-tennis-channel/1"
     }
   ]
 }
