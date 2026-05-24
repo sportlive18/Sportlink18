@@ -205,10 +205,10 @@
       "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-1"
     },
     {
-      "id": "sony2",
-      "name": "Sony Sport 2",
+      "id": "sonyliv1",
+      "name": "Sony Liv 1",
       "type": "iframe",
-      "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-2"
+      "iframeSrc": "https://webplay.rf.gd/sonyliv-events/player.html?url=https%3A%2F%2Fsonydaimenew.akamaized.net%2Fhls%2Flive%2F2022315%2FRoland_G2405%2FENG%2Fstd_lrh-800300010.m3u8%3Fhdnea%3Dexp%3D1779654565~acl%3D%2F*~id%3D04756438172551381145530637221212~hmac%3De9717a0fee0ea98752aeb0288ae42a68c9bf5748f213e7b2ebdcf8fc39123707"
     },
     {
       "id": "sony3",
@@ -217,10 +217,10 @@
       "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-3"
     },
     {
-      "id": "sony4",
-      "name": "Sony Sport 4",
+      "id": "sonyliv2",
+      "name": "Sony Liv 2",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Sony4.html"
+      "iframeSrc": "https://webplay.rf.gd/sonyliv-events/player.html?url=https%3A%2F%2Fsonydaimenew.akamaized.net%2Fhls%2Flive%2F2022315%2FRoland_G2405%2FHIN%2Fstd_lrh-800300010.m3u8%3Fhdnea%3Dexp%3D1779654565~acl%3D%2F*~id%3D04756438172551381145530637221212~hmac%3De9717a0fee0ea98752aeb0288ae42a68c9bf5748f213e7b2ebdcf8fc39123707"
     },
     {
       "id": "sony5",
