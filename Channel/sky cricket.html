@@ -3,18 +3,11 @@
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Sportlink</title>     
+  <title>SKY F1</title>     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMP9REY96D"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-FMP9REY96D');
-  </script>
   <style>  
-    * { margin: 0; padding: 0; box-sizing: border-box; }  
+   * { margin: 0; padding: 0; box-sizing: border-box; }  
     html, body {  
       background: #000;  
       height: 100vh;  
@@ -71,23 +64,18 @@
           'quality', 'fullscreen'  
         ],  
         volumeBarColors: {  
-          base: 'rgba(0, 136, 255, 0.3)',  
-          level: 'rgb(0, 136, 255)'  
+          base: 'rgba(255, 192, 203, 0.3)',  
+          level: 'rgb(255, 105, 180)'  
         },  
         seekBarColors: {  
-          base: 'rgba(0, 136, 255, 0.3)',  
-          buffered: 'rgba(0, 136, 255, 0.6)',  
-          played: 'rgb(0, 136, 255)'  
-        }
-      });  
-  
-      let drmConfig = {  
-        clearKeys: {  
-          "4d346b1d1ae64d4a800409cffa14983e": "208c972bd2da4359ac94e6944fe378b6"  
+          base: 'rgba(255, 255, 0, 0.3)',  
+          buffered: 'rgba(255, 255, 0, 0.6)',  
+          played: 'rgb(255, 255, 0)'  
         }  
-      };  
+      });  
+
   
-      let streamUrl = "https://dice-live-oc.akamaized.net/hdntl=exp=1779271497~acl=/*~id=b8790135-d763-4c78-8f1d-4c332b17589e~data=hdntl,aXA9MTIzLjI1My40OS44NiZleHA9MTc3OTE4NTEyNSZlaWQ9OTM2MDY5Jm9pZD0xNTQmdHlwZT1WT0QmdWlkPUhuRDROTnw5MDJlMTQ1Ny1mZGQ1LTQyMjQtYmRlYi0zNTM5MGY5YWRkNTkmY2lkPWRjZS5maXNmZWQmcHQ9bnVsbA~hmac=b2a7349feef05686a26f3e2935bfe42505558bf5a273d3487d5c29e7ba4fe5c5/dash/live/2093666/294921-318514/manifest-d.mpd";
+      let streamUrl = "https://livecdn-bp-iptv.rumsport7.live/live_abr/239_abrhd.m3u8?is_vip=false&token=fec0a70ccfc1e168228343b57dc32cbc43171492&x-sign=5db076a3af1c45e6873f075539a5f297&x-time=1779647460";  
   
       player.configure({  
         drm: drmConfig,  
@@ -126,6 +114,5 @@
       }  
     });  
   </script>  
-  <script>(function(s){s.dataset.zone='10975013',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-</body>  
+</body>
 </html>
