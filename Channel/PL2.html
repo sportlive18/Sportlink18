@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Sportlink</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .player-wrap {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .shaka-video-container {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      background: #000;
+    }
+
+    .shaka-controls-container {
+      z-index: 9999 !important;
+      bottom: 0 !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+      transition: opacity 0.35s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="player-wrap">
+  <div data-shaka-player-container shaka-controls="true">
+    <video id="video" data-shaka-player playsinline></video>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  mpd: "https://adjara-live-eu.akamaized.net/hdntl=exp=1779716812~acl=/*~id=1af07701-4aaa-44d6-be80-76218d10a621~data=hdntl,aXA9MjAuOTcuMTk4LjI0MCZleHA9MTc3OTYzMDQ0MiZlaWQ9OTYxNTM5Jm9pZD0xMDgmdHlwZT1WT0QmdWlkPXNleWRIdHwzM2RmMTQ4NS1jZmNlLTRlZGUtODA0Ny0zMjExOGNjYjhkNjgmY2lkPWRjZS5zcHVycyZwdD1udWxs~hmac=7f92add6cb087854a198ed812dc9c1338a43225a61fb81d5d81ebc22ab70c737/dash/live/2005781/303246-321971/manifest-d.mpd",
+  drm: { "87918e2ae72c46c986ff31677ec0293b": "bba27a2e110f49b79b866684853b8c52" }
+};
+
+async function init() {
+  shaka.polyfill.installAll();
+  if (!shaka.Player.isBrowserSupported()) { alert("Browser not supported"); return; }
+
+  const video = document.getElementById("video");
+  const container = document.querySelector("[data-shaka-player-container]");
+
+  const player = new shaka.Player(video);
+  const ui = new shaka.ui.Overlay(player, container, video);
+
+  ui.configure({
+    controlPanelElements: ["play_pause", "time_and_duration", "spacer", "language", "mute", "fullscreen", "quality", "overflow_menu"],
+    overflowMenuButtons: ["captions", "playback_rate"],
+    seekBarColors: { base: "rgba(255,255,255,0.2)", buffered: "rgba(255,255,255,0.4)", played: "#e8534a" }
+  });
+
+  player.configure({
+    drm: { clearKeys: CONFIG.drm },
+    streaming: { bufferingGoal: 30, rebufferingGoal: 15 }
+  });
+
+  await player.load(CONFIG.mpd).catch(e => console.error("Load error:", e));
+
+  // Auto-play (muted to satisfy autoplay policy)
+  video.muted = true;
+  video.play().catch(() => setTimeout(() => video.play(), 1000));
+
+  // Auto-hide controls after 3s of inactivity
+  const controls = container.querySelector(".shaka-controls-container");
+  let hideTimer;
+  const show = () => {
+    if (controls) { controls.style.opacity = "1"; controls.style.pointerEvents = "auto"; }
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hide, 3000);
+  };
+  const hide = () => {
+    if (controls && !video.paused) { controls.style.opacity = "0"; controls.style.pointerEvents = "none"; }
+  };
+  container.addEventListener("mousemove", show);
+  container.addEventListener("touchstart", show);
+  container.addEventListener("click", show);
+  video.addEventListener("pause", show);
+  video.addEventListener("play", () => setTimeout(hide, 3000));
+  setTimeout(hide, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+
+</body>
+</html>
