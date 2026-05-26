@@ -42,6 +42,12 @@
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/willow.html"
     },
+     {
+      "id": "willowios",
+      "name": "Willow HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WillowHD"
+    },
     {
       "id": "hotstar",
       "name": "Disney+ Hotstar",
