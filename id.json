@@ -34,7 +34,31 @@
       "id": "Hindi",
       "name": "Hindi",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/kayosport"
+      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1h"
+    },
+    {
+      "id": "Telegu",
+      "name": "Tel",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1tel"
+    },
+    {
+      "id": "Tamil",
+      "name": "Tam",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1tam"
+    },
+    {
+      "id": "English",
+      "name": "Eng",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1"
+    },
+    {
+      "id": "Kanada",
+      "name": "Kan",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1kan"
     },
     {
       "id": "willow",
