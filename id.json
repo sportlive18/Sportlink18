@@ -106,7 +106,7 @@
       "id": "kayosport",
       "name": "Kayo Sport HD",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live11.pages.dev/channel/ptv"
+      "iframeSrc": "https://allrounder-live12.pages.dev/channel/ptv"
     },
     {
       "id": "criclife",
@@ -130,7 +130,7 @@
       "id": "sky-cricket",
       "name": "Sky Cricket",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live11.pages.dev/channel/hub5"
+      "iframeSrc": "https://allrounder-live12.pages.dev/channel/hub5"
     },
     {
       "id": "Sky Sport",
