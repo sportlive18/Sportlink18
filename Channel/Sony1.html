@@ -1,137 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Sportlink</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-  <meta name="referrer" content="no-referrer"/>
-  
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cric Tv Sony Liv 2</title>
 
-  <!-- HLS.js -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-  <!-- Plyr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
 
   <style>
-    body {
-      background-color: #000;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
-      height: 100%;
-      width: 100%;
-    }
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
       background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .shaka-video-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
     video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
       background: #000;
+      object-fit: contain;
     }
-    .plyr {
-      height: 100%;
-      width: 100%;
+    .shaka-spinner-container,
+    .shaka-spinner,
+    .shaka-spinner-svg {
+      display: none !important;
     }
   </style>
 </head>
+
 <body>
-  <div class="video-container">
-    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
+  <div class="shaka-video-container" data-shaka-player>
+    <video autoplay playsinline preload="metadata"></video>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const video = document.getElementById("player");
-      const source = "https://wellandrosel.s3.us-east-1.amazonaws.com/btsport.m3u8";
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
 
-      const defaultOptions = {
-        autoplay: true,
-        controls: [
-          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
-          'mute', 'volume', 'settings', 'fullscreen'
-        ],
-        settings: ['quality']
-      };
+  shaka.polyfill.installAll();
+  if (!shaka.Player.isBrowserSupported()) return;
 
-      let player;
+  const video = document.querySelector('video');
+  const player = new shaka.Player();
+  await player.attach(video);
 
-      function setupPlayer(hls, qualities = []) {
-        player = new Plyr(video, {
-          ...defaultOptions,
-          quality: qualities.length ? {
-            default: qualities[0],
-            options: qualities,
-            forced: true,
-            onChange: q => {
-              hls.levels.forEach((level, index) => {
-                if (level.height === q) {
-                  hls.currentLevel = index;
-                }
-              });
-            }
-          } : {}
-        });
+  const container = document.querySelector('.shaka-video-container');
+  const ui = new shaka.ui.Overlay(player, container, video);
 
-        // 🔁 AUTO RESUME
-        setInterval(() => {
-          if (video.paused && video.readyState > 2) {
-            video.play().catch(()=>{});
-          }
-        }, 3000);
+  ui.configure({
+    controlPanelElements: [
+      'play_pause','time_and_duration','mute','volume',
+      'spacer','language','captions','picture_in_picture',
+      'quality','fullscreen'
+    ],
+    seekBarColors: {
+      base: 'white',
+      buffered: 'red',
+      played: 'green'
+    }
+  });
 
-        // 🔊 AUTO UNMUTE (on first interaction)
-        const unmute = () => {
-          video.muted = false;
-          video.volume = 1;
-          document.removeEventListener("click", unmute);
-          document.removeEventListener("touchstart", unmute);
-        };
+  // ── defaults ──────────────────────────────────────────────────────────────
+  const COOKIE_URL  = 'https://fifa-world-cup-live.pages.dev/cookie.json';
+  const STREAM_URL  = 'https://jiotvmblive.cdn.jio.com/bpk-tv/Ten3_HD_MOB/WDVLive/index.mpd';
+  const DRM_CONFIG  = {
+    clearKeys: {
+      "111e6908b965566e97139efddf7ef459": "c87903abbc052e1f21e51ebd928d9cb1"
+    }
+  };
 
-        document.addEventListener("click", unmute);
-        document.addEventListener("touchstart", unmute);
+  let cookieHeader = "__hdnea__=st=1781108429~exp=1781130029~acl=/*~hmac=2052023e5055784bb881f8f529f8127e5665d816f021ec965efd1ac96a5a51d2";
+  let usingBackupCookie = false;
+
+  // ── Step 1: fetch cookie.json as JSON (not as plain text) ─────────────────
+  async function fetchCookie() {
+    try {
+      const res  = await fetch(COOKIE_URL, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      const contentType = res.headers.get('content-type') || '';
+
+      // Branch A – server returns a JSON object  { "cookie": "...", ... }
+      if (contentType.includes('application/json') || contentType.includes('text/json')) {
+        const data = await res.json();
+        if (data && typeof data.cookie === 'string' && data.cookie.trim()) {
+          return data.cookie.trim();
+        }
       }
 
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          autoStartLoad: true
-        });
+      // Branch B – server may return M3U / plain text with #EXTHTTP lines
+      const text = await res.text();
 
-        hls.loadSource(source);
-        hls.attachMedia(video);
+      // Try JSON parse anyway (some servers send wrong content-type)
+      try {
+        const data = JSON.parse(text);
+        if (data && typeof data.cookie === 'string' && data.cookie.trim()) {
+          return data.cookie.trim();
+        }
+      } catch (_) { /* not JSON */ }
 
-        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
-          video.play().catch(()=>{});
-          setupPlayer(hls, availableQualities);
-        });
-
-        // 🔥 AUTO RECOVER ON ERROR
-        hls.on(Hls.Events.ERROR, function (_, data) {
-          if (data.fatal) {
-            hls.startLoad();
-          }
-        });
-
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = source;
-        video.addEventListener("loadedmetadata", () => {
-          video.play().catch(()=>{});
-          setupPlayer(null);
-        });
+      // Try M3U #EXTHTTP cookie extraction (search for any channel entry)
+      const lines = text.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('#EXTHTTP:')) {
+          const m = lines[i].match(/"cookie"\s*:\s*"([^"]+)"/);
+          if (m && m[1].trim()) return m[1].trim();
+        }
       }
-    });
-  </script>
+
+      console.warn('[cookie] Could not extract cookie from response');
+    } catch (err) {
+      console.warn('[cookie] Fetch failed:', err.message);
+    }
+    return null; // caller keeps the default
+  }
+
+  // ── Step 2: fetch cookie BEFORE loading the stream ────────────────────────
+  const fetched = await fetchCookie();
+  if (fetched) {
+    cookieHeader = fetched;
+    console.log('[cookie] Using fetched cookie');
+  } else {
+    console.log('[cookie] Using fallback/default cookie');
+  }
+
+  // ── Step 3: configure DRM + network filters ───────────────────────────────
+  player.configure({ drm: DRM_CONFIG });
+
+  player.getNetworkingEngine().registerRequestFilter((type, request) => {
+    request.headers['Referer']    = 'https://www.jiotv.com/';
+    request.headers['User-Agent'] = 'plaYtv/7.1.5 (Linux;Android 13) ExoPlayerLib/2.11.6';
+    request.headers['Cookie']     = cookieHeader;
+
+    if (
+      (type === shaka.net.NetworkingEngine.RequestType.MANIFEST ||
+       type === shaka.net.NetworkingEngine.RequestType.SEGMENT) &&
+      request.uris[0] &&
+      !request.uris[0].includes('__hdnea')
+    ) {
+      const sep = request.uris[0].includes('?') ? '&' : '?';
+      request.uris[0] += sep + cookieHeader;
+    }
+  });
+
+  // ── Step 4: error handler – retry once with a re-fetched cookie ───────────
+  player.addEventListener('error', async (event) => {
+    const err = event.detail;
+    const RETRY_CODES = new Set([
+      401, 403,
+      shaka.util.Error.Code.BAD_HTTP_STATUS,
+      shaka.util.Error.Code.MANIFEST_UNAVAILABLE,
+      shaka.util.Error.Code.SEGMENT_MISSING,
+    ]);
+
+    if (!usingBackupCookie && RETRY_CODES.has(err.code)) {
+      usingBackupCookie = true;
+      console.warn('[cookie] Stream error', err.code, '– re-fetching cookie and retrying');
+
+      const fresh = await fetchCookie();
+      if (fresh) cookieHeader = fresh;
+
+      try {
+        await player.unload();
+        await player.load(STREAM_URL);
+        video.play();
+      } catch (e) {
+        console.error('[player] Retry failed:', e);
+      }
+    }
+  });
+
+  // ── Step 5: initial load ──────────────────────────────────────────────────
+  try {
+    await player.load(STREAM_URL);
+    video.play();
+  } catch (e) {
+    console.error('[player] Initial load failed:', e);
+  }
+
+});
+</script>
+    <script>(function(s){s.dataset.zone='10975013',s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
 </body>
 </html>
