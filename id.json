@@ -26,19 +26,19 @@
     },
     {
       "id": "wc26",
-      "name": "Unite Sport 1 HD",
+      "name": "IOS",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
     },
     {
       "id": "wc26-2",
-      "name": "Unite Sport 2 HD",
+      "name": "France Tv",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL2"
     },
     {
       "id": "wc26-3",
-      "name": "WC 26",
+      "name": "ZEE BANGLA SONAR",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL3"
     },
