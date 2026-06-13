@@ -10,7 +10,7 @@
     },
     {
       "id": "fussball",
-      "name": "6ter",
+      "name": "6tr",
       "type": "iframe",
       "iframeSrc": "https://fifa-world-cup-live.pages.dev/fussball",
       "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
@@ -18,7 +18,7 @@
     },
     {
       "id": "w9",
-      "name": "6ter",
+      "name": "2",
       "type": "iframe",
       "iframeSrc": "https://fifa-world-cup-live.pages.dev/w9",
       "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
@@ -26,7 +26,7 @@
     },
     {
       "id": "gulli",
-      "name": "6ter",
+      "name": "6t44er",
       "type": "iframe",
       "iframeSrc": "https://fifa-world-cup-live.pages.dev/guli",
       "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
@@ -34,7 +34,7 @@
     },
     {
       "id": "m6plus",
-      "name": "6ter",
+      "name": "644ter",
       "type": "iframe",
       "iframeSrc": "https://fifa-world-cup-live.pages.dev/m6",
       "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
