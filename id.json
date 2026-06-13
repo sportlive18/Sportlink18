@@ -44,9 +44,15 @@
     },
         {
       "id": "wc26-4",
-      "name": "Himalaya Sports",
+      "name": "FS 1",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL4"
+    },
+    {
+      "id": "wc26-5",
+      "name": "Himalaya Sports HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/FANCODE3"
     },
     {
       "id": "willow",
