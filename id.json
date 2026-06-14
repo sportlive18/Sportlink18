@@ -98,6 +98,12 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
     },
     {
+      "id": "wc26-8",
+      "name": "Bioscope Sport",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL6"
+    },
+    {
       "id": "ios-3",
       "name": "FIFA HD",
       "type": "iframe",
