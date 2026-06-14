@@ -4,41 +4,31 @@
       "id": "6ter",
       "name": "6ter",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/6ter",
-      "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
-      "get": "https://hit-counter-theta.vercel.app/api/get?key=hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/6ter"
     },
     {
       "id": "fussball",
       "name": "6tr",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/fussball",
-      "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
-      "get": "https://hit-counter-theta.vercel.app/api/get?key=hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/fussball"
     },
     {
       "id": "w9",
       "name": "2",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/w9",
-      "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
-      "get": "https://hit-counter-theta.vercel.app/api/get?key=hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/w9"
     },
     {
       "id": "gulli",
       "name": "6t44er",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/guli",
-      "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
-      "get": "https://hit-counter-theta.vercel.app/api/get?key=hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/guli"
     },
     {
       "id": "m6plus",
       "name": "644ter",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/m6",
-      "hit": "https://hit-counter-theta.vercel.app/api/hit?key=hindi",
-      "get": "https://hit-counter-theta.vercel.app/api/get?key=hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/m6"
     },
 
     {
@@ -112,6 +102,12 @@
       "name": "FIFA HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
+    },
+        {
+      "id": "4K",
+      "name": "FIFA 4K",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/hub"
     },
     {
       "id": "willow",
