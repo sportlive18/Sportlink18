@@ -44,10 +44,10 @@
       "iframeSrc": "https://sayan-sportlink-jio-tv-main.pages.dev/Channel/Star_Sports_1_Hindi_HD"
     },
     {
-      "id": "Telegu",
-      "name": "Tel",
+      "id": "S",
+      "name": "S",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-starsport.pages.dev/player.html?id=ss1tel"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/Star1-Kanada"
     },
     {
       "id": "Tamil",
@@ -109,7 +109,7 @@
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
     },
-        {
+    {
       "id": "4K",
       "name": "FIFA 4K",
       "type": "iframe",
