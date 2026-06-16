@@ -1,0 +1,38 @@
+{
+  "iframes": [
+   {
+      "id": "WC1",
+      "name": "FOX SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC1"
+    },
+   {
+      "id": "WC2",
+      "name": "FOX SPORT 4K",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC2"
+    },
+    {
+      "id": "WC3",
+      "name": "ZDF",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC1"
+    },
+   {
+      "id": "WC4",
+      "name": "TUDN",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC4"
+    },
+     {
+      "id": "WC5",
+      "name": "FOX SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC5"
+    },
+     {
+      "id": "WC6",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
+    }
