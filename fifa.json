@@ -26,13 +26,13 @@
     },
      {
       "id": "WC5",
-      "name": "FOX SPORT HD",
+      "name": "WC SPORT HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC5"
     },
      {
       "id": "WC6",
-      "name": "TVP SPORT HD",
+      "name": "CAZE TV",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC6"
     },
@@ -77,16 +77,10 @@
       "id": "WC13",
       "name": "NTV HD",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn.html"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/tsn.html"
     },
      {
       "id": "WC14",
-      "name": "DAZN HD",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
-    },
-       {
-      "id": "WC15",
       "name": "DAZN HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
