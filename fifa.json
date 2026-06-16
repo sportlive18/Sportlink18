@@ -60,20 +60,33 @@
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC10"
     },
-         {
+    {
       "id": "WC11",
+      "name": "TIPIK HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC11"
+    },
+    
+         {
+      "id": "WC12",
       "name": "TVP SPORT HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
     },
      {
-      "id": "WC12",
+      "id": "WC13",
       "name": "NTV HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn.html"
     },
      {
-      "id": "WC12",
+      "id": "WC14",
+      "name": "DAZN HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
+    },
+       {
+      "id": "WC15",
       "name": "DAZN HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
