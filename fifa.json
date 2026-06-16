@@ -34,6 +34,42 @@
       "id": "WC6",
       "name": "TVP SPORT HD",
       "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC6"
+    },
+         {
+      "id": "WC7",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC7"
+    },
+         {
+      "id": "WC8",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC8"
+    },
+         {
+      "id": "WC9",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC9"
+    },
+         {
+      "id": "WC10",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC10"
+    },
+         {
+      "id": "WC11",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
+    },
+         {
+      "id": "WC12",
+      "name": "TVP SPORT HD",
+      "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
     }
       ]
