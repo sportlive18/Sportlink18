@@ -30,6 +30,46 @@
       "type": "iframe",
       "iframeSrc": "https://fifa-world-cup-live.pages.dev/m6"
     },
+      {
+    "name": "HINDI",
+    "iframe": "https://fifa-world-cup-live.pages.dev/hindi.html",
+    "thumbnail": "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202404/661fb99c585c6-zee-entertainment-enterprises-will-continue-to-take-all-the-strategic-steps-that-are-aimed-towards-g-032448673-16x9.jpg?size=948:533"
+  },
+  {
+    "name": "ENGLISH",
+    "iframe": "https://fifa-world-cup-live.pages.dev/english.html",
+    "thumbnail": "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202404/661fb99c585c6-zee-entertainment-enterprises-will-continue-to-take-all-the-strategic-steps-that-are-aimed-towards-g-032448673-16x9.jpg?size=948:533"
+  },
+  {
+    "name": "TSN",
+    "iframe": "https://fifa-world-cup-live.pages.dev/tsn.html",
+    "thumbnail": "https://bellmedia-images.imgix.net/lede/wp-content/uploads/2024/09/18581592_10155403529061055_8240563011649656197_n.jpg"
+  },
+  {
+    "name": "FOX SPORTS",
+    "iframe": "https://fifa-world-cup-live.pages.dev/fox-sports",
+    "thumbnail": "https://static0.srcdn.com/wordpress/wp-content/uploads/2025/05/fox-sports-1-logo-1200x674.jpg?q=70&fit=crop&w=1200&h=628&dpr=1"
+  },
+  {
+    "name": "TELEMUNDO",
+    "iframe": "https://fifa-world-cup-live.pages.dev/telemundo.html",
+    "thumbnail": "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_20/3352176/telemundo-social-default.png"
+  },
+  {
+    "name": "CAZE TV",
+    "iframe": "https://fifa-world-cup-live.pages.dev/caze-tv.html",
+    "thumbnail": "https://static.wikia.nocookie.net/logopedia/images/a/a3/CazeTV2022_qatar.jpg"
+  },
+  {
+    "name": "SPORTV",
+    "iframe": "https://fifa-world-cup-live.pages.dev/sportv.html",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/SporTV_logo_2021.svg/512px-SporTV_logo_2021.svg.png"
+  },
+  {
+    "name": "DSPORTS",
+    "iframe": "https://fifa-world-cup-live.pages.dev/dsports.html",
+    "thumbnail": "https://m.media-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.e524621f-1786-4d81-bfd1-40a07d8d997f/7/BOXART-16X9/da-DK._UR1920,1080_.jpg"
+  },
 
     {
       "id": "FOX501HD",
