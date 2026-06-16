@@ -38,25 +38,25 @@
     },
          {
       "id": "WC7",
-      "name": "TVP SPORT HD",
+      "name": "VIX HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC7"
     },
          {
       "id": "WC8",
-      "name": "TVP SPORT HD",
+      "name": "TELEMUNDO HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC8"
     },
          {
       "id": "WC9",
-      "name": "TVP SPORT HD",
+      "name": "D SPORT HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC9"
     },
          {
       "id": "WC10",
-      "name": "TVP SPORT HD",
+      "name": "SPORZA HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WC10"
     },
@@ -66,11 +66,18 @@
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
     },
-         {
+     {
       "id": "WC12",
-      "name": "TVP SPORT HD",
+      "name": "NTV HD",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/tsn.html"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn.html"
+    },
+     {
+      "id": "WC12",
+      "name": "DAZN HD",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
     }
+    
       ]
 }
