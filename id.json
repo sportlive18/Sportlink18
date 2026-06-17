@@ -170,8 +170,7 @@
     {
       "id": "hotstar",
       "name": "Disney+ Hotstar",
-      "type": "iframe",
-      "iframeSrc": "https://matcheslinkz.pages.dev/jio-hotstar"
+      "type": "iframhttps://fifa-world-cup-live.pages.dev/hindi"
     },
     {
       "id": "laliga",
@@ -186,10 +185,10 @@
       "iframeSrc": "https://allrounder-live12.pages.dev/star/star-1"
     },
     {
-      "id": "star1-hindi",
-      "name": "Star Sports (Hindi)",
+      "id": "hindi",
+      "name": "FIFA WC",
       "type": "iframe",
-      "iframeSrc": "https://allrounderlive.in/hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/hindi"
     },
     {
       "id": "star3",
