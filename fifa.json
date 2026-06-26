@@ -14,9 +14,9 @@
     },
     {
       "id": "WC3",
-      "name": "U1",
+      "name": "TSN",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/hindi"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/tsn"
     },
    {
       "id": "WC4",
