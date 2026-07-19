@@ -4,13 +4,13 @@
       "id": "WC1",
       "name": "FOX SPORT HD",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC1"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/w9"
     },
    {
       "id": "WC2",
       "name": "FOX SPORT 4K",
       "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/fox-sports"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/english"
     },
     {
       "id": "WC3",
@@ -28,7 +28,7 @@
       "id": "WC5",
       "name": "WC SPORT HD",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/WC5"
+      "iframeSrc": "https://fifa-world-cup-live.pages.dev/m6"
     },
      {
       "id": "WC6",
