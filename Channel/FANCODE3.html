@@ -1,137 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Real Madrid Tv</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-  <meta name="referrer" content="no-referrer"/>
-  
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
 
-  <!-- HLS.js -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<meta charset="UTF-8">
+<title>CRICKLY FANCODE LIVE WEB PLAYER</title>
 
-  <!-- Plyr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <style>
-    body {
-      background-color: #000;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
-    .plyr {
-      height: 100%;
-      width: 100%;
-    }
-  </style>
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- YOUR MAIN CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- SHAKA PLAYER -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.6.0/shaka-player.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.6.0/controls.min.css">
+
+<style>
+
+/* PLAYER ONLY STYLES */
+
+html,body{
+margin:0;
+padding:0;
+background:#000;
+height:100%;
+width:100%;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+}
+
+.video-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+}
+
+.shaka-video-container{
+width:100%;
+height:100%;
+}
+
+video{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
+}
+
+/* LOADING */
+
+.loading-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:#000;
+color:#fff;
+z-index:2000;
+font-size:18px;
+}
+
+.spinner{
+border:4px solid rgba(255,255,255,.2);
+border-top:4px solid #3b82f6;
+border-radius:50%;
+width:40px;
+height:40px;
+animation:spin 1s linear infinite;
+margin-bottom:12px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+</style>
+
 </head>
+
 <body>
-  <div class="video-container">
-    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
-  </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const video = document.getElementById("player");
-      const source = "https://du63lhrf9y1yb.cloudfront.net/143351_hindi_hls_e275e99cda1596_1ta-di_h264/index.m3u8";
+<div class="video-container">
 
-      const defaultOptions = {
-        autoplay: true,
-        controls: [
-          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
-          'mute', 'volume', 'settings', 'fullscreen'
-        ],
-        settings: ['quality']
-      };
+<div class="shaka-video-container" data-shaka-player>
 
-      let player;
+<video id="video" autoplay playsinline muted></video>
 
-      function setupPlayer(hls, qualities = []) {
-        player = new Plyr(video, {
-          ...defaultOptions,
-          quality: qualities.length ? {
-            default: qualities[0],
-            options: qualities,
-            forced: true,
-            onChange: q => {
-              hls.levels.forEach((level, index) => {
-                if (level.height === q) {
-                  hls.currentLevel = index;
-                }
-              });
-            }
-          } : {}
-        });
+<div id="loading" class="loading-overlay">
+<div class="spinner"></div>
+Analyzing the video...
+</div>
 
-        // 🔁 AUTO RESUME
-        setInterval(() => {
-          if (video.paused && video.readyState > 2) {
-            video.play().catch(()=>{});
-          }
-        }, 3000);
+</div>
 
-        // 🔊 AUTO UNMUTE (on first interaction)
-        const unmute = () => {
-          video.muted = false;
-          video.volume = 1;
-          document.removeEventListener("click", unmute);
-          document.removeEventListener("touchstart", unmute);
-        };
+</div>
 
-        document.addEventListener("click", unmute);
-        document.addEventListener("touchstart", unmute);
-      }
 
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          autoStartLoad: true
-        });
+<!-- TELEGRAM POPUP (USES YOUR CSS) -->
 
-        hls.loadSource(source);
-        hls.attachMedia(video);
+<div id="telegramModal" class="modal hidden">
 
-        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
-          video.play().catch(()=>{});
-          setupPlayer(hls, availableQualities);
-        });
+<div class="modal-content">
 
-        // 🔥 AUTO RECOVER ON ERROR
-        hls.on(Hls.Events.ERROR, function (_, data) {
-          if (data.fatal) {
-            hls.startLoad();
-          }
-        });
+<h2>Join our Telegram</h2>
 
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = source;
-        video.addEventListener("loadedmetadata", () => {
-          video.play().catch(()=>{});
-          setupPlayer(null);
-        });
-      }
-    });
-  </script>
-</body>
+<p>
+Stay updated with the latest
+<strong>Live Match Links</strong>
+and updates. Click below to join our official Telegram channel.
+</p>
+
+<button id="joinButton" class="btn">Join Telegram</button>
+
+<button id="closeButton" class="btn">Already Joined</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ================= STREAM ================= */
+
+let streamUrl =
+"https://du63lhrf9y1yb.cloudfront.net/143351_hindi_hls_e275e99cda1596_1ta-di_h264/index.m3u8";
+
+/* ================= PLAYER ================= */
+
+const video = document.getElementById("video");
+const loading = document.getElementById("loading");
+
+async function initPlayer(){
+
+if(!streamUrl){
+alert("Stream URL missing");
+return;
+}
+
+try{
+
+const player = new shaka.Player(video);
+
+const container = document.querySelector(".shaka-video-container");
+
+const ui = new shaka.ui.Overlay(player,container,video);
+
+ui.configure({
+
+controlPanelElements:[
+'play_pause',
+'mute',
+'time_and_duration',
+'spacer',
+'quality',
+'language',
+'picture_in_picture',
+'fullscreen',
+'overflow_menu'
+],
+
+addSeekBar:true
+
+});
+
+player.configure({
+streaming:{
+bufferingGoal:10,
+rebufferingGoal:2,
+bufferBehind:30
+}
+});
+
+await player.load(streamUrl);
+
+video.play().catch(()=>{
+video.muted=true;
+video.play();
+});
+
+video.addEventListener("playing",()=>{
+loading.style.display="none";
+});
+
+}
+
+catch(e){
+
+console.log("Shaka error:",e);
+
+video.src = streamUrl;
+
+video.play();
+
+video.addEventListener("playing",()=>{
+loading.style.display="none";
+});
+
+}
+
+}
+
+
+/* ================= TELEGRAM POPUP ================= */
+
+const modal = document.getElementById("telegramModal");
+const joinBtn = document.getElementById("joinButton");
+const closeBtn = document.getElementById("closeButton");
+
+/* SHOW POPUP EVERY PAGE LOAD */
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+modal.classList.remove("hidden");
+},2000);
+
+});
+
+/* JOIN TELEGRAM */
+
+joinBtn.onclick=function(){
+
+window.open("https://telegram.me/+NSqV0ZHy3flhZmQ1","_blank");
+
+modal.classList.add("hidden");
+
+}
+
+/* CLOSE */
+
+closeBtn.onclick=function(){
+
+modal.classList.add("hidden");
+
+}
+
+
+/* INIT PLAYER */
+
+document.addEventListener("DOMContentLoaded",initPlayer);
+
+</script>
+
+  <script>(function(s){s.dataset.zone='10603308',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</body>  
 </html>
