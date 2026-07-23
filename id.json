@@ -96,14 +96,14 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
     },
     {
-      "id": "wc26",
-      "name": "IOS",
+      "id": "us1",
+      "name": "Unite Sports 1",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
     },
     {
-      "id": "wc26-2",
-      "name": "France Tv",
+      "id": "us2",
+      "name": "Unite Sports 2",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL2"
     },
