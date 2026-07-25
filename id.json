@@ -13,6 +13,12 @@
       "iframeSrc": "https://allinonereborn2.online/sony/ptest1.html?id=sony-ten-3-hd"
     },
     {
+      "id": "s5",
+      "name": "sony5",
+      "type": "iframe",
+      "iframeSrc": "https://allinonereborn2.online/sony/ptest1.html?id=sony-ten-5-hd"
+    },
+    {
       "id": "s1",
       "name": "sony1",
       "type": "iframe",
