@@ -126,10 +126,10 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/FANCODE3"
     },
     {
-      "id": "wc26-6",
-      "name": "NBC HD",
+      "id": "fan",
+      "name": "Fancode Hls",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/criclife"
+      "iframeSrc": "https://allrounder-live12.pages.dev/hls"
     },
     {
       "id": "wc26-7",
