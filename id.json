@@ -42,6 +42,12 @@
       "type": "iframe",
       "iframeSrc": " https://fifa-world-cup-live.pages.dev/hindi"
     },
+       {
+      "id": "u1",
+      "name": "U1 Sports ",
+      "type": "iframe",
+      "iframeSrc": "https://kick.com/bhgvhvvvkvttvdv"
+    },
     {
       "id": "tapmad",
       "name": "Tapmad",
