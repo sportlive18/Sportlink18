@@ -87,15 +87,14 @@ seekBarColors: {
       });  
   
       // ✅ Your DRM Key + MPD URL  
-      let drmConfig = {  
-        clearKeys: {  
-          "be277ded76725b0891a3eee213794391":
- "12b14b25a96be789e5e97fe35fcc6e3c"  
-        }  
-      };  
-  
-      let streamUrl = "https://live1-814bffb9b389f652.fastly.foxtelgroupcdn.net.au/out/v1/a1caaa0d2e0a48a0b720c986401b84a0/index.mpd";  
-  
+      let drmConfig = {
+  clearKeys: {
+    "c108e7b44a1d4e65bd9edf19b46e5ec1":
+      "8dca625e57fa0b4c71e991016373eee4"
+  }
+};
+
+let streamUrl = "https://in-mc-flive.fancode.com/mumbai/143353_hindi_dash_66824_1drmta-di_h264/index.mpd";
       player.configure({  
         drm: drmConfig,  
         streaming: {  
