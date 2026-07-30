@@ -3,7 +3,7 @@
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Sportlink</title>     
+  <title>TNT1</title>     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
   <!-- Google tag (gtag.js) -->
@@ -12,6 +12,7 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-FMP9REY96D');
 </script>
   <style>  
@@ -44,9 +45,12 @@
     }  
   </style>  
 </head>  
-<body>  
+
+ 
+  
+  <body>  
   <div class="shaka-video-container" data-shaka-player>  
-    <video autoplay playsinline preload="metadata" poster=""></video>  
+    <video autoplay playsinline preload="metadata" poster="https://www.newscaststudio.com/wp-content/uploads/2023/07/tnt-sports-uk-branding.jpg"></video>  
   </div>  
   
   <script>  
@@ -72,24 +76,25 @@
           'quality', 'fullscreen'  
         ],  
         volumeBarColors: {  
-          base: 'rgba(0, 136, 255, 0.3)',  
-          level: 'rgb(0, 136, 255)'  
-        },  
-        seekBarColors: {  
-          base: 'rgba(0, 136, 255, 0.3)',  
-          buffered: 'rgba(0, 136, 255, 0.6)',  
-          played: 'rgb(0, 136, 255)'  
-        }
+  base: 'rgba(0, 136, 255, 0.3)',  
+  level: 'rgb(0, 136, 255)'  
+},  
+seekBarColors: {  
+  base: 'rgba(0, 136, 255, 0.3)',  
+  buffered: 'rgba(0, 136, 255, 0.6)',  
+  played: 'rgb(0, 136, 255)'  
+}
       });  
   
-      // ✅ ClearKey DRM
+      // ✅ Your DRM Key + MPD URL  
       let drmConfig = {  
         clearKeys: {  
-          "5466ebd70704bdeb657f0abf3c5ca4ef": "bdd79b72d8e48ed483aa623cc38a8a16"
+          "69a5aa835a061ce64a630d1046727e40":
+ "d02feac8a999bd06bf4059bf33411749"  
         }  
       };  
   
-      let streamUrl = "https://otte-tim.live.pv-cdn.net/bom-nitro/live/clients/dash/enc/fsu3wl2rwb/out/v1/be61206c04e643349d53fb22301f3b50/cenc.mpd";
+      let streamUrl = "https://otte.live.fly.ww.aiv-cdn.net/fra-nitro/live/clients/dash/enc/rhf2dwosdt/out/v1/ee550d2a68d846c797e6ce4de2e8b76d/cenc.mpd";  
   
       player.configure({  
         drm: drmConfig,  
