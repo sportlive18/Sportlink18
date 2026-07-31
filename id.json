@@ -288,10 +288,10 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
     },
     {
-      "id": "sonyliv1",
-      "name": "Sony Liv 1",
+      "id": "tsn1",
+      "name": "TSN 1",
       "type": "iframe",
-      "iframeSrc": "https://allrounderlive.in/hindi"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn"
     },
     {
       "id": "sony3",
