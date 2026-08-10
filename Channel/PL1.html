@@ -1,155 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="referrer" content="no-referrer">
-<title>Sayan</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@5.1.8/dist/controls.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
-.shaka-video-container{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
-video{width:100%;height:100%;object-fit:contain;background:#000}
-video.mode-fill{object-fit:fill}
-video.mode-cover{object-fit:cover}
-.shaka-spinner-container,.shaka-spinner,.shaka-spinner-svg{display:none!important}
-.shaka-controls-container button{color:#fff!important}
-.shaka-fit-btn{background:transparent!important;border:none!important;cursor:pointer!important;padding:0 10px!important;opacity:.85;display:flex;align-items:center;justify-content:center;height:100%;transition:opacity .15s}
-.shaka-fit-btn:hover{opacity:1}
-.shaka-fit-btn svg{width:18px;height:18px;display:block}
-#loader{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9;opacity:0;pointer-events:none;transition:opacity .2s}
-#loader.on{opacity:1}
-.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,.15);border-top-color:#38bdf8;border-radius:50%;animation:sp .75s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nick Plus (Digital) · Hotstar</title>
+    <meta name="referrer" content="no-referrer">
+
+    <!-- Shaka Player (UI + core) -->
+    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css" />
+
+    <style>
+        /* ----- RESET & FULLSCREEN LAYOUT ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .shaka-video-container {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        /* ----- CUSTOM WATERMARK (Nick Plus) ----- */
+        .custom-watermark {
+            position: absolute;
+            z-index: 40;
+            pointer-events: none;
+            top: 65%;
+            left: 6%;
+            transform: translateY(-50%);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.20);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        }
+        .custom-watermark span {
+            color: rgba(255, 255, 255, 0.30);
+        }
+        .custom-watermark .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 80, 80, 0.6);
+            margin-right: 8px;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.5);
+            }
+        }
+
+        /* ----- MODERN BLOCKER (sandbox fallback + error) ----- */
+        .block-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            text-align: center;
+            padding: 20px;
+        }
+        .block-box {
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .block-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .block-title .error-icon {
+            display: block;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .block-sub {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            word-break: break-word;
+        }
+        .block-sub code {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #ff8a8a;
+            margin-top: 8px;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+        .block-sub .hint {
+            display: block;
+            margin-top: 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 700px) {
+            .custom-watermark {
+                font-size: 10px;
+                top: 60%;
+                left: 16%;
+            }
+            .block-title {
+                font-size: 22px;
+            }
+            .block-box {
+                padding: 25px;
+            }
+            .block-sub {
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="shaka-video-container" id="pc">
-  <video id="v" autoplay playsinline preload="metadata"></video>
-  <div id="loader"><div class="spin"></div></div>
-</div>
+    <!-- PLAYER CONTAINER -->
+    <div class="shaka-video-container" id="player-container">
+        <video id="video" autoplay muted playsinline preload="metadata"></video>
+        <div class="custom-watermark">
+            <span class="dot"></span>Nick Plus <span>· Digital</span>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/shaka-player@5.1.8/dist/shaka-player.ui.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-  shaka.polyfill.installAll();
-  if (!shaka.Player.isBrowserSupported()) return;
+    <script>
+        (function() {
 
-  const video     = document.getElementById('v');
-  const container = document.getElementById('pc');
-  const loader    = document.getElementById('loader');
+            // ----- SANDBOX DETECTION (keep user informed) -----
+            function isSandboxedEnv() {
+                try {
+                    if (window.self === window.top) return false;
+                    if (window.frameElement && window.frameElement.hasAttribute("sandbox")) {
+                        return true;
+                    }
+                    try {
+                        document.domain = document.domain;
+                        if (window.frameElement && !window.frameElement.getAttribute("sandbox")) {
+                            return false;
+                        }
+                    } catch (_) {
+                        return true;
+                    }
+                    return false;
+                } catch (_) {
+                    return true;
+                }
+            }
 
-  let playing = false;
-  const showLoader = () => { if (playing) loader.classList.add('on'); };
-  const hideLoader = () => { playing = true; loader.classList.remove('on'); };
+            function showBlockScreen(title, message, extra) {
+                const container = document.getElementById("player-container");
+                const video = document.getElementById("video");
+                try {
+                    video.pause();
+                    video.removeAttribute('src');
+                    video.load();
+                } catch (_) {}
 
-  video.addEventListener('waiting',    showLoader);
-  video.addEventListener('stalled',    showLoader);
-  video.addEventListener('seeking',    showLoader);
-  video.addEventListener('playing',    hideLoader);
-  video.addEventListener('canplay',    hideLoader);
-  video.addEventListener('timeupdate', () => { if (!video.paused && video.currentTime > 0) hideLoader(); });
+                const overlay = document.createElement("div");
+                overlay.className = "block-overlay";
+                overlay.id = "block-display";
+                overlay.innerHTML = `
+                    <div class="block-box">
+                        <div class="block-title">
+                            <span class="error-icon">⚠️</span>
+                            ${title}
+                        </div>
+                        <div class="block-sub">
+                            ${message}
+                            ${extra ? `<code>${extra}</code>` : ''}
+                            <span class="hint">🔄 Try reloading the page or check the stream token.</span>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+                if (container) container.style.display = 'none';
+            }
 
-  const player = new shaka.Player();
-  await player.attach(video);
+            if (isSandboxedEnv()) {
+                showBlockScreen(
+                    'Disable Sandbox',
+                    'Open this page in a normal browser tab and disable ad blockers.'
+                );
+                return;
+            }
 
-  const ui = new shaka.ui.Overlay(player, container, video);
-  ui.configure({
-    controlPanelElements: ['play_pause','time_and_duration','spacer','quality','fullscreen','overflow_menu'],
-    overflowMenuButtons:  ['language','captions','playback_rate','picture_in_picture'],
-    seekBarColors: { base:'rgba(209,213,219,.25)', buffered:'rgba(139,0,0,.45)', played:'#22c55e' },
-    fadeDelay: 3
-  });
+            // ----- CONFIGURATION – Hotstar stream (Nick Plus) -----
+            const CONFIG = {
+                // MPD from the M3U entry (ttl=86400 = 24h)
+                streamUrl: "https://livetv.hotstar.com/mp1/gec-india-1540074047/22c4e4fc4e8c4a1897019c4c6ad698c2/index.mpd?a=ns&ttl=86400",
+                // ClearKey: keyId:key  (from #KODIPROP:inputstream.adaptive.license_key)
+                keyId: "8446d54c24f549ba9c9323836a060000",
+                key: "db25bb59ba41470e82e4728f46781954",
+                // Headers from #EXTHTTP and #EXTVLCOPT
+                cookie: "hdntl=exp=1786366813~acl=%2f*~id=65900ec1ddc75624f5b79c59ee0885e6~data=hdntl~hmac=c95baf04bca98749e4860775051283cfc57cc9a4a96ab78da0d57b966c055b2a",
+                userAgent: "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/11)",
+                referer: "https://www.hotstar.com/",
+                origin: "https://www.hotstar.com/"
+            };
 
-  const STREAM_URL = 'https://sundirectgo-live.pc.cdn.bitgravity.com/svchd18/dth.mpd';
-  const RAW_KEYS = 'e08ade1eb5c0ce1ccbd9d8dfa4860409:d5a557c984227122649f8c94d5ef2b86';
-  const clearKeys = Object.fromEntries(
-    RAW_KEYS.split(',').map(pair => pair.trim().split(':'))
-  );
+            // ----- EXTRACT hdntl value (full token) from cookie -----
+            function extractHdntl(cookieStr) {
+                // cookie format: "hdntl=exp=...~acl=...~hmac=..."
+                const match = cookieStr.match(/hdntl=([^;]+)/);
+                if (match) return match[1]; // returns full token
+                return null;
+            }
 
-  player.configure({
-    drm: { clearKeys },
-    manifest: {
-      defaultPresentationDelay: 4,
-      ignoreTextStreamFailures: true,
-      dash: { autoCorrectDrift: true, ignoreMinBufferTime: true }
-    },
-    abr: {
-      enabled: true,
-      defaultBandwidthEstimate: 2000000,
-      bandwidthUpgradeTarget: 0.85,
-      bandwidthDowngradeTarget: 0.95,
-      restrictions: { maxHeight: 1080 }
-    }
-  });
-  player.configurationForLowLatency({
-    streaming: {
-      inaccurateManifestTolerance: 0,
-      segmentPrefetchLimit: 2,
-      updateIntervalSeconds: 0.1,
-      maxDisabledTime: 1,
-      bufferingGoal: 10,
-      rebufferingGoal: 2,
-      bufferBehind: 30,
-      safeSeekOffset: 3,
-      retryParameters: { baseDelay: 100, maxAttempts: 5, backoffFactor: 1.5, fuzzFactor: 0.5 }
-    },
-    manifest: {
-      dash: { autoCorrectDrift: true },
-      retryParameters: { baseDelay: 100 }
-    },
-    drm: {
-      retryParameters: { baseDelay: 100 }
-    }
-  });
+            const hdntlToken = extractHdntl(CONFIG.cookie);
+            console.log("[Nick+] hdntl token:", hdntlToken ? hdntlToken.substring(0, 40) + "…" : "❌ missing");
 
-  player.getNetworkingEngine().registerRequestFilter((type, request) => {
-    request.headers['Referer']    = 'https://www.cricbuzz.com/';
-    request.headers['User-Agent'] = 'Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36';
-  });
+            // ----- BOOT PLAYER -----
+            document.addEventListener("DOMContentLoaded", async () => {
 
-  try { await player.load(STREAM_URL); } catch (_) {}
+                // Install polyfills
+                shaka.polyfill.installAll();
+                if (!shaka.Player.isBrowserSupported()) {
+                    showBlockScreen(
+                        'Browser Not Supported',
+                        'Your browser does not support the required media features.'
+                    );
+                    return;
+                }
 
-  const MODES = ['contain','fill','cover'];
-  const ICONS = {
-    contain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="21" x2="22" y2="21"/></svg>',
-    fill:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>',
-    cover:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 7l3 3m0 0H7m2 0V8m9-1l-3 3m0 0h2m-2 0V8M6 13l3-3m0 0H7m2 0v2m9 1l-3-3m0 0h2m-2 0v2"/></svg>'
-  };
-  let modeIdx = 0;
+                const video = document.getElementById("video");
+                const container = document.getElementById("player-container");
 
-  function injectFitButton(cnt, vid) {
-    const poll = setInterval(() => {
-      const panel = cnt.querySelector('.shaka-controls-button-panel');
-      if (!panel) return;
-      clearInterval(poll);
-      const btn = document.createElement('button');
-      btn.className = 'shaka-fit-btn';
-      btn.title     = 'Toggle fit mode';
-      btn.innerHTML = ICONS.contain;
-      const anchor = panel.querySelector('.shaka-fullscreen-button');
-      if (anchor) panel.insertBefore(btn, anchor); else panel.appendChild(btn);
-      function applyMode(idx) {
-        modeIdx = idx;
-        const m = MODES[idx];
-        vid.classList.remove('mode-fill','mode-cover');
-        if (m === 'fill')  vid.classList.add('mode-fill');
-        if (m === 'cover') vid.classList.add('mode-cover');
-        btn.innerHTML = ICONS[m];
-      }
-      btn.addEventListener('click', e => { e.stopPropagation(); applyMode((modeIdx + 1) % MODES.length); });
-      ['fullscreenchange','webkitfullscreenchange'].forEach(ev => {
-        document.addEventListener(ev, () => {
-          if (!(document.fullscreenElement || document.webkitFullscreenElement)) applyMode(0);
-        });
-      });
-    }, 50);
-  }
+                // Ensure muted to allow autoplay
+                video.muted = true;
 
-  injectFitButton(container, video);
-});
-</script>
+                // Create player + UI
+                const player = new shaka.Player();
+                try {
+                    await player.attach(video);
+                } catch (e) {
+                    showBlockScreen(
+                        'Player Init Error',
+                        'Failed to attach player to video element.',
+                        e.message || String(e)
+                    );
+                    return;
+                }
+
+                const ui = new shaka.ui.Overlay(player, container, video);
+
+                // Configure UI controls
+                ui.configure({
+                    addBigPlayButton: true,
+                    controlPanelElements: [
+                        "mute",
+                        "play_pause",
+                        "time_and_duration",
+                        "spacer",
+                        "quality",
+                        "picture_in_picture",
+                        "fullscreen"
+                    ],
+                    seekBarColors: {
+                        base: "white",
+                        buffered: "red",
+                        played: "green"
+                    }
+                });
+
+                // ----- DRM: ClearKey -----
+                player.configure({
+                    drm: {
+                        clearKeys: {
+                            [CONFIG.keyId]: CONFIG.key
+                        }
+                    },
+                    manifest: {
+                        defaultPresentationDelay: 5
+                    },
+                    streaming: {
+                        lowLatencyMode: true,
+                        bufferingGoal: 10,
+                        rebufferingGoal: 2,
+                        safeSeekOffset: 5
+                    }
+                });
+
+                // ----- REQUEST FILTER: add required headers (Cookie, User-Agent, Referer, Origin) -----
+                const netEngine = player.getNetworkingEngine();
+                if (netEngine) {
+                    netEngine.registerRequestFilter((type, request) => {
+                        // Core headers
+                        request.headers["Cookie"] = CONFIG.cookie;
+                        request.headers["User-Agent"] = CONFIG.userAgent;
+                        request.headers["Referer"] = CONFIG.referer;
+                        request.headers["Origin"] = CONFIG.origin;
+
+                        // For manifest & segments, also append hdntl as URL param (some CDNs require it)
+                        if (type === shaka.net.NetworkingEngine.RequestType.MANIFEST ||
+                            type === shaka.net.NetworkingEngine.RequestType.SEGMENT) {
+                            if (hdntlToken && !request.uris[0].includes("hdntl=")) {
+                                const sep = request.uris[0].includes("?") ? "&" : "?";
+                                request.uris[0] += sep + "hdntl=" + encodeURIComponent(hdntlToken);
+                            }
+                        }
+                    });
+                }
+
+                // ----- LOAD STREAM -----
+                try {
+                    console.log("[Nick+] Loading:", CONFIG.streamUrl);
+                    await player.load(CONFIG.streamUrl);
+                    // Unmute after user interaction (autoplay with audio may be blocked)
+                    video.play().catch(() => {});
+                    console.log("[Nick+] ✅ Stream loaded successfully");
+                } catch (e) {
+                    console.error("[Nick+] ❌ Load error:", e);
+
+                    // Extract useful error details
+                    let errorMsg = e.message || String(e);
+                    let detail = "";
+
+                    // Shaka error objects have a `code` and `data` property
+                    if (e.code !== undefined) {
+                        const codeMap = {
+                            1000: "MANIFEST_LOAD_FAILED",
+                            1001: "MANIFEST_PARSE_FAILED",
+                            1002: "MANIFEST_INVALID",
+                            3000: "LICENSE_REQUEST_FAILED",
+                            3001: "LICENSE_RESPONSE_INVALID",
+                            3002: "LICENSE_PARSING_FAILED",
+                            4000: "VIDEO_ERROR",
+                            5000: "NETWORK_ERROR",
+                            6000: "SEGMENT_LOAD_FAILED"
+                        };
+                        const codeName = codeMap[e.code] || `ERROR_${e.code}`;
+                        detail = `[${codeName}]`;
+
+                        // If there's a data object with more info
+                        if (e.data && e.data.length) {
+                            const extra = e.data.map(d => String(d)).join(' ');
+                            detail += ` ${extra}`;
+                        }
+                    }
+
+                    // Show detailed error
+                    showBlockScreen(
+                        'Stream Error',
+                        'Could not load the stream. The token may have expired or the stream is unavailable.',
+                        `${detail} ${errorMsg}`
+                    );
+                    return;
+                }
+
+                // Once user interacts, unmute
+                const unmuteOnInteraction = () => {
+                    video.muted = false;
+                    video.play().catch(() => {});
+                    document.removeEventListener("click", unmuteOnInteraction);
+                    document.removeEventListener("touchstart", unmuteOnInteraction);
+                };
+                document.addEventListener("click", unmuteOnInteraction);
+                document.addEventListener("touchstart", unmuteOnInteraction);
+
+                // Also unmute when the video plays
+                video.addEventListener("play", () => {
+                    video.muted = false;
+                });
+
+            });
+
+        })();
+    </script>
+
 </body>
 </html>
