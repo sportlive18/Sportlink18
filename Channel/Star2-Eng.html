@@ -1,221 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportLink - Star Sport 2</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-        .header {
-            background: rgba(10,10,10,0.98);
-            padding: 0 40px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 3px solid #e8000d;
-            box-shadow: 0 4px 30px rgba(232,0,13,0.3);
-            height: 70px;
-        }
-        .logo-container { display: flex; align-items: center; gap: 6px; }
-        .logo-sport { font-size: 30px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-link  { font-size: 30px; font-weight: 900; color: #e8000d; text-transform: uppercase; letter-spacing: 1px; }
-        .header-right { display: flex; align-items: center; gap: 20px; }
-        .live-badge {
-            background: #e8000d; padding: 7px 18px; border-radius: 4px;
-            font-size: 13px; font-weight: 700; letter-spacing: 2px;
-            animation: glow 2s infinite;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .live-dot-header { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes glow {
-            0%,100%{ box-shadow: 0 0 10px rgba(232,0,13,.5); }
-            50%    { box-shadow: 0 0 25px rgba(232,0,13,.9); }
-        }
-        @keyframes pulse {
-            0%,100%{ opacity:1; transform:scale(1);   }
-            50%    { opacity:.4; transform:scale(1.4); }
-        }
-        .sub-header {
-            background: linear-gradient(90deg,#e8000d,#b30000);
-            padding: 10px 40px; display: flex; align-items: center; gap: 14px;
-        }
-        .cricket-icon { font-size: 20px; }
-        .sub-title { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
-        .sub-divider { width: 1px; height: 16px; background: rgba(255,255,255,.4); }
-        .sub-desc { font-size: 13px; color: rgba(255,255,255,.85); letter-spacing: 1px; }
-        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
-        .video-section {
-            background: rgba(255,255,255,.04); border-radius: 14px; overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0,0,0,.8);
-            border: 1px solid rgba(232,0,13,.25);
-        }
-        .video-header {
-            background: rgba(0,0,0,.6); padding: 16px 28px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid rgba(232,0,13,.2);
-        }
-        .video-title-group { display: flex; flex-direction: column; gap: 4px; }
-        .video-title { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .video-subtitle { font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: 1px; }
-        .live-indicator {
-            display: flex; align-items: center; gap: 9px;
-            background: rgba(232,0,13,.15); padding: 8px 18px; border-radius: 6px;
-            border: 1px solid rgba(232,0,13,.5);
-        }
-        .live-dot { width: 10px; height: 10px; background: #e8000d; border-radius: 50%; animation: pulse 1.5s infinite; box-shadow: 0 0 8px #e8000d; }
-        .live-text { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #e8000d; }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Star Sports 2 (Digital) · Hotstar</title>
+    <meta name="referrer" content="no-referrer">
 
-        .player-shell {
-            position: relative;
+    <!-- Shaka Player (UI + core) -->
+    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
             width: 100%;
-            padding-bottom: 56.25%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .shaka-video-container {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             background: #000;
         }
-        .player-shell iframe {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            border: none; display: block;
-        }
 
-        .sportlink-watermark {
+        .custom-watermark {
             position: absolute;
-            bottom: 80px;
-            right: 20px;
-            z-index: 15;
+            z-index: 40;
             pointer-events: none;
-            opacity: 0.35;
-            transition: opacity 0.3s;
+            top: 65%;
+            left: 6%;
+            transform: translateY(-50%);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.20);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
         }
-        .watermark-text {
-            font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-            display: flex; align-items: center; gap: 3px;
+        .custom-watermark span {
+            color: rgba(255, 255, 255, 0.30);
         }
-        .watermark-sport { color: #fff; }
-        .watermark-link  { color: #e8000d; }
+        .custom-watermark .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 200, 0, 0.7);
+            margin-right: 8px;
+            animation: pulse 1.8s infinite;
+        }
 
-        .player-shell:fullscreen .sportlink-watermark,
-        .player-shell:-webkit-full-screen .sportlink-watermark,
-        .player-shell:-moz-full-screen .sportlink-watermark,
-        .player-shell:-ms-fullscreen .sportlink-watermark {
-            opacity: 0.5; bottom: 20px;
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.5);
+            }
         }
 
-        @media screen and (orientation: landscape) and (max-width: 1024px) {
-            .sportlink-watermark { bottom: 15px; right: 15px; opacity: 0.45; }
-            .watermark-text { font-size: 13px; }
+        .block-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            text-align: center;
+            padding: 20px;
+        }
+        .block-box {
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .block-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .block-title .error-icon {
+            display: block;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .block-sub {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            word-break: break-word;
+        }
+        .block-sub code {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #ff8a8a;
+            margin-top: 8px;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+        .block-sub .hint {
+            display: block;
+            margin-top: 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
         }
 
-        .controls {
-            padding: 18px 28px; background: rgba(0,0,0,.5);
-            display: flex; gap: 12px; align-items: center;
-            border-top: 1px solid rgba(255,255,255,.06);
-        }
-        .btn { padding:10px 22px; border:none; border-radius:6px; font-size:13px; font-weight:700; cursor:pointer; transition:all .25s; color:#fff; text-transform:uppercase; letter-spacing:1px; }
-        .btn-primary  { background:#e8000d; box-shadow:0 4px 15px rgba(232,0,13,.35); }
-        .btn-primary:hover  { background:#ff1a24; box-shadow:0 6px 20px rgba(232,0,13,.55); transform:translateY(-2px); }
-        .btn-secondary{ background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); }
-        .btn-secondary:hover{ background:rgba(255,255,255,.18); transform:translateY(-2px); }
-        .spacer { flex:1; }
-        .stream-info { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; }
-        .footer { text-align:center; padding:30px 20px; color:rgba(255,255,255,.25); font-size:12px; letter-spacing:1px; }
-        .footer span { color:#e8000d; }
-
-        @media(max-width:768px){
-            .header,.sub-header{ padding-left:16px; padding-right:16px; }
-            .logo-sport,.logo-link{ font-size:22px; }
-            .sub-desc,.sub-divider{ display:none; }
-            .container{ margin:16px auto; padding:0 12px; }
-            .controls{ flex-wrap:wrap; padding:14px 16px; gap:10px; }
-            .btn{ padding:9px 16px; font-size:12px; }
-            .stream-info{ display:none; }
-            .sportlink-watermark{ bottom: 70px; right: 10px; }
-            .watermark-text{ font-size: 12px; }
+        @media (max-width: 700px) {
+            .custom-watermark {
+                font-size: 10px;
+                top: 60%;
+                left: 16%;
+            }
+            .block-title {
+                font-size: 22px;
+            }
+            .block-box {
+                padding: 25px;
+            }
+            .block-sub {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="header">
-    <div class="logo-container">
-        <span class="logo-sport">Sport</span><span class="logo-link">Link</span>
-    </div>
-    <div class="header-right">
-        <div class="live-badge"><div class="live-dot-header"></div>LIVE</div>
-    </div>
-</div>
-
-<div class="sub-header">
-    <span class="cricket-icon">📺</span>
-    <span class="sub-title">Star Sport 2</span>
-    <div class="sub-divider"></div>
-    <span class="sub-desc">Live Sports Streaming</span>
-</div>
-
-<div class="container">
-    <div class="video-section">
-
-        <div class="video-header">
-            <div class="video-title-group">
-                <div class="video-title">Star Sport 2</div>
-                <div class="video-subtitle">Live Sports · HD Stream</div>
-            </div>
-            <div class="live-indicator">
-                <div class="live-dot"></div>
-                <span class="live-text">LIVE</span>
-            </div>
+    <div class="shaka-video-container" id="player-container">
+        <video id="video" autoplay muted playsinline preload="metadata"></video>
+        <div class="custom-watermark">
+            <span class="dot"></span>Star Sports 2 <span>· Digital</span>
         </div>
-
-        <div class="player-shell" id="playerShell">
-            <iframe
-                id="streamFrame"
-                src="https://sayan-jiotv-10.pages.dev/Channel/Star_Sports_HD2_BTS"
-                allowfullscreen
-                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                scrolling="no"
-                frameborder="0">
-            </iframe>
-
-            <div class="sportlink-watermark">
-                <div class="watermark-text">
-                    <span class="watermark-sport">Sport</span><span class="watermark-link">Link</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="controls">
-            <button class="btn btn-primary" onclick="enterFullscreen()">⛶ &nbsp;Fullscreen</button>
-            <button class="btn btn-secondary" onclick="reloadStream()">↺ &nbsp;Reload</button>
-            <div class="spacer"></div>
-            <div class="stream-info">sportlink.live · hub sports</div>
-        </div>
-
     </div>
-</div>
 
-<div class="footer">&copy; 2026 <span>SportLink by Sayan</span> &nbsp;·&nbsp; Hub Sports &nbsp;·&nbsp; All rights reserved</div>
+    <script>
+        (function() {
 
-<script>
-    function reloadStream(){
-        const f = document.getElementById('streamFrame');
-        f.src = f.src;
-    }
+            // ----- Error overlay (no sandbox check) -----
+            function showBlockScreen(title, message, extra) {
+                const container = document.getElementById("player-container");
+                const video = document.getElementById("video");
+                try {
+                    video.pause();
+                    video.removeAttribute('src');
+                    video.load();
+                } catch (_) {}
 
-    function enterFullscreen(){
-        const w = document.getElementById('playerShell');
-        const f = document.getElementById('streamFrame');
-        const go = el => (el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen||function(){}).call(el);
-        go(w) || go(f);
-    }
+                const overlay = document.createElement("div");
+                overlay.className = "block-overlay";
+                overlay.id = "block-display";
+                overlay.innerHTML = `
+                    <div class="block-box">
+                        <div class="block-title">
+                            <span class="error-icon">⚠️</span>
+                            ${title}
+                        </div>
+                        <div class="block-sub">
+                            ${message}
+                            ${extra ? `<code>${extra}</code>` : ''}
+                            <span class="hint">🔄 Try reloading the page or check the stream token.</span>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+                if (container) container.style.display = 'none';
+            }
 
-    document.getElementById('playerShell').addEventListener('click', () => {
-        setTimeout(enterFullscreen, 300);
-    }, { once: true });
-</script>
+            // ----- CONFIGURATION – Hotstar stream (Star Sports 2) -----
+            const CONFIG = {
+                streamUrl: "https://premiumplugx.top/yash/hotstar.php/Star-Sports-2-Digital.mpd",
+                keyId: "14d0c8ee09944c32bafea44a987d0000",
+                key: "74d35f4034b14854bd3ca83dd3aa2fb1",
+                cookie: "",
+                userAgent: "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/11)",
+                referer: "https://www.hotstar.com/"
+            };
+
+            // ----- BOOT PLAYER -----
+            document.addEventListener("DOMContentLoaded", async () => {
+
+                shaka.polyfill.installAll();
+                if (!shaka.Player.isBrowserSupported()) {
+                    showBlockScreen(
+                        'Browser Not Supported',
+                        'Your browser does not support the required media features.'
+                    );
+                    return;
+                }
+
+                const video = document.getElementById("video");
+                const container = document.getElementById("player-container");
+                video.muted = true;
+
+                const player = new shaka.Player();
+                try {
+                    await player.attach(video);
+                } catch (e) {
+                    showBlockScreen(
+                        'Player Init Error',
+                        'Failed to attach player to video element.',
+                        e.message || String(e)
+                    );
+                    return;
+                }
+
+                const ui = new shaka.ui.Overlay(player, container, video);
+                ui.configure({
+                    addBigPlayButton: true,
+                    controlPanelElements: [
+                        "mute",
+                        "play_pause",
+                        "time_and_duration",
+                        "spacer",
+                        "quality",
+                        "picture_in_picture",
+                        "fullscreen"
+                    ],
+                    seekBarColors: {
+                        base: "white",
+                        buffered: "red",
+                        played: "green"
+                    }
+                });
+
+                // ----- DRM: ClearKey -----
+                player.configure({
+                    drm: {
+                        clearKeys: {
+                            [CONFIG.keyId]: CONFIG.key
+                        }
+                    },
+                    manifest: {
+                        defaultPresentationDelay: 5
+                    },
+                    streaming: {
+                        lowLatencyMode: true,
+                        bufferingGoal: 10,
+                        rebufferingGoal: 2,
+                        safeSeekOffset: 5
+                    },
+                    networking: {
+                        credentials: 'include'
+                    }
+                });
+
+                // ----- REQUEST FILTER: add required headers -----
+                const netEngine = player.getNetworkingEngine();
+                if (netEngine) {
+                    netEngine.registerRequestFilter((type, request) => {
+                        request.headers["Cookie"] = CONFIG.cookie;
+                        request.headers["User-Agent"] = CONFIG.userAgent;
+                        request.headers["Referer"] = CONFIG.referer;
+                        // Origin is not set programmatically; browser handles it.
+                    });
+                }
+
+                // ----- LOAD STREAM -----
+                try {
+                    console.log("[Star Sports 2] Loading:", CONFIG.streamUrl);
+                    await player.load(CONFIG.streamUrl);
+                    video.play().catch(() => {});
+                    console.log("[Star Sports 2] ✅ Stream loaded successfully");
+                } catch (e) {
+                    console.error("[Star Sports 2] ❌ Load error:", e);
+
+                    let errorMsg = e.message || String(e);
+                    let detail = "";
+
+                    if (e.code !== undefined) {
+                        const codeMap = {
+                            1000: "MANIFEST_LOAD_FAILED",
+                            1001: "MANIFEST_PARSE_FAILED",
+                            1002: "MANIFEST_INVALID",
+                            3000: "LICENSE_REQUEST_FAILED",
+                            3001: "LICENSE_RESPONSE_INVALID",
+                            3002: "LICENSE_PARSING_FAILED",
+                            4000: "VIDEO_ERROR",
+                            5000: "NETWORK_ERROR",
+                            6000: "SEGMENT_LOAD_FAILED"
+                        };
+                        const codeName = codeMap[e.code] || `ERROR_${e.code}`;
+                        detail = `[${codeName}]`;
+                        if (e.data && e.data.length) {
+                            const extra = e.data.map(d => String(d)).join(' ');
+                            detail += ` ${extra}`;
+                        }
+                    }
+
+                    let userMessage = 'Could not load the stream. The token may have expired or the stream is unavailable.';
+                    if (e.code === 1002 && errorMsg.includes('Failed to fetch')) {
+                        userMessage = 'The manifest request was blocked (CORS or network error). Try using a CORS proxy or disable browser security for testing.';
+                    }
+
+                    showBlockScreen(
+                        'Stream Error',
+                        userMessage,
+                        `${detail} ${errorMsg}`
+                    );
+                    return;
+                }
+
+                // Unmute on user interaction
+                const unmuteOnInteraction = () => {
+                    video.muted = false;
+                    video.play().catch(() => {});
+                    document.removeEventListener("click", unmuteOnInteraction);
+                    document.removeEventListener("touchstart", unmuteOnInteraction);
+                };
+                document.addEventListener("click", unmuteOnInteraction);
+                document.addEventListener("touchstart", unmuteOnInteraction);
+                video.addEventListener("play", () => {
+                    video.muted = false;
+                });
+
+            });
+
+        })();
+    </script>
 
 </body>
 </html>
