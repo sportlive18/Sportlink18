@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Nick Plus (Digital) · Hotstar</title>
+    <title>Star Sports 2 (Digital) · Hotstar</title>
     <meta name="referrer" content="no-referrer">
 
     <!-- Shaka Player (UI + core) -->
@@ -43,7 +43,7 @@
             background: #000;
         }
 
-        /* ----- CUSTOM WATERMARK (Nick Plus) ----- */
+        /* ----- CUSTOM WATERMARK (Star Sports 2) ----- */
         .custom-watermark {
             position: absolute;
             z-index: 40;
@@ -66,7 +66,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(255, 80, 80, 0.6);
+            background: rgba(255, 200, 0, 0.7);
             margin-right: 8px;
             animation: pulse 1.8s infinite;
         }
@@ -179,7 +179,7 @@
     <div class="shaka-video-container" id="player-container">
         <video id="video" autoplay muted playsinline preload="metadata"></video>
         <div class="custom-watermark">
-            <span class="dot"></span>Nick Plus <span>· Digital</span>
+            <span class="dot"></span>Star Sports 2 <span>· Digital</span>
         </div>
     </div>
 
@@ -244,14 +244,14 @@
                 return;
             }
 
-            // ----- CONFIGURATION – Hotstar stream (Nick Plus) -----
+            // ----- CONFIGURATION – Hotstar stream (Star Sports 2) -----
             const CONFIG = {
-                // MPD from the M3U entry (ttl=86400 = 24h)
-                streamUrl: "https://livetv.hotstar.com/mp1/gec-india-1540074047/22c4e4fc4e8c4a1897019c4c6ad698c2/index.mpd?a=ns&ttl=86400",
+                // MPD from the new M3U entry (ttl=86400 = 24h)
+                streamUrl: "https://livetv.hotstar.com/mp1/gec-india-1540068250/1d0752e2f605404886fec4ab49cc3350/index.mpd?a=ns&ttl=86400",
                 // ClearKey: keyId:key  (from #KODIPROP:inputstream.adaptive.license_key)
-                keyId: "8446d54c24f549ba9c9323836a060000",
-                key: "db25bb59ba41470e82e4728f46781954",
-                // Headers from #EXTHTTP and #EXTVLCOPT
+                keyId: "14d0c8ee09944c32bafea44a987d0000",
+                key: "74d35f4034b14854bd3ca83dd3aa2fb1",
+                // Headers from #EXTHTTP and #EXTVLCOPT (same cookie)
                 cookie: "hdntl=exp=1786366813~acl=%2f*~id=65900ec1ddc75624f5b79c59ee0885e6~data=hdntl~hmac=c95baf04bca98749e4860775051283cfc57cc9a4a96ab78da0d57b966c055b2a",
                 userAgent: "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/11)",
                 referer: "https://www.hotstar.com/",
@@ -260,14 +260,13 @@
 
             // ----- EXTRACT hdntl value (full token) from cookie -----
             function extractHdntl(cookieStr) {
-                // cookie format: "hdntl=exp=...~acl=...~hmac=..."
                 const match = cookieStr.match(/hdntl=([^;]+)/);
-                if (match) return match[1]; // returns full token
+                if (match) return match[1];
                 return null;
             }
 
             const hdntlToken = extractHdntl(CONFIG.cookie);
-            console.log("[Nick+] hdntl token:", hdntlToken ? hdntlToken.substring(0, 40) + "…" : "❌ missing");
+            console.log("[Star Sports 2] hdntl token:", hdntlToken ? hdntlToken.substring(0, 40) + "…" : "❌ missing");
 
             // ----- BOOT PLAYER -----
             document.addEventListener("DOMContentLoaded", async () => {
@@ -363,19 +362,16 @@
 
                 // ----- LOAD STREAM -----
                 try {
-                    console.log("[Nick+] Loading:", CONFIG.streamUrl);
+                    console.log("[Star Sports 2] Loading:", CONFIG.streamUrl);
                     await player.load(CONFIG.streamUrl);
-                    // Unmute after user interaction (autoplay with audio may be blocked)
                     video.play().catch(() => {});
-                    console.log("[Nick+] ✅ Stream loaded successfully");
+                    console.log("[Star Sports 2] ✅ Stream loaded successfully");
                 } catch (e) {
-                    console.error("[Nick+] ❌ Load error:", e);
+                    console.error("[Star Sports 2] ❌ Load error:", e);
 
-                    // Extract useful error details
                     let errorMsg = e.message || String(e);
                     let detail = "";
 
-                    // Shaka error objects have a `code` and `data` property
                     if (e.code !== undefined) {
                         const codeMap = {
                             1000: "MANIFEST_LOAD_FAILED",
@@ -390,15 +386,12 @@
                         };
                         const codeName = codeMap[e.code] || `ERROR_${e.code}`;
                         detail = `[${codeName}]`;
-
-                        // If there's a data object with more info
                         if (e.data && e.data.length) {
                             const extra = e.data.map(d => String(d)).join(' ');
                             detail += ` ${extra}`;
                         }
                     }
 
-                    // Show detailed error
                     showBlockScreen(
                         'Stream Error',
                         'Could not load the stream. The token may have expired or the stream is unavailable.',
@@ -417,7 +410,6 @@
                 document.addEventListener("click", unmuteOnInteraction);
                 document.addEventListener("touchstart", unmuteOnInteraction);
 
-                // Also unmute when the video plays
                 video.addEventListener("play", () => {
                     video.muted = false;
                 });
