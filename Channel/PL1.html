@@ -186,7 +186,7 @@
     <script>
         (function() {
 
-            // ----- SANDBOX DETECTION (keep user informed) -----
+            // ----- SANDBOX DETECTION -----
             function isSandboxedEnv() {
                 try {
                     if (window.self === window.top) return false;
@@ -254,24 +254,13 @@
                 // Headers from #EXTHTTP and #EXTVLCOPT (same cookie)
                 cookie: "hdntl=exp=1786366813~acl=%2f*~id=65900ec1ddc75624f5b79c59ee0885e6~data=hdntl~hmac=c95baf04bca98749e4860775051283cfc57cc9a4a96ab78da0d57b966c055b2a",
                 userAgent: "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/11)",
-                referer: "https://www.hotstar.com/",
-                origin: "https://www.hotstar.com/"
+                referer: "https://www.hotstar.com/"
+                // Origin header is omitted because it's forbidden to set programmatically.
             };
-
-            // ----- EXTRACT hdntl value (full token) from cookie -----
-            function extractHdntl(cookieStr) {
-                const match = cookieStr.match(/hdntl=([^;]+)/);
-                if (match) return match[1];
-                return null;
-            }
-
-            const hdntlToken = extractHdntl(CONFIG.cookie);
-            console.log("[Star Sports 2] hdntl token:", hdntlToken ? hdntlToken.substring(0, 40) + "…" : "❌ missing");
 
             // ----- BOOT PLAYER -----
             document.addEventListener("DOMContentLoaded", async () => {
 
-                // Install polyfills
                 shaka.polyfill.installAll();
                 if (!shaka.Player.isBrowserSupported()) {
                     showBlockScreen(
@@ -283,11 +272,8 @@
 
                 const video = document.getElementById("video");
                 const container = document.getElementById("player-container");
-
-                // Ensure muted to allow autoplay
                 video.muted = true;
 
-                // Create player + UI
                 const player = new shaka.Player();
                 try {
                     await player.attach(video);
@@ -301,8 +287,6 @@
                 }
 
                 const ui = new shaka.ui.Overlay(player, container, video);
-
-                // Configure UI controls
                 ui.configure({
                     addBigPlayButton: true,
                     controlPanelElements: [
@@ -336,27 +320,23 @@
                         bufferingGoal: 10,
                         rebufferingGoal: 2,
                         safeSeekOffset: 5
+                    },
+                    // IMPORTANT: Include credentials (cookies) in cross-origin requests
+                    networking: {
+                        credentials: 'include'
                     }
                 });
 
-                // ----- REQUEST FILTER: add required headers (Cookie, User-Agent, Referer, Origin) -----
+                // ----- REQUEST FILTER: add required headers (Cookie, User-Agent, Referer) -----
                 const netEngine = player.getNetworkingEngine();
                 if (netEngine) {
                     netEngine.registerRequestFilter((type, request) => {
-                        // Core headers
+                        // Set headers that are allowed to be modified
                         request.headers["Cookie"] = CONFIG.cookie;
                         request.headers["User-Agent"] = CONFIG.userAgent;
                         request.headers["Referer"] = CONFIG.referer;
-                        request.headers["Origin"] = CONFIG.origin;
-
-                        // For manifest & segments, also append hdntl as URL param (some CDNs require it)
-                        if (type === shaka.net.NetworkingEngine.RequestType.MANIFEST ||
-                            type === shaka.net.NetworkingEngine.RequestType.SEGMENT) {
-                            if (hdntlToken && !request.uris[0].includes("hdntl=")) {
-                                const sep = request.uris[0].includes("?") ? "&" : "?";
-                                request.uris[0] += sep + "hdntl=" + encodeURIComponent(hdntlToken);
-                            }
-                        }
+                        // Do NOT set Origin – it's controlled by the browser and cannot be overridden.
+                        // Also, we do not append hdntl to the URL – the server expects it only as a cookie.
                     });
                 }
 
@@ -392,15 +372,22 @@
                         }
                     }
 
+                    // If the error is MANIFEST_INVALID and the message includes "Failed to fetch",
+                    // it's likely a CORS or network issue – suggest using a CORS proxy or disabling security.
+                    let userMessage = 'Could not load the stream. The token may have expired or the stream is unavailable.';
+                    if (e.code === 1002 && errorMsg.includes('Failed to fetch')) {
+                        userMessage = 'The manifest request was blocked (CORS or network error). Try using a CORS proxy or disable browser security for testing.';
+                    }
+
                     showBlockScreen(
                         'Stream Error',
-                        'Could not load the stream. The token may have expired or the stream is unavailable.',
+                        userMessage,
                         `${detail} ${errorMsg}`
                     );
                     return;
                 }
 
-                // Once user interacts, unmute
+                // Unmute on user interaction
                 const unmuteOnInteraction = () => {
                     video.muted = false;
                     video.play().catch(() => {});
@@ -409,7 +396,6 @@
                 };
                 document.addEventListener("click", unmuteOnInteraction);
                 document.addEventListener("touchstart", unmuteOnInteraction);
-
                 video.addEventListener("play", () => {
                     video.muted = false;
                 });
@@ -420,4 +406,4 @@
     </script>
 
 </body>
-</html>
+    </html>
