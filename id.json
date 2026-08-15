@@ -1,43 +1,43 @@
 {
   "iframes": [
-      {
-      "id": "hin2",
-      "name": "Hin2",
-      "type": "iframe",
-      "iframeSrc": "https://allrounder3-0.pages.dev/cricket/hindi"
-    },
     {
       "id": "s3",
       "name": "sony3",
       "type": "iframe",
-      "iframeSrc": "https://allinonereborn2.online/sony/ptest1.html?id=sony-ten-3-hd"
+      "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten3HD.in"
     },
     {
       "id": "s5",
       "name": "sony5",
       "type": "iframe",
-      "iframeSrc": "https://allinonereborn2.online/sony/ptest1.html?id=sony-ten-5-hd"
+      "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten5HD.in"
     },
     {
       "id": "s1",
       "name": "sony1",
       "type": "iframe",
-      "iframeSrc": "https://allinonereborn2.online/sony/ptest1.html?id=sony-ten-1-hd"
+      "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten1HD"
     },
   {
-      "id": "FOX501HD",
+      "id": "f",
       "name": "FOX 501 HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/Fox501"
     },
+      {
+      "id": "h",
+      "name": "Hin2",
+      "type": "iframe",
+      "iframeSrc": "https://allrounder3-0.pages.dev/cricket/hindi"
+    },
     {
-      "id": "prime",
+      "id": "p",
       "name": "prime",
       "type": "iframe",
       "iframeSrc": "https://allrounderlive.in/prime.html"
     },
     {
-      "id": "U1",
+      "id": "t",
       "name": "TNT",
       "type": "iframe",
       "iframeSrc": "https://allrounder3-0.pages.dev/cricket/tnt"
@@ -46,99 +46,51 @@
       "id": "u1",
       "name": "U1 Sports ",
       "type": "iframe",
-      "iframeSrc": "https://kick.com/bhgvhvvvkvttvdv"
+      "iframeSrc": ""
     },
     {
-      "id": "tapmad",
+      "id": "tap",
       "name": "Tapmad",
       "type": "iframe",
-      "iframeSrc": "https://matchesxlinks.pages.dev/m3u8?url=https://bpl24middleeast.akamaized.net/hls/live/2109311/j15klM//master.m3u8"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
     },
     {
       "id": "us1",
       "name": "Unite Sports 1",
       "type": "iframe",
-      "iframeSrc": "https://matcheslinkz.pages.dev/h"
+      "iframeSrc": ""
     },
     {
       "id": "us2",
       "name": "Unite Sports 2",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL2"
+      "iframeSrc": ""
     },
     {
-      "id": "wc26-3",
+      "id": "z",
       "name": "ZEE BANGLA SONAR",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL3"
     },
-        {
-      "id": "wc26-4",
-      "name": "FS 1",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL4"
-    },
-    {
-      "id": "wc26-5",
-      "name": "Himalaya Sports HD",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/FANCODE3"
-    },
-    {
-      "id": "fan",
-      "name": "Fancode Hls",
-      "type": "iframe",
-      "iframeSrc": "https://allrounder-live12.pages.dev/hls"
-    },
-    {
-      "id": "wc26-7",
-      "name": "TVP Sport",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/pl5"
-    },
-    {
-      "id": "wc26-8",
-      "name": "FOX Sport",
-      "type": "iframe",
-      "iframeSrc": "https://fifa-world-cup-live.pages.dev/fox-sports"
-    },
-    {
-      "id": "ios-3",
-      "name": "FIFA HD",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/ios"
-    },
-    {
-      "id": "4K",
-      "name": "FIFA 4K",
-      "type": "iframe",
-      "iframeSrc": "http://84.17.50.102/fox/index.m3u8"
-    },
-    {
-      "id": "willow",
-      "name": "Willow TV",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/willow.html"
-    },
      {
-      "id": "willowios",
+      "id": "wios",
       "name": "Willow HD",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/WillowHD"
     },
     {
-      "id": "hotstar",
+      "id": "hstar",
       "name": "Disney+ Hotstar",
       "type": "iframhttps://fifa-world-cup-live.pages.dev/hindi"
     },
     {
-      "id": "laliga",
+      "id": "l",
       "name": "Laliga Tv",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/LaligaTv"
     },
     {
-      "id": "star1-english",
+      "id": "s",
       "name": "Star Sports (English)",
       "type": "iframe",
       "iframeSrc": "https://allrounder-live12.pages.dev/star/star-1"
@@ -156,10 +108,10 @@
       "iframeSrc": "https://allrounder3-0.pages.dev/cricket/sony-3"
     },
     {
-      "id": "kayosport",
+      "id": "k",
       "name": "Kayo Sport HD",
       "type": "iframe",
-      "iframeSrc": "https://allrounder-live12.pages.dev/channel/ptv"
+      "iframeSrc": ""
     },
     {
       "id": "sl",
@@ -168,94 +120,40 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/hotstar"
     },
     {
-      "id": "willow-cricbuzz",
+      "id": "w",
       "name": "Willow Cricbuzz",
       "type": "iframe",
-      "iframeSrc": "https://allrounder2.dillzycreations.workers.dev/cricket/willow"
+      "iframeSrc": "https://sportlink-willow-livehub.pages.dev/?id=B0HCX5GP83"
     },
     {
-      "id": "willow-cricbuzz-2",
+      "id": "w2",
       "name": "Willow Cricbuzz 2",
       "type": "iframe",
       "iframeSrc": "https://allrounder3-0.pages.dev/cricket/willow"
     },
     {
-      "id": "sky-cricket",
+      "id": "sc",
       "name": "Sky Cricket",
       "type": "iframe",
       "iframeSrc": "https://bl.rutube.ru/livestream/7c13a51576b9ff2601f08f5d57dd5169/index.m3u8?s=uiXES2ePt7xTpQnbJxn7Dg&e=2074684474&scheme=https"
     },
     {
-      "id": "Sky Sport",
-      "name": "Sky Sport",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/sky%20cricket"
-    },
-    {
-      "id": "ptv",
-      "name": "PTV",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/ptv"
-    },
-    {
-      "id": "fox501",
-      "name": "Fox 501",
-      "type": "iframe",
-      "iframeSrc": "https://allrounder-live11.pages.dev/channel/kayo"
-    },
-    {
-      "id": "star1-tv-eng",
-      "name": "Star Sports 1 HD (English)",
-      "type": "iframe",
-      "iframeSrc": "https://joplay.lrl45.workers.dev/1106"
-    },
-    {
       "id": "Cbs Sports",
       "name": "Cbs Sports",
       "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/cbs Sports.html"
+      "iframeSrc": ""
     },
     {
-      "id": "star1-hindi-hd",
+      "id": "ss1h",
       "name": "Star Sports 1 Hindi HD",
       "type": "iframe",
       "iframeSrc": "https://allrounderlive.in/hindi"
     },
     {
-      "id": "star2-hindi-hd",
+      "id": "ss2h",
       "name": "Star Sports 2 Hindi HD",
       "type": "iframe",
       "iframeSrc": ""
-    },
-    {
-      "id": "star2-eng-hd",
-      "name": "Star Sports 2 Eng HD",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Star2-Eng"
-    },
-    {
-      "id": "bein1",
-      "name": "Bein Sports 1",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/beinsport1.html"
-    },
-    {
-      "id": "bein2",
-      "name": "Bein Sports 2",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/beinsport2.html"
-    },
-    {
-      "id": "bein3",
-      "name": "Bein Sports 3",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/beinsport3.html"
-    },
-    {
-      "id": "bein4",
-      "name": "Bein Sports 4",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/beinsport4.html"
     },
     {
       "id": "tnt1",
@@ -282,12 +180,6 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/Tnt4.html"
     },
     {
-      "id": "sony1",
-      "name": "Sony Sport 1",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL1"
-    },
-    {
       "id": "tsn1",
       "name": "TSN 1",
       "type": "iframe",
@@ -303,7 +195,7 @@
       "id": "sonyliv2",
       "name": "Sony Liv 2",
       "type": "iframe",
-      "iframeSrc": "https://webplay.rf.gd/sonyliv-events/player.html?url=https%3A%2F%2Fsonydaimenew.akamaized.net%2Fhls%2Flive%2F2022317%2FUCLFinal3005%2FHIN%2Fstd_lrh-800300010.m3u8%3Fhdnea%3Dexp%3D1780195659~acl%3D%2F*~id%3D99220423692191779197505145906581~hmac%3D238912175871ba2aeb793c9e9fef8e666d5b41f042698dc021aa209696fc5a40"
+      "iframeSrc": ""
     },
     {
       "id": "sony5",
@@ -312,40 +204,22 @@
       "iframeSrc": "https://sayan-sportlink-sonynetwork.pages.dev/Channel/sony-sports-5"
     },
     {
-      "id": "ten-cricket",
-      "name": "Ten Cricket",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Ten Cricket.html"
-    },
-    {
       "id": "fubosport",
       "name": "Fubo Sport",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/fubosport.html"
     },
     {
-      "id": "star-select-1 HD",
+      "id": "sss1",
       "name": "Star Sport Select 1",
       "type": "iframe",
       "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-1-hd"
     },
     {
-      "id": "star-select-2",
+      "id": "sss2",
       "name": "Star Sport Select 2",
       "type": "iframe",
       "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-2-hd"
-    },
-    {
-      "id": "fancode",
-      "name": "Fancode",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/FANCODE3"
-    },
-    {
-      "id": "fancode2",
-      "name": "Fancode 1",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/Fancode2.html"
     },
     {
       "id": "tsn",
@@ -354,52 +228,40 @@
       "iframeSrc": "https://sportlink18.pages.dev/Channel/Tsn.html"
     },
     {
-      "id": "premier-sport 2",
-      "name": "Premier Sport",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/premiersport"
-    },
-     {
-      "id": "premier-sport 1",
-      "name": "Premier Sport 1",
-      "type": "iframe",
-      "iframeSrc": "https://sportlink18.pages.dev/Channel/PremierSport1"
-    },
-    {
       "id": "star1-kannada",
       "name": "Star Sports 1 Kannada",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-kannada"
+      "iframeSrc": ""
     },
     {
       "id": "star1-tamil",
       "name": "Star Sports 1 Tamil",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-tamil-hd"
+      "iframeSrc": ""
     },
     {
       "id": "star1-telugu",
       "name": "Star Sports 1 Telugu",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-1-telugu-hd"
+      "iframeSrc": ""
     },
     {
       "id": "star2-tamil",
       "name": "Star Sports 2 Tamil",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-tamil-hd"
+      "iframeSrc": ""
     },
     {
       "id": "star2-telugu",
       "name": "Star Sports 2 Telugu",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-telugu-hd"
+      "iframeSrc": ""
     },
     {
       "id": "star2-kannada",
       "name": "Star Sports 2 Kannada",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-2-kannada"
+      "iframeSrc": ""
     }
   ]
 }
