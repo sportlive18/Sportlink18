@@ -1,409 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Star Sports 2 (Digital) · Hotstar</title>
-    <meta name="referrer" content="no-referrer">
+  <title>SKY</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="referrer" content="no-referrer"/>
+  
+  <!-- Plyr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"/>
 
-    <!-- Shaka Player (UI + core) -->
-    <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js">
-    </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css" />
+  <!-- HLS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-    <style>
-        /* ----- RESET & FULLSCREEN LAYOUT ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            overflow: hidden;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+  <!-- Plyr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
 
-        .shaka-video-container {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #000;
-        }
-
-        /* ----- CUSTOM WATERMARK (Star Sports 2) ----- */
-        .custom-watermark {
-            position: absolute;
-            z-index: 40;
-            pointer-events: none;
-            top: 65%;
-            left: 6%;
-            transform: translateY(-50%);
-            font-size: 13px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.20);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-        }
-        .custom-watermark span {
-            color: rgba(255, 255, 255, 0.30);
-        }
-        .custom-watermark .dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 200, 0, 0.7);
-            margin-right: 8px;
-            animation: pulse 1.8s infinite;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(1.5);
-            }
-        }
-
-        /* ----- MODERN BLOCKER (sandbox fallback + error) ----- */
-        .block-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-            text-align: center;
-            padding: 20px;
-        }
-        .block-box {
-            padding: 40px;
-            max-width: 550px;
-            width: 100%;
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 0.6s ease-out;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .block-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-        .block-title .error-icon {
-            display: block;
-            font-size: 48px;
-            margin-bottom: 8px;
-        }
-        .block-sub {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.65);
-            line-height: 1.7;
-            word-break: break-word;
-        }
-        .block-sub code {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #ff8a8a;
-            margin-top: 8px;
-            max-width: 100%;
-            overflow-wrap: break-word;
-        }
-        .block-sub .hint {
-            display: block;
-            margin-top: 16px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* ----- RESPONSIVE ----- */
-        @media (max-width: 700px) {
-            .custom-watermark {
-                font-size: 10px;
-                top: 60%;
-                left: 16%;
-            }
-            .block-title {
-                font-size: 22px;
-            }
-            .block-box {
-                padding: 25px;
-            }
-            .block-sub {
-                font-size: 13px;
-            }
-        }
-    </style>
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    .plyr {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="video-container">
+    <video autoplay playsinline muted id="player" controls preload="metadata"></video>
+  </div>
 
-    <!-- PLAYER CONTAINER -->
-    <div class="shaka-video-container" id="player-container">
-        <video id="video" autoplay muted playsinline preload="metadata"></video>
-        <div class="custom-watermark">
-            <span class="dot"></span>Star Sports 2 <span>· Digital</span>
-        </div>
-    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("player");
+      const source = "https://bpl24middleeast.akamaized.net/hls/live/2109311/j15klM//master.m3u8";
+      const defaultOptions = {
+        autoplay: true,
+        controls: [
+          'play', 'rewind', 'fast-forward', 'progress', 'current-time',
+          'mute', 'volume', 'settings', 'fullscreen'
+        ],
+        settings: ['quality']
+      };
 
-    <script>
-        (function() {
+      let player;
 
-            // ----- SANDBOX DETECTION -----
-            function isSandboxedEnv() {
-                try {
-                    if (window.self === window.top) return false;
-                    if (window.frameElement && window.frameElement.hasAttribute("sandbox")) {
-                        return true;
-                    }
-                    try {
-                        document.domain = document.domain;
-                        if (window.frameElement && !window.frameElement.getAttribute("sandbox")) {
-                            return false;
-                        }
-                    } catch (_) {
-                        return true;
-                    }
-                    return false;
-                } catch (_) {
-                    return true;
+      function setupPlayer(hls, qualities = []) {
+        player = new Plyr(video, {
+          ...defaultOptions,
+          quality: qualities.length ? {
+            default: qualities[0],
+            options: qualities,
+            forced: true,
+            onChange: q => {
+              hls.levels.forEach((level, index) => {
+                if (level.height === q) {
+                  hls.currentLevel = index;
                 }
+              });
             }
+          } : {}
+        });
 
-            function showBlockScreen(title, message, extra) {
-                const container = document.getElementById("player-container");
-                const video = document.getElementById("video");
-                try {
-                    video.pause();
-                    video.removeAttribute('src');
-                    video.load();
-                } catch (_) {}
+        // 🔁 AUTO RESUME
+        setInterval(() => {
+          if (video.paused && video.readyState > 2) {
+            video.play().catch(()=>{});
+          }
+        }, 3000);
 
-                const overlay = document.createElement("div");
-                overlay.className = "block-overlay";
-                overlay.id = "block-display";
-                overlay.innerHTML = `
-                    <div class="block-box">
-                        <div class="block-title">
-                            <span class="error-icon">⚠️</span>
-                            ${title}
-                        </div>
-                        <div class="block-sub">
-                            ${message}
-                            ${extra ? `<code>${extra}</code>` : ''}
-                            <span class="hint">🔄 Try reloading the page or check the stream token.</span>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(overlay);
-                if (container) container.style.display = 'none';
-            }
+        // 🔊 AUTO UNMUTE (on first interaction)
+        const unmute = () => {
+          video.muted = false;
+          video.volume = 1;
+          document.removeEventListener("click", unmute);
+          document.removeEventListener("touchstart", unmute);
+        };
 
-            if (isSandboxedEnv()) {
-                showBlockScreen(
-                    'Disable Sandbox',
-                    'Open this page in a normal browser tab and disable ad blockers.'
-                );
-                return;
-            }
+        document.addEventListener("click", unmute);
+        document.addEventListener("touchstart", unmute);
+      }
 
-            // ----- CONFIGURATION – Hotstar stream (Star Sports 2) -----
-            const CONFIG = {
-                // MPD from the new M3U entry (ttl=86400 = 24h)
-                streamUrl: "https://livetv.hotstar.com/mp1/gec-india-1540068250/1d0752e2f605404886fec4ab49cc3350/index.mpd?a=ns&ttl=86400",
-                // ClearKey: keyId:key  (from #KODIPROP:inputstream.adaptive.license_key)
-                keyId: "14d0c8ee09944c32bafea44a987d0000",
-                key: "74d35f4034b14854bd3ca83dd3aa2fb1",
-                // Headers from #EXTHTTP and #EXTVLCOPT (same cookie)
-                cookie: "hdntl=exp=1786366813~acl=%2f*~id=65900ec1ddc75624f5b79c59ee0885e6~data=hdntl~hmac=c95baf04bca98749e4860775051283cfc57cc9a4a96ab78da0d57b966c055b2a",
-                userAgent: "Hotstar;in.startv.hotstar/25.02.24.8.11169 (Android/11)",
-                referer: "https://www.hotstar.com/"
-                // Origin header is omitted because it's forbidden to set programmatically.
-            };
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          autoStartLoad: true
+        });
 
-            // ----- BOOT PLAYER -----
-            document.addEventListener("DOMContentLoaded", async () => {
+        hls.loadSource(source);
+        hls.attachMedia(video);
 
-                shaka.polyfill.installAll();
-                if (!shaka.Player.isBrowserSupported()) {
-                    showBlockScreen(
-                        'Browser Not Supported',
-                        'Your browser does not support the required media features.'
-                    );
-                    return;
-                }
+        hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+          const availableQualities = data.levels.map(l => l.height).sort((a,b) => b - a);
+          video.play().catch(()=>{});
+          setupPlayer(hls, availableQualities);
+        });
 
-                const video = document.getElementById("video");
-                const container = document.getElementById("player-container");
-                video.muted = true;
+        // 🔥 AUTO RECOVER ON ERROR
+        hls.on(Hls.Events.ERROR, function (_, data) {
+          if (data.fatal) {
+            hls.startLoad();
+          }
+        });
 
-                const player = new shaka.Player();
-                try {
-                    await player.attach(video);
-                } catch (e) {
-                    showBlockScreen(
-                        'Player Init Error',
-                        'Failed to attach player to video element.',
-                        e.message || String(e)
-                    );
-                    return;
-                }
-
-                const ui = new shaka.ui.Overlay(player, container, video);
-                ui.configure({
-                    addBigPlayButton: true,
-                    controlPanelElements: [
-                        "mute",
-                        "play_pause",
-                        "time_and_duration",
-                        "spacer",
-                        "quality",
-                        "picture_in_picture",
-                        "fullscreen"
-                    ],
-                    seekBarColors: {
-                        base: "white",
-                        buffered: "red",
-                        played: "green"
-                    }
-                });
-
-                // ----- DRM: ClearKey -----
-                player.configure({
-                    drm: {
-                        clearKeys: {
-                            [CONFIG.keyId]: CONFIG.key
-                        }
-                    },
-                    manifest: {
-                        defaultPresentationDelay: 5
-                    },
-                    streaming: {
-                        lowLatencyMode: true,
-                        bufferingGoal: 10,
-                        rebufferingGoal: 2,
-                        safeSeekOffset: 5
-                    },
-                    // IMPORTANT: Include credentials (cookies) in cross-origin requests
-                    networking: {
-                        credentials: 'include'
-                    }
-                });
-
-                // ----- REQUEST FILTER: add required headers (Cookie, User-Agent, Referer) -----
-                const netEngine = player.getNetworkingEngine();
-                if (netEngine) {
-                    netEngine.registerRequestFilter((type, request) => {
-                        // Set headers that are allowed to be modified
-                        request.headers["Cookie"] = CONFIG.cookie;
-                        request.headers["User-Agent"] = CONFIG.userAgent;
-                        request.headers["Referer"] = CONFIG.referer;
-                        // Do NOT set Origin – it's controlled by the browser and cannot be overridden.
-                        // Also, we do not append hdntl to the URL – the server expects it only as a cookie.
-                    });
-                }
-
-                // ----- LOAD STREAM -----
-                try {
-                    console.log("[Star Sports 2] Loading:", CONFIG.streamUrl);
-                    await player.load(CONFIG.streamUrl);
-                    video.play().catch(() => {});
-                    console.log("[Star Sports 2] ✅ Stream loaded successfully");
-                } catch (e) {
-                    console.error("[Star Sports 2] ❌ Load error:", e);
-
-                    let errorMsg = e.message || String(e);
-                    let detail = "";
-
-                    if (e.code !== undefined) {
-                        const codeMap = {
-                            1000: "MANIFEST_LOAD_FAILED",
-                            1001: "MANIFEST_PARSE_FAILED",
-                            1002: "MANIFEST_INVALID",
-                            3000: "LICENSE_REQUEST_FAILED",
-                            3001: "LICENSE_RESPONSE_INVALID",
-                            3002: "LICENSE_PARSING_FAILED",
-                            4000: "VIDEO_ERROR",
-                            5000: "NETWORK_ERROR",
-                            6000: "SEGMENT_LOAD_FAILED"
-                        };
-                        const codeName = codeMap[e.code] || `ERROR_${e.code}`;
-                        detail = `[${codeName}]`;
-                        if (e.data && e.data.length) {
-                            const extra = e.data.map(d => String(d)).join(' ');
-                            detail += ` ${extra}`;
-                        }
-                    }
-
-                    // If the error is MANIFEST_INVALID and the message includes "Failed to fetch",
-                    // it's likely a CORS or network issue – suggest using a CORS proxy or disabling security.
-                    let userMessage = 'Could not load the stream. The token may have expired or the stream is unavailable.';
-                    if (e.code === 1002 && errorMsg.includes('Failed to fetch')) {
-                        userMessage = 'The manifest request was blocked (CORS or network error). Try using a CORS proxy or disable browser security for testing.';
-                    }
-
-                    showBlockScreen(
-                        'Stream Error',
-                        userMessage,
-                        `${detail} ${errorMsg}`
-                    );
-                    return;
-                }
-
-                // Unmute on user interaction
-                const unmuteOnInteraction = () => {
-                    video.muted = false;
-                    video.play().catch(() => {});
-                    document.removeEventListener("click", unmuteOnInteraction);
-                    document.removeEventListener("touchstart", unmuteOnInteraction);
-                };
-                document.addEventListener("click", unmuteOnInteraction);
-                document.addEventListener("touchstart", unmuteOnInteraction);
-                video.addEventListener("play", () => {
-                    video.muted = false;
-                });
-
-            });
-
-        })();
-    </script>
-
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = source;
+        video.addEventListener("loadedmetadata", () => {
+          video.play().catch(()=>{});
+          setupPlayer(null);
+        });
+      }
+    });
+  </script>
 </body>
-    </html>
+</html>
