@@ -20,19 +20,19 @@
     },
      {
       "id": "so3",
-      "name": "sony3",
+      "name": "sonysport3",
       "type": "iframe",
       "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten3HD.in"
     },
     {
       "id": "s05",
-      "name": "sony5",
+      "name": "sonysport5",
       "type": "iframe",
       "iframeSrc": "https://sayan-starsport-sportlink.pages.dev/?id=STEN3"
     },
     {
       "id": "s01",
-      "name": "sony1",
+      "name": "sonysport1",
       "type": "iframe",
       "iframeSrc": "https://sayan-starsport-sportlink.pages.dev/?id=STEN1"
     },
