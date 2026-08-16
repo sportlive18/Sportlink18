@@ -16,7 +16,25 @@
       "id": "s1",
       "name": "sony1",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten1HD"
+      "iframeSrc": "https://sayan-starsport-sportlink.pages.dev/?id=STEN3"
+    },
+     {
+      "id": "so3",
+      "name": "sony3",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink-sonyliv.vercel.app/?id=Ten3HD.in"
+    },
+    {
+      "id": "s05",
+      "name": "sony5",
+      "type": "iframe",
+      "iframeSrc": "https://sayan-starsport-sportlink.pages.dev/?id=STEN3"
+    },
+    {
+      "id": "s01",
+      "name": "sony1",
+      "type": "iframe",
+      "iframeSrc": "https://sayan-starsport-sportlink.pages.dev/?id=STEN1"
     },
   {
       "id": "f",
