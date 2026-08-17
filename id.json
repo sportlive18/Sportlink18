@@ -162,14 +162,20 @@
       "iframeSrc": ""
     },
     {
-      "id": "ss1h",
-      "name": "Star Sports 1 Hindi HD",
+      "id": "ss1",
+      "name": "Star Sports 1 ",
       "type": "iframe",
-      "iframeSrc": "https://allrounderlive.in/hindi"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL6"
     },
     {
-      "id": "ss2h",
-      "name": "Star Sports 2 Hindi HD",
+      "id": "ss1h",
+      "name": "Star Sports 1 Hindi ",
+      "type": "iframe",
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/Star1"
+    },
+    {
+      "id": "ss2",
+      "name": "Star Sports 2 ",
       "type": "iframe",
       "iframeSrc": "https://sportlink18.pages.dev/Channel/PL4"
     },
