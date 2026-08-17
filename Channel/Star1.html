@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Star Sports 1 Digital</title>
+  <title>Star Sports 1 Hindi Digital</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">
   <!-- Google tag (gtag.js) -->
@@ -46,7 +46,7 @@
 </head>
 <body>
   <div class="shaka-video-container" data-shaka-player>
-    <video autoplay playsinline preload="metadata" poster="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/7482/1782284567482-h.jpg"></video>
+    <video autoplay playsinline preload="metadata" poster="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8867/1782284658867-h.jpg"></video>
   </div>
 
   <script>
@@ -82,14 +82,14 @@
         }
       });
 
-      // ─── Star Sports 1 Digital ─────────────────────────────────────────────
+      // ─── Star Sports 1 Hindi Digital ──────────────────────────────────────
       const drmConfig = {
         clearKeys: {
-          "e85897bf6e594d698b7c82646c8e0000": "d2dda31234ae40538843e871cd4dcc2a"
+          "b9f1cb8a1361457bbd8097f8c2590000": "1960274b7ba344cb899eba2e80916774"
         }
       };
 
-      const streamUrl = "https://shoebinfo.qzz.io/test/hot.php/Star-Sports-1-Digital.mpd";
+      const streamUrl = "https://shoebinfo.qzz.io/test/hot.php/Star-Sports-1-Hindi-Digital.mpd";
 
       player.configure({
         drm: drmConfig,
@@ -122,7 +122,7 @@
 
       try {
         await player.load(streamUrl);
-        console.log("Star Sports 1 Digital loaded successfully");
+        console.log("Star Sports 1 Hindi Digital loaded successfully");
       } catch (error) {
         console.error('Load error:', error);
       }
