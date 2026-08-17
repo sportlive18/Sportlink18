@@ -171,7 +171,7 @@
       "id": "ss2h",
       "name": "Star Sports 2 Hindi HD",
       "type": "iframe",
-      "iframeSrc": ""
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL4"
     },
     {
       "id": "tnt1",
@@ -231,13 +231,13 @@
       "id": "sss1",
       "name": "Star Sport Select 1",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-1-hd"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL2"
     },
     {
       "id": "sss2",
       "name": "Star Sport Select 2",
       "type": "iframe",
-      "iframeSrc": "https://sportlink-jio-tv-mini.pages.dev/channel/star-sports-select-2-hd"
+      "iframeSrc": "https://sportlink18.pages.dev/Channel/PL3"
     },
     {
       "id": "tsn",
