@@ -90,39 +90,6 @@ https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/b3b3fkmrbl/out/v1
 #KODIPROP:inputstream.adaptive.license_key=1994b1df7dfd2e8a8d7b9bf3fb900285:22a1444b3da18e139191665b3d652835
 https://otte.cache.aiv-cdn.net/iad-nitro/live/clients/dash/enc/avqlywnuzx/out/v1/aefca6420f944a9482e117f315de535f/cenc.mpd
 
-#EXTINF:-1 tvg-id="fancode247" tvg-name="Fancode 24/7" tvg-logo="https://fancode.com/skillup-uploads/fc-web-logo/fc-logo-orange-block-bg.png" group-title="Sports",Fancode 24/7
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/140.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=065051b99bf5cf8d9a3bde5cbde6aaf9:214bd176832872339ce184338320f9a2
-https://a204aivottepl-a.akamaihd.net/sin-nitro/live/clients/dash/enc/h35gev6jft/out/v1/c64004e114c245a4ab84bb570275a4a9/cenc.mpd
-
-#EXTINF:-1 tvg-id="starzplaysports" tvg-name="Starzplay Sports" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPyZl5vPjNB-alkSeC9KwMZuFxOFOGwYDFKg&s" group-title="Sports",Starzplay Sports
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=117c29396ec6fd295880013241a466e1:3dfb883251884e66d784111877c44b13
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-https://sps3.starzplayarabia.com/out/v1/95528122fa434bcd948c9ed2e7afabee/index.mpd
-
-#EXTINF:-1 tvg-id="criclife1" tvg-name="CricLife 1" tvg-logo="https://www.ooredoo.qa/web/wp-content/uploads/2023/08/10-CricLife1-Logo_02_Web-site-logo-150x120pxl_.png" group-title="Sports",CricLife 1
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=1e23e51b09a67b83813c17049870bcd4:c3d6288e378b0dc55320fd0e6fd2e55f
-https://ev-fast-mpd.starzplayarabia.com/live/eds/CricLife1/DASH/CricLife1.mpd
-
-#EXTINF:-1 tvg-id="criclife2" tvg-name="CricLife 2" tvg-logo="https://www.ooredoo.qa/web/wp-content/uploads/2025/08/cricbuzz-active.png" group-title="Sports",CricLife 2
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=48bef83b4c6a3c5189b01b0126210da4:bd085230b7b09e50954fe0af111a8a9f
-https://ev-fast-mpd.starzplayarabia.com/live/eds/CricLife2/DASH/CricLife2.mpd
-
-#EXTINF:-1 tvg-id="cricbuzz2" tvg-name="CRICBUZZ 2" tvg-logo="https://www.ooredoo.qa/web/wp-content/uploads/2025/10/Cricbuzz-2.jpg" group-title="Sports",CRICBUZZ 2
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=4e8b5ddac5332a4e66c002b4c0f22322:d06de29b0eacb81ac6e3f325849047e8
-https://cors-proxy.cooks.fyi/https://ev-fast-mpd.starzplayarabia.com/live/eds/Criclife_3/DASH/Criclife_3.mpd
-
-#EXTINF:-1 tvg-id="criclifewomen" tvg-name="Criclife Women" tvg-logo="https://images.assets-landingi.com/uc/b225b09b-62b2-49c6-b9cd-0446fdce1ade/criclife.svg" group-title="Sports",Criclife Women
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=9dc5ddd99e3c723bf109a504da715dac:d39d55e9ba386a86641ca9668abf2b0d
-https://ev-fast-mpd.starzplayarabia.com/live/eds/CricLife_Women_27112025/DASH/CricLife_Women_27112025.mpd
-
 #EXTINF:-1 tvg-id="tsn1" tvg-name="TSN 1" tvg-logo="https://i.imgur.com/eRFE0jZ.png" group-title="Sports",TSN 1
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
@@ -155,9 +122,6 @@ https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cscevwljkq/out/v1
 #EXTINF:-1 tvg-id="78" tvg-logo="https://raw.githubusercontent.com/abusaeeidx/Tv-Channel-Logo/heads/main/CricHD/runded/16-by-xfireflix.png" group-title="Sports",Star Sports 1 HD
 http://mag.diamondtv.one:80/live/unur/rtdVDBNG2z/302025.m3u8
 
-#EXTINF: -1 tvg-id="235" tvg-logo="https://abusaeeidx.github.io/Tv-Channel-Logo/CricHD/V2.0/new/Star_Sports_2.png" group-title="Sports", Star Sports 2 HD
-http://astott21.xyz:80/live/XbknUJShHI/is72nB1nio/1090637.ts
-
 #EXTINF:-1 tvg-id="1191" tvg-name="dd-sports-1-0" tvg-language="HIN" tvg-logo="https://assets.dishhomego.com.np/f_webp,q_85,w_250/dhome/posters/44c5d57c-c3bd-4ea6-a367-52c4388e5287.jpg" group-title="Sports", DD Sports HD
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
@@ -178,9 +142,6 @@ http://skyfilex.fun:80/live/9480808/9480808/333368.ts
 #EXTINF: -1 tvg-id="Cricbuzz" tvg-logo="https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/600_144.png" group-title="Sports", Cricbuzz
 http://mag.diamondtv.one:80/live/unur/rtdVDBNG2z/302020.ts
 
-#EXTINF: -1 tvg-id="Willow.us" tvg-logo="https://i.postimg.cc/RFNMQVQM/j-Na-Ow-Lv-R-400x400-photoaidcom-cropped.png" group-title="Sports", Willow Cricket
-http://mag.tivi-one-iptv.net:80/play/live.php?mac=A0:BB:3E:07:67:9C&stream=373197&extension=ts
-
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=290e09c837da78d5cd961978d390515c:b748836c71e6a4ca68ef5b5652db6247
 #EXTINF:-1 tvg-id="WillowSports.us" tvg-logo="https://images.fubo.tv/channel-config-ui/station-logos/on-dark/willow_sports_stacked_logo_full_white.png" group-title="Sports",Willow Sports
@@ -198,17 +159,13 @@ http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/GR7E6CW6C7XSQL3R36FTRRWW
 #EXTINF:-1 tvg-id="HubSports4.sg" tvg-logo="https://iili.io/FkbZuBS.jpg" group-title="Sports",Hub Sports 4
 http://line.myfreetv.xyz:80/live/F389522A5CF2/07F5172B0542/1090650.ts
 
-#EXTINF:-1 tvg-id="skysp.1" tvg-logo="https://i.postimg.cc/wxDNzRcQ/sky-sport-1.png" group-title="Sports", Sky Sport 1
-https://new8k.deadpooll.workers.dev/playlist?id=23409
-
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/abusaeeidx/Tv-Channel-Logo/heads/main/CricHD/runded/20-by-xfireflix.png" group-title="Sports", PTV Sports
 https://s1.itcnbd.live/PTV-Sports/index.m3u8
 #http://mag.diamondtv.one:80/live/unur/rtdVDBNG2z/302016.ts
 
 #EXTINF:-1 tvg-logo="http://epg.ophion.feralhosting.com/logos/South_Africa/SuperSportCricket.za.png" group-title="Sports",Supersport Cricket
 http://premiumdedi.one:80/live/Moral6Fail/CzYx3GWW85/115338.ts
-#EXTINF:-1 tvg-logo="https://www.thepapare.com/wp-content/uploads/Logo-01.png" group-title="Sports",The Papare
-http://premiumtvs.space:8080/live/1yearqatar8942/950316240263/269552.ts
+
 #EXTINF:-1 tvg-logo="https://i.imgur.com/2JzlorD.png" group-title="Sports",T Sports
 http://103.185.24.134:3001/TSportsHD/index.m3u8
 
@@ -229,7 +186,69 @@ https://bpl24middleeast.akamaized.net/hls/live/2109311/j15klM//master.m3u8
 #EXTINF:-1 tvg-logo="" group-title="Sports", TveSports
 https://livetv.mahotsavtv.com/trinityvision/tvesports/index.m3u8
 
-#EXTINF:-1 tvg-logo="https://m.media-amazon.com/images/I/51am3fgD1lL.png" group-title="Sports", ATN Sports
-https://d3bq19vx8xhpwy.cloudfront.net/live/myStream/playlist.m3u8
+#EXTINF:-1 tvg-id="star_sports_1" tvg-name="STAR SPORTS 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Star_Sports_1_HD.png/2560px-Star_Sports_1_HD.png" group-title="Sports",STAR SPORTS 1
+http://magiclive.xyz:2052/uBwJpdzf/tZGszzA/358988
 
+#EXTINF:-1 tvg-id="star_sports_2" tvg-name="STAR SPORTS 2" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/3/30/STAR_Sports_2_logo.png/revision/latest?cb=20150719162835" group-title="Sports",STAR SPORTS 2
+http://magiclive.xyz:2052/uBwJpdzf/tZGszzA/358987
+
+#EXTINF:-1 tvg-id="starsports1hd.in" tvg-name="STAR SPORTS 1 ENGLISH 4K" tvg-logo="" group-title="SPORTS",STAR SPORTS 1 ENGLISH 4K
+https://streamhub.dhruvpatil681.workers.dev/290.m3u8
+
+#EXTINF:-1 tvg-id="starsports1hd.in" tvg-name="STAR SPORTS 1 HINDI 4K" tvg-logo="" group-title="SPORTS",STAR SPORTS 1 HINDI 4K
+https://streamhub.dhruvpatil681.workers.dev/1965.m3u8
+
+#EXTINF:-1 tvg-id="starsports2hd.in" tvg-name="STAR SPORTS 2 ENGLISH  4K" tvg-logo="" group-title="SPORTS",STAR SPORTS 2 ENGLISH  4K
+https://streamhub.dhruvpatil681.workers.dev/1446.m3u8
+
+#EXTINF:-1 tvg-id="starsports2hd.in" tvg-name="STAR SPORTS 2 HINDI 4K" tvg-logo="" group-title="SPORTS",STAR SPORTS 2 HINDI 4K
+https://streamhub.dhruvpatil681.workers.dev/6166.m3u8
+
+#EXTINF:-1 tvg-id="starsports3.in" tvg-name="STAR SPORTS 3" tvg-logo="" group-title="SPORTS",STAR SPORTS 3
+https://streamhub.dhruvpatil681.workers.dev/6167.m3u8
+
+#EXTINF:-1 tvg-id="starsportsselect1.in" tvg-name="STAR SPORTS SELECT 1 4K" tvg-logo="" group-title="SPORTS",STAR SPORTS SELECT 1 4K
+https://streamhub.dhruvpatil681.workers.dev/1444.m3u8
+
+#EXTINF:-1 tvg-id="starsportsselect2.in" tvg-name="STAR SPORTS SELECT 2 4K" tvg-logo="" group-title="SPORTS",STAR SPORTS SELECT 2 4K
+https://streamhub.dhruvpatil681.workers.dev/1448.m3u8
+
+#EXTINF:-1 tvg-id="star_sports_hindi_1" tvg-name="STAR SPORTS HINDI 1" tvg-logo="https://raw.githubusercontent.com/abusaeeidx/Tv-Channel-Logo/heads/main/CricHD/runded/16-by-xfireflix.png" group-title="Sports",STAR SPORTS HINDI 1
+http://magiclive.xyz:2052/uBwJpdzf/tZGszzA/358990
+
+#EXTINF:-1 tvg-id="astro_cricket" tvg-name="ASTRO CRICKET" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/f/fc/Astro_Cricket_%282024%29.png" group-title="Sports",ASTRO CRICKET
+http://magiclive.xyz:2052/uBwJpdzf/tZGszzA/359328
+
+#EXTINF:-1 tvg-id="willow_cricket" tvg-name="WILLOW CRICKET" tvg-logo="" group-title="Sports",WILLOW CRICKET
+http://magiclive.xyz:2052/uBwJpdzf/tZGszzA/359166
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 1.in" tvg-name="Sony Sports Ten 1" group-title="Sports" tvg-logo="https://i.postimg.cc/k5y9R4vH/sony-ten-1.webp",Sony TEN 1 SD
+https://cloudplay-sonyliv.pages.dev/ten1.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 1 HD.in" tvg-name="Sony Sports Ten 1 HD" group-title="Sports" tvg-logo="https://i.postimg.cc/h4knM9Rr/sonysportsten1hd.webp",Sony TEN 1 HD
+https://cloudplay-sonyliv.pages.dev/ten1hd.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 2.in" tvg-name="Sony Sports Ten 2" group-title="Sports" tvg-logo="https://i.postimg.cc/027s4b8q/sonysportsten2.webp",Sony TEN 2 SD
+https://cloudplay-sonyliv.pages.dev/ten2.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 2 HD.in" tvg-name="Sony Sports Ten 2 HD" group-title="Sports" tvg-logo="https://i.postimg.cc/zG5rY8BH/sonysportsten2hd.webp",Sony TEN 2 HD
+https://cloudplay-sonyliv.pages.dev/ten2hd.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 3.in" tvg-name="Sony Sports Ten 3" group-title="Sports" tvg-logo="https://i.postimg.cc/XY80VmGH/sonysportsten3.webp",Sony TEN 3 SD
+https://cloudplay-sonyliv.pages.dev/ten3.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 3 HD.in" tvg-name="Sony Sports Ten 3 HD" group-title="Sports" tvg-logo="https://i.postimg.cc/xd1Vq5L0/sonysportsten3hd.webp",Sony TEN 3 HD
+https://cloudplay-sonyliv.pages.dev/ten3hd.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 4.in" tvg-name="Sony Sports Ten 4" group-title="Sports" tvg-logo="https://i.postimg.cc/526M3sRj/Sony_Ten_4_HD.png",Sony TEN 4 SD
+https://cloudplay-sonyliv.pages.dev/ten4.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 4 HD.in" tvg-name="Sony Sports Ten 4 HD" group-title="Sports" tvg-logo="https://i.postimg.cc/526M3sRj/Sony_Ten_4_HD.png",Sony TEN 4 HD
+https://cloudplay-sonyliv.pages.dev/ten4hd.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 5.in" tvg-name="Sony Sports Ten 5" group-title="Sports" tvg-logo="https://i.postimg.cc/Mpjks892/sony-sports-ten-5.png",Sony TEN 5 SD
+https://cloudplay-sonyliv.pages.dev/ten5.m3u8
+
+#EXTINF:-1 tvg-id="SONY SPORTS TEN 5 HD.in" tvg-name="Sony Sports Ten 5 HD" group-title="Sports" tvg-logo="https://i.postimg.cc/CKrT884b/sonysportsten5hd.webp",Sony TEN 5 HD
+https://cloudplay-sonyliv.pages.dev/ten5hd.m3u8
 
